@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/scraping.js": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 900
+    },
+    "api/health.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}
+

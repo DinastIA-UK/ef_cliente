@@ -1,17 +1,33 @@
 [
   {
-    "jobId": "88151ccd-5208-4c26-9a2e-fc43aa1b004e",
-    "callbackUrl": {
-      "callbackUrl": "http://localhost:3001/webhook/scraping-result",
-      "status": "pending",
-      "progress": "Job criado, aguardando início..."
+    "jobId": "137eef82-3a47-40d0-b894-eda964714fbe",
+    "callbackUrl": "auto-created",
+    "status": "completed",
+    "createdAt": "2025-12-02T17:10:55.841Z",
+    "updatedAt": "2025-12-02T17:14:08.198Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2025-12-02T17:10:56.492Z",
+        "level": "info",
+        "message": "Iniciando processo de scraping"
+      },
+      {
+        "timestamp": "2025-12-02T17:14:08.198Z",
+        "level": "info",
+        "message": "Scraping concluído em 192 segundos"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso",
+      "totalBoxes": 0,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 192,
+      "logs": [],
+      "extractedAt": "2025-12-02T17:14:08.195Z"
     },
-    "status": "started",
-    "createdAt": "2025-10-22T21:14:28.287Z",
-    "updatedAt": "2025-10-22T21:14:28.287Z",
-    "progress": "Iniciando scraping...",
-    "logs": [],
-    "result": null,
     "error": null
   }
 ]
