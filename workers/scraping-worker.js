@@ -124,6 +124,17 @@ if (isMainThread) {
         unitsProcessed: result?.unitsProcessed || 0,
         successfulUnits: result?.successfulUnits || 0,
         failedUnits: result?.failedUnits || [],
+        // Detalhes individuais das unidades para callback/observabilidade
+        units: Array.isArray(result?.unitDetails) ? result.unitDetails.map(u => ({
+          code: u.code,
+          city: u.city,
+          boxesCount: u.boxesCount,
+          pagesProcessed: u.pagesProcessed,
+          processingTime: u.processingTime,
+          supabaseStatus: u.supabaseStatus,
+          status: u.status,
+          error: u.error || null
+        })) : [],
         processingTime: processingTime,
         logs: result?.logs || [],
         extractedAt: new Date().toISOString()
