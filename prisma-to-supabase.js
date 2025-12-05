@@ -109,9 +109,21 @@ async function keepAlive(page) {
  * @returns {Object} Dados extraídos dos boxes de todas as unidades
  */
 async function extractBoxesData() {
-    const browser = await chromium.launch({ 
-        headless: false,
-        slowMo: 100
+    // Definição de modo headless:
+    // - Em produção (NODE_ENV=production), força headless por padrão
+    // - Pode ser sobrescrito via variável PLAYWRIGHT_HEADLESS ("true"/"false")
+    const headlessEnv = process.env.PLAYWRIGHT_HEADLESS;
+    const headless = typeof headlessEnv === 'string'
+        ? headlessEnv.toLowerCase() === 'true'
+        : process.env.NODE_ENV === 'production';
+    const slowMo = headless ? 0 : 100;
+    console.log(`🧭 Playwright: headless=${headless} (NODE_ENV=${process.env.NODE_ENV || 'undefined'})`);
+
+    const browser = await chromium.launch({
+        headless,
+        slowMo,
+        // Flags para maior compatibilidade em ambientes containerizados
+        args: ['--no-sandbox', '--disable-dev-shm-usage']
     });
     
     const context = await browser.newContext();

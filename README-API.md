@@ -8,6 +8,15 @@ Esta API permite executar o scraping do Prisma Box de forma assíncrona, fornece
 
 **Endpoint:** `POST /api/scraping/start`
 
+Parâmetros de query opcionais:
+- `mode`: força o modo de execução
+  - `worker` → usa `worker_threads` (recomendado para produção)
+  - `direct` → executa diretamente no processo (útil em desenvolvimento)
+
+Comportamento padrão:
+- Em desenvolvimento/localhost ou com `SCRAPING_DIRECT_EXECUTION=true` → execução direta.
+- Em produção (Vercel) → execução via worker.
+
 **Body:**
 ```json
 {
@@ -26,6 +35,10 @@ Esta API permite executar o scraping do Prisma Box de forma assíncrona, fornece
 }
 ```
 
+Exemplos:
+- Iniciar com worker: `POST /api/scraping/start?mode=worker`
+- Iniciar direto: `POST /api/scraping/start?mode=direct`
+
 ### 2. Verificar Status
 
 **Endpoint:** `GET /api/scraping/status/:jobId`
@@ -35,7 +48,7 @@ Esta API permite executar o scraping do Prisma Box de forma assíncrona, fornece
 {
   "success": true,
   "job": {
-    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "jobId": "550e8400-e29b-41d4-a716-446655440000",
     "status": "running",
     "progress": "Processando unidade 5 de 20...",
     "createdAt": "2024-01-15T10:30:00.000Z",
@@ -98,6 +111,15 @@ Quando o scraping terminar, a API enviará um POST para a `callbackUrl` fornecid
 ### Workers Ativos
 `GET /api/scraping/active` - Lista workers ativos
 
+Exemplo de resposta:
+```json
+{
+  "success": true,
+  "activeWorkers": ["550e8400-e29b-41d4-a716-446655440000"],
+  "count": 1
+}
+```
+
 ### Health Check
 `GET /health` - Verifica se a API está funcionando
 
@@ -107,6 +129,8 @@ Quando o scraping terminar, a API enviará um POST para a `callbackUrl` fornecid
 2. Configure as variáveis de ambiente:
    - `PRISMA_USERNAME` e `PRISMA_PASSWORD`
    - `SUPABASE_URL` e `SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_KEY` (uso de serviço)
+   - `SCRAPING_DIRECT_EXECUTION` (opcional; `true` força execução direta)
    - `PORT` (opcional, padrão: 3000)
 
 ## 🚀 Executar
@@ -129,6 +153,10 @@ npm start
 - `completed`: Scraping concluído com sucesso
 - `failed`: Scraping falhou
 
+Notas:
+- Em execução direta (dev), o `progress` inicia com "Execução direta iniciada...".
+- Em execução via worker (prod), o `progress` inicia com "Worker iniciado, carregando script de scraping...".
+
 ## 🔄 Sistema de Retry
 
 O sistema de callback possui retry automático:
@@ -143,6 +171,9 @@ O sistema de callback possui retry automático:
 - Jobs têm timeout de 2 horas
 - Limpeza automática de jobs antigos
 
+Deploy (Vercel):
+- Funções possuem `maxDuration` (atual: 900 segundos) definido em `vercel.json`.
+
 ## 📊 Monitoramento
 
 A API gera logs detalhados para monitoramento:
@@ -150,3 +181,7 @@ A API gera logs detalhados para monitoramento:
 - Progresso do scraping
 - Erros e tentativas de callback
 - Performance e timing
+
+Diferenças de ambiente:
+- Local: rotas montadas em `/api/scraping/*` via `api-server.js`.
+- Vercel: função `api/scraping` monta as rotas no root (`'/'`), acessíveis como `/api/scraping/*`.
