@@ -63,6 +63,19 @@ if (isMainThread) {
     getActiveWorkers() {
       return Array.from(this.activeWorkers.keys());
     }
+
+    // Encerrar todos os workers ativos (usado durante shutdown)
+    shutdownAll() {
+      for (const [jobId, worker] of this.activeWorkers.entries()) {
+        try {
+          console.log(`🛑 Encerrando worker ativo: ${jobId}`);
+          worker.terminate();
+        } catch (e) {
+          console.log(`⚠️ Falha ao encerrar worker ${jobId}:`, e?.message || e);
+        }
+        this.activeWorkers.delete(jobId);
+      }
+    }
   }
 
   module.exports = new ScrapingWorkerManager();
