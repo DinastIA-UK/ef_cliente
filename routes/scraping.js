@@ -91,6 +91,27 @@ router.post('/gerar-proposta', async (req, res) => {
 
     // Criar job no tracker com unidade armazenada
     await jobTracker.createJob(jobId, callbackUrl);
+    
+    // Armazenar dados de entrada para uso no worker
+    const inputData = {
+      unidade,
+      clienteNome,
+      clienteTelCel,
+      cpf,
+      sexo,
+      cep,
+      numero_endereco,
+      pagamento,
+      valorBens,
+      propostaPrevisaoEntrada,
+      motivoLocacaoId,
+      vendedorId,
+      boxes
+    };
+    
+    await jobTracker.updateJob(jobId, { data: inputData });
+
+    // Adicionar logs informativos
     await jobTracker.addLog(jobId, `Unidade selecionada: ${unidade}`);
     if (clienteNome) {
       await jobTracker.addLog(jobId, `Cliente: ${clienteNome}`);

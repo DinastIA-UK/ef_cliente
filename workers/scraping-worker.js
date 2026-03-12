@@ -123,9 +123,15 @@ if (isMainThread) {
       console.log(`🚀 DEBUG: Iniciando execução do script principal`);
       console.log(`📋 DEBUG: Verificando se scrapingScript.main existe:`, typeof scrapingScript.main);
 
-      // Executar o scraping
+      // Recuperar dados de entrada do job tracker
+      const job = jobTracker.getJob(jobId);
+      const inputData = job?.data || {};
+      
+      console.log(`📊 DEBUG: Dados recuperados:`, inputData);
+      
+      // Executar o scraping com os dados de entrada
       const startTime = Date.now();
-      const result = await scrapingScript.main();
+      const result = await scrapingScript.main(inputData);
       const endTime = Date.now();
       
       const processingTime = Math.round((endTime - startTime) / 1000); // em segundos
