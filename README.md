@@ -1,14 +1,15 @@
-# Prisma Box → Supabase Integration
+# Prisma EF - Automação de Propostas e Contratos
 
-Este projeto automatiza a extração de dados de boxes do Prisma Box e os armazena em uma base de dados Supabase.
+Sistema de automação para gestão de propostas e contratos no Prisma Box, com API REST, scraping de dados e integração com Supabase.
 
 ## 📋 Pré-requisitos
 
-- Node.js (versão 14 ou superior)
-- Conta no Supabase
-- Acesso ao Prisma Box
+- Node.js (versão 16 ou superior)
+- Playwright (instalado via npm)
+- Supabase (opcional, para persistência de dados)
+- Credenciais do Prisma Box
 
-## 🚀 Configuração Inicial
+## 🚀 Instalação
 
 ### 1. Instalar Dependências
 
@@ -18,136 +19,194 @@ npm install
 
 ### 2. Configurar Variáveis de Ambiente
 
-O arquivo `.env` já foi criado com suas credenciais do Supabase. Verifique se as informações estão corretas:
+Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-SUPABASE_URL=https://uqzlilifrboerjqtuhky.supabase.co
-SUPABASE_ANON_KEY=sua_anon_key
-SUPABASE_SERVICE_KEY=sua_service_key
+PRISMA_USERNAME=seu-usuario@example.com
+PRISMA_PASSWORD=sua-senha
+SUPABASE_URL=sua-url-supabase
+SUPABASE_ANON_KEY=sua-anon-key
+SUPABASE_SERVICE_KEY=sua-service-key
+PORT=3000
 ```
-
-### 3. Criar Tabela no Supabase
-
-1. Acesse o dashboard do Supabase: https://uqzlilifrboerjqtuhky.supabase.co
-2. Vá para "SQL Editor"
-3. Execute o script contido no arquivo `supabase-setup.sql`
 
 ## 📁 Estrutura do Projeto
 
 ```
-prisma/
-├── .env                    # Variáveis de ambiente
-├── supabase-setup.sql      # Script para criar tabela no Supabase
-├── supabase-client.js      # Cliente e funções do Supabase
-├── prisma-to-supabase.js   # Script principal de integração
-├── index.js               # Script original do Playwright
-└── README.md              # Esta documentação
+prisma_EF/
+├── api/                          # Endpoints da API
+│   ├── health.js                 # Health check
+│   └── scraping.js               # Scraping de dados
+├── config/                       # Arquivos de configuração
+│   ├── bases.json               # Dados de bases
+│   ├── corrected-units-mapped.json
+│   └── final-units-config.json
+├── data/                        # Dados persistentes
+│   └── jobs.json               # Histórico de jobs
+├── routes/                      # Rotas da API
+│   └── scraping.js             # Rotas de scraping
+├── server/                      # Configuração do servidor
+│   └── app.js                  # App Express
+├── utils/                       # Utilitários
+│   ├── callback.js             # Callbacks
+│   └── job-tracker.js          # Rastreamento de jobs
+├── workers/                     # Workers em background
+│   └── scraping-worker.js      # Worker de scraping
+├── api-server.js               # Servidor principal
+├── prisma-to-supabase.js       # Automação de propostas/contratos
+├── supabase-client.js          # Cliente Supabase
+├── package.json
+└── README.md
 ```
 
 ## 🎯 Como Usar
 
-### Execução Completa (Recomendado)
-
-Execute o processo completo de extração e inserção:
+### Iniciar o Servidor API
 
 ```bash
-node prisma-to-supabase.js
+npm start
 ```
 
-Este comando irá:
-1. Abrir o navegador e fazer login no Prisma Box
-2. Aplicar filtro para boxes "DISPONÍVEL"
-3. Extrair todos os dados dos boxes
-4. Limpar dados existentes no Supabase
-5. Inserir os novos dados
-6. Mostrar estatísticas
+O servidor estará disponível em `http://localhost:3000`
 
-### Uso Programático
+### Endpoints da API
 
-Você também pode usar as funções individualmente:
-
-```javascript
-const { extractBoxesData } = require('./prisma-to-supabase');
-const { insertBoxes, getBoxesStats } = require('./supabase-client');
-
-// Extrair dados
-const data = await extractBoxesData();
-
-// Inserir no Supabase
-const result = await insertBoxes(data.boxes);
-
-// Obter estatísticas
-const stats = await getBoxesStats();
+#### Health Check
+```http
+GET /api/health
 ```
 
-## 📊 Estrutura dos Dados
+#### Automação de Propostas e Contratos
+```http
+POST /api/scraping/proposal
+Content-Type: application/json
 
-Cada box contém as seguintes informações:
-
-```javascript
 {
-  box_number: "D8",
-  status: "DISPONÍVEL",
-  location_full: "Acesso 01 Térreo Caixa Postal",
-  location_access: "Acesso 01",
-  location_floor: "Térreo",
-  type_name: "Caixa Postal",
-  dimensions: "0.31 x 0.31 x 0.31",
-  area_m2: 0.10,
-  volume_m3: 0.03,
-  price_monthly: "R$ 99,00",
-  price_per_m3: "R$ 3.323,15",
-  price_daily: "R$ 3,30",
-  extracted_at: "2025-01-06T15:40:54.727Z"
+  "clienteNome": "João Silva",
+  "clienteTelCel": "11999999999",
+  "previsaoEntrada": "2026-04-15",
+  "motivoLocacaoId": "1",
+  "vendedorId": "1",
+  "boxes": [
+    {
+      "nome": "Box 01",
+      "tipo": "MENSAL"
+    }
+  ],
+  "dadosCliente": {
+    "cpf": "12345678902",
+    "sexo": "M",
+    "cep": "01311-100",
+    "numero_endereco": "123",
+    "pagamento": "PIX",
+    "valorBens": "5000.00"
+  }
 }
 ```
 
-## 🔧 Funções Disponíveis
-
-### supabase-client.js
-
-- `insertBoxes(boxesData)` - Inserir array de boxes no Supabase
-- `clearBoxes()` - Limpar todos os dados da tabela
-- `getBoxesByStatus(status)` - Buscar boxes por status
-- `getBoxesStats()` - Obter estatísticas dos boxes
+## 🔧 Principais Funções
 
 ### prisma-to-supabase.js
 
-- `extractBoxesData()` - Extrair dados do Prisma Box
-- `main()` - Executar processo completo
+- **performLogin(page)** - Fazer login no Prisma Box
+- **preencherDadosCliente(page, nome, telefone)** - Preencher dados do cliente
+- **adicionarItemsBoxes(page, boxes, dadosCliente)** - Adicionar items de boxes
+- **preencherDadosClienteContrato(page, cpf, sexo, cep, numero)** - Preencher dados do cliente no contrato
+- **preencherValorBensEProxima(page, valorBens)** - Preencher valor dos bens
+- **selecionarPagamentoEProxima(page, pagamento)** - Selecionar forma de pagamento
 
-## ⚙️ Configurações Avançadas
+### supabase-client.js
 
-### Personalizar Login
+- Integração com banco de dados Supabase
+- Persistência de propostas e contratos
+- Queries e updates de dados
 
-Edite o arquivo `prisma-to-supabase.js` e altere as credenciais de login:
+## 📊 Fluxo de Automação
 
-```javascript
-await page.fill('input[name="email"]', 'seu-email@exemplo.com');
-await page.fill('input[name="password"]', 'sua-senha');
+1. ✅ Login no Prisma Box
+2. ✅ Criação de nova proposta
+3. ✅ Preenchimento de dados do cliente
+4. ✅ Adição de items (boxes)
+5. ✅ Preenchimento de feedback
+6. ✅ Salva proposta
+7. ✅ Navegação para criação de contrato
+8. ✅ Seleção da proposta criada
+9. ✅ Preenchimento de dados do cliente no contrato
+10. ✅ Seleção de forma de pagamento
+11. ✅ Preenchimento de valor dos bens (com índice IPCA TRIMESTRAL)
+12. ✅ Salva contrato
+
+## 🏗️ Tecnologias Utilizadas
+
+- **Playwright** - Automação de navegador
+- **Express.js** - Framework web
+- **Supabase** - Banco de dados
+- **Node.js** - Runtime JavaScript
+
+## 📝 Exemplos de Uso
+
+### Automatizar Criação de Proposta via cURL
+
+```bash
+curl -X POST http://localhost:3000/api/scraping/proposal \
+  -H "Content-Type: application/json" \
+  -d '{
+    "clienteNome": "João Silva",
+    "clienteTelCel": "11999999999",
+    "previsaoEntrada": "2026-04-15",
+    "motivoLocacaoId": "1",
+    "vendedorId": "1",
+    "boxes": [{"nome": "Box 01", "tipo": "MENSAL"}],
+    "dadosCliente": {
+      "cpf": "12345678902",
+      "sexo": "M",
+      "cep": "01311-100",
+      "numero_endereco": "123",
+      "pagamento": "PIX",
+      "valorBens": "5000.00"
+    }
+  }'
 ```
 
-### Filtros Personalizados
+## 🔐 Segurança
 
-Você pode modificar os filtros aplicados alterando esta seção:
+- Credenciais armazenadas em variáveis de ambiente (`.env`)
+- Senhas não são expostas nos logs
+- Validação de entrada na API
 
-```javascript
-// Selecionar filtro "Disponível"
-await page.selectOption('select[name="status"]', 'DISPONÍVEL');
+## 🐛 Troubleshooting
+
+### Erro: "Elemento não está visível"
+- Verifique se a página carregou completamente
+- Aumente o timeout em `page.waitForSelector()`
+
+### Erro: "Campo não encontrado"
+- Verifique os seletores CSS nos comentários das funções
+- Confirme que a página do Prisma Box não mudou
+
+### Erro de Login
+- Verifique suas credenciais no `.env`
+- Confirme se a conta do Prisma Box está ativa
+
+## 📦 Deploy
+
+Para fazer deploy em uma VPS ou Docker:
+
+```bash
+docker build -t prisma-ef .
+docker run -p 3000:3000 --env-file .env prisma-ef
 ```
 
-### Modo Headless
+## 📞 Suporte
 
-Para executar sem interface gráfica, altere:
+Para dúvidas ou problemas, verifique:
+- Logs do console
+- Arquivo de histórico em `data/jobs.json`
+- Variáveis de ambiente
 
-```javascript
-const browser = await chromium.launch({ 
-    headless: true,  // Alterar para true
-    slowMo: 1000 
-});
-```
+## 📄 Licença
 
-## 🚀 Deploy na VPS
+Propriedade da Dinastia - Todos os direitos reservados
 
 ### 1. Preparar Ambiente
 
