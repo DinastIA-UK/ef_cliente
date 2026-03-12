@@ -259,7 +259,7 @@ router.post('/gerar-proposta', async (req, res) => {
         // Execução via worker (produção)
         try {
           console.log(`🚀 Iniciando worker para job: ${jobId}`);
-          await scrapingWorker.startScraping(jobId, callbackUrl);
+          await scrapingWorker.startScraping(jobId, callbackUrl, inputData);
           console.log(`✅ Worker iniciado para job: ${jobId}`);
         } catch (error) {
           console.error(`❌ Erro ao iniciar worker para job ${jobId}:`, error);

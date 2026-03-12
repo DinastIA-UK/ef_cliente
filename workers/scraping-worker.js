@@ -8,11 +8,11 @@ if (isMainThread) {
       this.activeWorkers = new Map();
     }
 
-    async startScraping(jobId, callbackUrl) {
+    async startScraping(jobId, callbackUrl, inputData = {}) {
       return new Promise((resolve, reject) => {
-        // Criar worker
+        // Criar worker com dados de entrada
         const worker = new Worker(__filename, {
-          workerData: { jobId, callbackUrl }
+          workerData: { jobId, callbackUrl, inputData }
         });
 
         this.activeWorkers.set(jobId, worker);
@@ -86,7 +86,7 @@ if (isMainThread) {
   const callbackService = require('../utils/callback');
 
   async function runScraping() {
-    const { jobId, callbackUrl } = workerData;
+    const { jobId, callbackUrl, inputData = {} } = workerData;
     
     try {
       console.log(`🚀 Worker iniciado para job: ${jobId}`);
@@ -123,16 +123,11 @@ if (isMainThread) {
       console.log(`🚀 DEBUG: Iniciando execução do script principal`);
       console.log(`📋 DEBUG: Verificando se scrapingScript.main existe:`, typeof scrapingScript.main);
 
-      // Recuperar dados de entrada do job tracker
-      const job = jobTracker.getJob(jobId);
-      const inputData = job?.data || {};
-      
+      // ✅ DADOS VÊM DIRETO DE workerData, não do jobTracker!
       console.error('\n' + '█'.repeat(100));
-      console.error('✨ [WORKER-1] RECUPERANDO DADOS DO JOBTRACKER');
+      console.error('✨ [WORKER-1] DADOS RECEBIDOS DO WORKERDATA');
       console.error('✨ [WORKER-1] Job ID: ' + jobId);
-      console.error('✨ [WORKER-1] Job completo:');
-      console.error(JSON.stringify(job, null, 2));
-      console.error('✨ [WORKER-1] InputData extraído:');
+      console.error('✨ [WORKER-1] InputData:');
       console.error(JSON.stringify(inputData, null, 2));
       console.error('✨ [WORKER-1] Unidade recebida: ' + (inputData.unidade || 'VAZIA'));
       console.error('✨ [WORKER-1] Boxes recebidos: ' + (inputData.boxes ? inputData.boxes.length : 0) + ' items');
