@@ -9,14 +9,24 @@ const router = express.Router();
 // POST /api/scraping/gerar-proposta - Gerar proposta
 router.post('/gerar-proposta', async (req, res) => {
   try {
-    // LOG: Exibir payload completo recebido
-    console.log('\n' + '='.repeat(70));
-    console.log('📥 PAYLOAD RECEBIDO NA ROTA /gerar-proposta:');
-    console.log('='.repeat(70));
+    const timestamp = new Date().toISOString();
+    const separator = '█'.repeat(100);
+    
+    console.log('\n' + separator);
+    console.log('🚨🚨🚨 ROTA /gerar-proposta ATIVADA EM: ' + timestamp);
+    console.log('🚨🚨🚨 PROCESSO: routes/scraping.js - ARQUIVO NOVO COM DEBUG');
+    console.log(separator);
+    console.log('\n📋 REQ.BODY COMPLETO:');
     console.log(JSON.stringify(req.body, null, 2));
-    console.log('='.repeat(70) + '\n');
+    console.log('\n' + separator + '\n');
 
     const { callbackUrl, unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes } = req.body;
+
+    console.log('\n📍 VARIÁVEIS EXTRAÍDAS:');
+    console.log(`   - callbackUrl: ${callbackUrl}`);
+    console.log(`   - unidade: ${unidade}`);
+    console.log(`   - boxes: ${JSON.stringify(boxes)}`);
+    console.log('');
 
     // Validar callback URL
     if (!callbackUrl) {
@@ -95,6 +105,10 @@ router.post('/gerar-proposta', async (req, res) => {
 
     // Gerar ID único para o job
     const jobId = uuidv4();
+    
+    console.log('\n' + '█'.repeat(100));
+    console.log('✨ [ROUTES-1] CRIANDO JOB COM ID: ' + jobId);
+    console.log('█'.repeat(100) + '\n');
 
     // Criar job no tracker com unidade armazenada
     await jobTracker.createJob(jobId, callbackUrl);
@@ -116,11 +130,12 @@ router.post('/gerar-proposta', async (req, res) => {
       boxes
     };
     
-    console.log('\n' + '='.repeat(70));
-    console.log('💾 DADOS ARMAZENADOS NO JOB TRACKER:');
-    console.log('='.repeat(70));
+    console.log('\n' + '█'.repeat(100));
+    console.log('✨ [ROUTES-2] SALVANDO DADOS NO JOBTRACKER');
+    console.log('✨ [ROUTES-2] Job ID: ' + jobId);
+    console.log('✨ [ROUTES-2] InputData:');
     console.log(JSON.stringify(inputData, null, 2));
-    console.log('='.repeat(70) + '\n');
+    console.log('█'.repeat(100) + '\n');
     
     await jobTracker.updateJob(jobId, { data: inputData });
 

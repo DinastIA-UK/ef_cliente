@@ -2159,11 +2159,14 @@ async function extractBoxesData() {
  */
 async function main(options = {}) {
     try {
-        console.log('\n' + '='.repeat(70));
-        console.log('🚀 FUNÇÃO MAIN() INICIADA COM OPÇÕES:');
-        console.log('='.repeat(70));
+        const separator = '█'.repeat(100);
+        console.log('\n' + separator);
+        console.log('✨ [MAIN-1] FUNÇÃO MAIN INICIADA');
+        console.log('✨ [MAIN-1] OPÇÕES RECEBIDAS:');
         console.log(JSON.stringify(options, null, 2));
-        console.log('='.repeat(70) + '\n');
+        console.log('✨ [MAIN-1] Unidade: ' + (options.unidade || 'NÃO FORNECIDA'));
+        console.log('✨ [MAIN-1] Boxes: ' + (options.boxes ? options.boxes.length : 0) + ' items');
+        console.log(separator + '\n');
 
         console.log('🎯 Iniciando processo de login Prisma Box');
         console.log('='.repeat(50));
