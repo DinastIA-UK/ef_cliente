@@ -1116,12 +1116,28 @@ async function clicarSalvar(page) {
     try {
         console.log('\n💾 Procurando botão "Salvar"...');
         
+        // Fazer scroll para o elemento antes de clicar
+        console.log('📍 Scrollando para o elemento "Salvar"...');
+        await page.evaluate(() => {
+            const el = document.querySelector('a[href="#finish"]');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        await page.waitForTimeout(800);
+        
         // Tentar encontrar o botão de salvar
         const botaoSalvar = await page.$('a[href="#finish"]');
         
         if (botaoSalvar) {
             console.log('✅ Botão "Salvar" encontrado');
-            await botaoSalvar.click();
+            try {
+                await botaoSalvar.click({ timeout: 5000 });
+            } catch (firstClickError) {
+                // Se falhar, tentar com JavaScript direto
+                console.warn('⚠️ Click falhou, tentando com JavaScript...');
+                await botaoSalvar.evaluate(el => el.click());
+            }
             console.log('✅ Botão "Salvar" clicado com sucesso!');
         } else {
             console.warn('⚠️ Botão com href="#finish" não encontrado, tentando alternativas...');
@@ -1407,10 +1423,20 @@ async function preencherValorBensEProxima(page, valorBens) {
             return;
         }
         
+        // Fazer scroll para o elemento antes de interagir
+        console.log('📍 Scrollando para o elemento de valor dos bens...');
+        await page.evaluate(() => {
+            const el = document.querySelector('#contratoValorDosBens');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        await page.waitForTimeout(800);
+        
         // Aguardar o input estar disponível
         console.log('⏳ Aguardando input de valor dos bens (#contratoValorDosBens)...');
         try {
-            await page.waitForSelector('#contratoValorDosBens', { timeout: 10000 });
+            await page.waitForSelector('#contratoValorDosBens', { timeout: 10000, visible: true });
             console.log('✅ Input de valor dos bens encontrado');
         } catch (e) {
             console.error('❌ Input #contratoValorDosBens não encontrado!');
@@ -1488,10 +1514,20 @@ async function selecionarPagamentoEProxima(page, pagamento) {
             return;
         }
         
+        // Fazer scroll para o elemento antes de interagir
+        console.log('📍 Scrollando para o elemento de pagamento...');
+        await page.evaluate(() => {
+            const el = document.querySelector('#carteiraSubId');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        await page.waitForTimeout(800);
+        
         // Aguardar o select estar disponível
         console.log('⏳ Aguardando select de pagamento (#carteiraSubId)...');
         try {
-            await page.waitForSelector('#carteiraSubId', { timeout: 10000 });
+            await page.waitForSelector('#carteiraSubId', { timeout: 10000, visible: true });
             console.log('✅ Select de pagamento encontrado');
         } catch (e) {
             console.error('❌ Select #carteiraSubId não encontrado!');
