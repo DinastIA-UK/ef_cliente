@@ -101,6 +101,14 @@ class JobTracker {
 
   async updateJob(jobId, updates) {
     let job = this.jobs.get(jobId);
+    
+    // 🔄 Se não encontrar em memória, tenta sincronizar do arquivo
+    if (!job) {
+      console.log(`⚠️ Job não encontrado em memória, tentando sincronizar do arquivo: ${jobId}`);
+      job = await this.getJobWithFileSync(jobId);
+    }
+    
+    // Se ainda não encontrar, cria novo
     if (!job) {
       console.log(`⚠️ Job não encontrado para atualização: ${jobId}`);
       // Criar job automaticamente se não existir
@@ -170,7 +178,32 @@ class JobTracker {
     
     return job;
   }
-
+  async getJobWithFileSync(jobId) {
+    // 🔄 FORÇA sincronização com arquivo antes de recuperar
+    // Resolve problemas de race condition entre processes paralelos
+    try {
+      const data = await fs.readFile(this.jobsFile, 'utf8');
+      const jobsArray = JSON.parse(data);
+      const jobFromFile = jobsArray.find(j => j.jobId === jobId);
+      
+      if (jobFromFile) {
+        console.error(`\n${'█'.repeat(100)}`);
+        console.error(`✨ [JOBTRACKER] JOB SINCRONIZADO DO ARQUIVO`);
+        console.error(`✨ [JOBTRACKER] Job ID: ${jobId}`);
+        console.error(`✨ [JOBTRACKER] Conteúdo do job:`);
+        console.error(JSON.stringify(jobFromFile, null, 2));
+        console.error(`${'█'.repeat(100)}\n`);
+        
+        // Atualizar em memória também
+        this.jobs.set(jobId, jobFromFile);
+      }
+      
+      return jobFromFile || null;
+    } catch (error) {
+      console.error(`❌ Erro ao sincronizar job do arquivo:`, error);
+      return null;
+    }
+  }
   getAllJobs() {
     return Array.from(this.jobs.values());
   }

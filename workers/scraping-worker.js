@@ -124,8 +124,17 @@ if (isMainThread) {
       console.log(`📋 DEBUG: Verificando se scrapingScript.main existe:`, typeof scrapingScript.main);
 
       // ✅ DADOS VÊM DIRETO DE workerData, não do jobTracker!
+      // Mas se inputData estiver vazio, tenta sincronizar do jobTracker
+      let inputData = workerData.inputData || {};
+      
+      if (!inputData || Object.keys(inputData).length === 0) {
+        console.error('\n⚠️ [WORKER] InputData vazio no workerData, tentando sincronizar do jobTracker...\n');
+        const job = await jobTracker.getJobWithFileSync(jobId);
+        inputData = (job && job.data) || {};
+      }
+      
       console.error('\n' + '█'.repeat(100));
-      console.error('✨ [WORKER-1] DADOS RECEBIDOS DO WORKERDATA');
+      console.error('✨ [WORKER-1] DADOS DISPONÍVEIS PARA EXECUÇÃO');
       console.error('✨ [WORKER-1] Job ID: ' + jobId);
       console.error('✨ [WORKER-1] InputData:');
       console.error(JSON.stringify(inputData, null, 2));
