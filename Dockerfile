@@ -15,10 +15,10 @@ COPY . .
 
 # Ambiente
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=3001
 
 # Expor porta da API
-EXPOSE 3000
+EXPOSE 3001
 
 # Comando de inicialização (API local) sem npm wrapper
 # Evita logs de "npm error signal SIGTERM" em reinícios controlados

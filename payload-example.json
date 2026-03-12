@@ -1,5 +1,5 @@
 {
-  "callbackUrl": "http://localhost:3000/api/prisma/callback",
+  "callbackUrl": "http://localhost:3001/api/prisma/callback",
   "unidade": "ESPAÇO FÁCIL - LONDRINA",
   "clienteNome": "João Silva Teste",
   "clienteTelCel": "(43) 99999-8888",

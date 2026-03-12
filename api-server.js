@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { createApp } = require('./server/app');
 const scrapingWorker = require('./workers/scraping-worker');
-const PORT = process.env.API_PORT || process.env.PORT || 3000;
+const PORT = process.env.API_PORT || process.env.PORT || 3001;
 
 // Cria app com basePath padrão '/api/prisma' para ambiente local
 const app = createApp({ basePath: '/api/prisma' });
