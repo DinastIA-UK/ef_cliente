@@ -1423,7 +1423,17 @@ async function preencherValorBensEProxima(page, valorBens) {
             return;
         }
         
-        // Fazer scroll para o elemento antes de interagir
+        // Aguardar o input estar disponível (não usar visible: true, pois pode estar oculto)
+        console.log('⏳ Aguardando input de valor dos bens (#contratoValorDosBens)...');
+        try {
+            await page.waitForSelector('#contratoValorDosBens', { timeout: 10000 });
+            console.log('✅ Input de valor dos bens encontrado');
+        } catch (e) {
+            console.error('❌ Input #contratoValorDosBens não encontrado!');
+            throw e;
+        }
+        
+        // Fazer scroll para o elemento
         console.log('📍 Scrollando para o elemento de valor dos bens...');
         await page.evaluate(() => {
             const el = document.querySelector('#contratoValorDosBens');
@@ -1433,47 +1443,28 @@ async function preencherValorBensEProxima(page, valorBens) {
         });
         await page.waitForTimeout(800);
         
-        // Aguardar o input estar disponível
-        console.log('⏳ Aguardando input de valor dos bens (#contratoValorDosBens)...');
-        try {
-            await page.waitForSelector('#contratoValorDosBens', { timeout: 10000, visible: true });
-            console.log('✅ Input de valor dos bens encontrado');
-        } catch (e) {
-            console.error('❌ Input #contratoValorDosBens não encontrado!');
-            throw e;
-        }
-        
         // Converter valor para string se for número
         const valorFormatado = String(valorBens).replace(/\./g, '').replace(',', '.');
         console.log(`📝 Preenchendo com valor: ${valorFormatado}`);
         
-        // Limpar o campo
-        await page.evaluate(() => {
+        // Usar JavaScript direto para preencher (funciona com elementos ocultos)
+        await page.evaluate((valor) => {
             const input = document.querySelector('#contratoValorDosBens');
             if (input) {
-                input.value = '';
+                input.value = valor;
                 input.dispatchEvent(new Event('change', { bubbles: true }));
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                input.dispatchEvent(new Event('blur', { bubbles: true }));
             }
-        });
-        
-        await page.waitForTimeout(300);
-        
-        // Focar no campo e digitar o valor
-        const valorInput = await page.$('#contratoValorDosBens');
-        await valorInput.focus();
-        await valorInput.type(valorFormatado, { delay: 30 });
-        
-        // Disparar eventos para garantir que o campo seja reconhecido
-        await valorInput.evaluate(el => {
-            el.dispatchEvent(new Event('change', { bubbles: true }));
-            el.dispatchEvent(new Event('blur', { bubbles: true }));
-            el.dispatchEvent(new Event('input', { bubbles: true }));
-        });
+        }, valorFormatado);
         
         await page.waitForTimeout(500);
         
         // Verificar o valor preenchido
-        const valorVerificado = await valorInput.evaluate(el => el.value);
+        const valorVerificado = await page.evaluate(() => {
+            const input = document.querySelector('#contratoValorDosBens');
+            return input ? input.value : 'não encontrado';
+        });
         console.log(`✅ Valor preenchido: ${valorVerificado}`);
         
         // Selecionar o índice "IPCA TRIMESTRAL"
@@ -1514,7 +1505,17 @@ async function selecionarPagamentoEProxima(page, pagamento) {
             return;
         }
         
-        // Fazer scroll para o elemento antes de interagir
+        // Aguardar o select estar disponível (não usar visible: true, pois pode estar oculto)
+        console.log('⏳ Aguardando select de pagamento (#carteiraSubId)...');
+        try {
+            await page.waitForSelector('#carteiraSubId', { timeout: 10000 });
+            console.log('✅ Select de pagamento encontrado');
+        } catch (e) {
+            console.error('❌ Select #carteiraSubId não encontrado!');
+            throw e;
+        }
+        
+        // Fazer scroll para o elemento
         console.log('📍 Scrollando para o elemento de pagamento...');
         await page.evaluate(() => {
             const el = document.querySelector('#carteiraSubId');
@@ -1523,16 +1524,6 @@ async function selecionarPagamentoEProxima(page, pagamento) {
             }
         });
         await page.waitForTimeout(800);
-        
-        // Aguardar o select estar disponível
-        console.log('⏳ Aguardando select de pagamento (#carteiraSubId)...');
-        try {
-            await page.waitForSelector('#carteiraSubId', { timeout: 10000, visible: true });
-            console.log('✅ Select de pagamento encontrado');
-        } catch (e) {
-            console.error('❌ Select #carteiraSubId não encontrado!');
-            throw e;
-        }
         
         // Tentar usar selectOption primeiro (se for um valor de ID numérico)
         console.log(`📍 Tentando selecionar forma de pagamento: ${pagamento}`);
