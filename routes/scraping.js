@@ -6,10 +6,10 @@ const scrapingWorker = require('../workers/scraping-worker');
 
 const router = express.Router();
 
-// POST /api/scraping/start - Iniciar scraping
-router.post('/start', async (req, res) => {
+// POST /api/scraping/gerar-proposta - Gerar proposta
+router.post('/gerar-proposta', async (req, res) => {
   try {
-    const { callbackUrl } = req.body;
+    const { callbackUrl, unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes } = req.body;
 
     // Validar callback URL
     if (!callbackUrl) {
@@ -17,6 +17,65 @@ router.post('/start', async (req, res) => {
         success: false,
         error: 'callbackUrl é obrigatório'
       });
+    }
+
+    // Validar unidade
+    if (!unidade) {
+      return res.status(400).json({
+        success: false,
+        error: 'unidade é obrigatória'
+      });
+    }
+
+    // Validar cliente (opcional, mas se fornecido deve ter nome e celular)
+    if (clienteNome || clienteTelCel) {
+      if (!clienteNome) {
+        return res.status(400).json({
+          success: false,
+          error: 'clienteNome é obrigatório quando clienteTelCel é fornecido'
+        });
+      }
+      if (!clienteTelCel) {
+        return res.status(400).json({
+          success: false,
+          error: 'clienteTelCel é obrigatório quando clienteNome é fornecido'
+        });
+      }
+    }
+
+    // Validar proposta (opcional, mas se fornecido deve ter ambos)
+    if (propostaPrevisaoEntrada || motivoLocacaoId) {
+      if (!propostaPrevisaoEntrada) {
+        return res.status(400).json({
+          success: false,
+          error: 'propostaPrevisaoEntrada é obrigatório quando motivoLocacaoId é fornecido'
+        });
+      }
+      if (!motivoLocacaoId) {
+        return res.status(400).json({
+          success: false,
+          error: 'motivoLocacaoId é obrigatório quando propostaPrevisaoEntrada é fornecido'
+        });
+      }
+    }
+
+    // Validar vendedor (opcional, mas se fornecido deve ter propostaPrevisaoEntrada e motivoLocacaoId)
+    if (vendedorId) {
+      if (!propostaPrevisaoEntrada || !motivoLocacaoId) {
+        return res.status(400).json({
+          success: false,
+          error: 'propostaPrevisaoEntrada e motivoLocacaoId são obrigatórios quando vendedorId é fornecido'
+        });
+      }
+    }
+
+    if (boxes && Array.isArray(boxes) && boxes.length > 0) {
+      if (!propostaPrevisaoEntrada || !motivoLocacaoId) {
+        return res.status(400).json({
+          success: false,
+          error: 'propostaPrevisaoEntrada e motivoLocacaoId são obrigatórios quando boxes é fornecido'
+        });
+      }
     }
 
     const urlValidation = callbackService.validateCallbackUrl(callbackUrl);
@@ -30,15 +89,57 @@ router.post('/start', async (req, res) => {
     // Gerar ID único para o job
     const jobId = uuidv4();
 
-    // Criar job no tracker (apenas URL; status/progresso são gerenciados pelo tracker/worker)
+    // Criar job no tracker com unidade armazenada
     await jobTracker.createJob(jobId, callbackUrl);
+    await jobTracker.addLog(jobId, `Unidade selecionada: ${unidade}`);
+    if (clienteNome) {
+      await jobTracker.addLog(jobId, `Cliente: ${clienteNome}`);
+      await jobTracker.addLog(jobId, `Celular: ${clienteTelCel}`);
+    }
+    if (cpf) {
+      await jobTracker.addLog(jobId, `CPF: ${cpf}`);
+    }
+    if (sexo) {
+      await jobTracker.addLog(jobId, `Sexo: ${sexo}`);
+    }
+    if (cep) {
+      await jobTracker.addLog(jobId, `CEP: ${cep}`);
+    }
+    if (numero_endereco) {
+      await jobTracker.addLog(jobId, `Número Endereço: ${numero_endereco}`);
+    }
+    if (pagamento) {
+      await jobTracker.addLog(jobId, `Forma de Pagamento: ${pagamento}`);
+    }
+    if (valorBens) {
+      await jobTracker.addLog(jobId, `Valor dos Bens: ${valorBens}`);
+    }
+    if (propostaPrevisaoEntrada) {
+      await jobTracker.addLog(jobId, `Previsão de Entrada: ${propostaPrevisaoEntrada}`);
+      await jobTracker.addLog(jobId, `Motivo Locação ID: ${motivoLocacaoId}`);
+    }
+    if (vendedorId) {
+      await jobTracker.addLog(jobId, `Vendedor ID: ${vendedorId}`);
+    }
 
     // Responder imediatamente com 200 OK
     res.status(200).json({
       success: true,
       jobId,
-      message: 'Scraping iniciado com sucesso',
+      message: 'Proposta iniciada com sucesso',
       status: 'pending',
+      unidade: unidade,
+      clienteNome: clienteNome || null,
+      clienteTelCel: clienteTelCel || null,
+      cpf: cpf || null,
+      sexo: sexo || null,
+      cep: cep || null,
+      numero_endereco: numero_endereco || null,
+      pagamento: pagamento || null,
+      valorBens: valorBens || null,
+      propostaPrevisaoEntrada: propostaPrevisaoEntrada || null,
+      motivoLocacaoId: motivoLocacaoId || null,
+      vendedorId: vendedorId || null,
       timestamp: new Date().toISOString()
     });
 
@@ -65,7 +166,7 @@ router.post('/start', async (req, res) => {
           const { getBoxesStats } = require('../supabase-client');
 
           const startTime = Date.now();
-          await main();
+          await main({ unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes });
           const endTime = Date.now();
           const processingTime = Math.round((endTime - startTime) / 1000);
 
@@ -262,6 +363,46 @@ router.get('/active', (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Erro interno do servidor'
+    });
+  }
+});
+
+// POST /api/scraping/callback - Receber callback de teste
+router.post('/callback', (req, res) => {
+  try {
+    const { jobId, success, data, error } = req.body;
+
+    console.log('\n' + '=' .repeat(60));
+    console.log('📥 CALLBACK RECEBIDO');
+    console.log('=' .repeat(60));
+    console.log(`📌 Job ID: ${jobId}`);
+    console.log(`✅ Status: ${success ? 'SUCESSO' : 'ERRO'}`);
+    console.log(`⏰ Timestamp: ${new Date().toISOString()}`);
+
+    if (data) {
+      console.log('\n📊 Dados:');
+      console.log(JSON.stringify(data, null, 2));
+    }
+
+    if (error) {
+      console.log('\n❌ Erro:');
+      console.log(error);
+    }
+
+    console.log('=' .repeat(60) + '\n');
+
+    // Responder ao callback
+    res.status(200).json({
+      success: true,
+      message: 'Callback recebido com sucesso',
+      receivedAt: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('❌ Erro ao processar callback:', error);
+    res.status(400).json({
+      success: false,
+      error: 'Erro ao processar callback'
     });
   }
 });

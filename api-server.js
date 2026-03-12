@@ -3,8 +3,8 @@ const { createApp } = require('./server/app');
 const scrapingWorker = require('./workers/scraping-worker');
 const PORT = process.env.API_PORT || process.env.PORT || 3000;
 
-// Cria app com basePath padrão '/api/scraping' para ambiente local
-const app = createApp({ basePath: '/api/scraping' });
+// Cria app com basePath padrão '/api/prisma' para ambiente local
+const app = createApp({ basePath: '/api/prisma' });
 
 // Graceful shutdown
 function beginShutdown(signal) {

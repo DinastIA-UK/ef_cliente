@@ -180,5 +180,3324 @@
       "extractedAt": "2025-12-04T14:03:09.654Z"
     },
     "error": null
+  },
+  {
+    "jobId": "59412e5e-4ffe-4ce5-8caa-529c3026bdbc",
+    "callbackUrl": "https://webhook.site/seu-id",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:19:59.705Z",
+    "updatedAt": "2026-03-06T18:20:00.792Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:19:59.707Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:19:59.826Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:20:00.792Z",
+        "level": "error",
+        "message": "Erro: Variáveis de ambiente SUPABASE_URL e SUPABASE_SERVICE_KEY são obrigatórias"
+      }
+    ],
+    "result": null,
+    "error": "Variáveis de ambiente SUPABASE_URL e SUPABASE_SERVICE_KEY são obrigatórias"
+  },
+  {
+    "jobId": "0d7aeea0-c208-4877-910b-404270a06287",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-06T18:23:47.669Z",
+    "updatedAt": "2026-03-06T18:23:47.794Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:23:47.671Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:23:47.794Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "03bb657e-9900-4373-998d-22d800f7a055",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-06T18:25:36.081Z",
+    "updatedAt": "2026-03-06T18:25:36.189Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:25:36.082Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:25:36.189Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "0b1758a1-ad2c-4fa8-b6b8-014ed3e9b50a",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:29:10.935Z",
+    "updatedAt": "2026-03-06T18:29:11.063Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:29:10.937Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:29:11.046Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:29:11.063Z",
+        "level": "error",
+        "message": "Erro: await is only valid in async functions and the top level bodies of modules"
+      }
+    ],
+    "result": null,
+    "error": "await is only valid in async functions and the top level bodies of modules"
+  },
+  {
+    "jobId": "c3a75c23-66f1-4f84-a472-2d12c63a60b6",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-06T18:30:49.152Z",
+    "updatedAt": "2026-03-06T18:30:49.276Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:30:49.153Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:30:49.276Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "02bfe57d-6c15-4294-9935-81909c075a27",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:33:46.687Z",
+    "updatedAt": "2026-03-06T18:33:46.813Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:33:46.689Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:33:46.796Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:33:46.813Z",
+        "level": "error",
+        "message": "Erro: Unexpected end of input"
+      }
+    ],
+    "result": null,
+    "error": "Unexpected end of input"
+  },
+  {
+    "jobId": "c9f83159-a024-41e4-adcc-8f2998cbb4d1",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:35:04.893Z",
+    "updatedAt": "2026-03-06T18:35:32.305Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:35:04.894Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:35:05.002Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:35:32.305Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "1228f624-7208-4c31-b566-93d0859fe52b",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:37:59.517Z",
+    "updatedAt": "2026-03-06T18:39:05.784Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:37:59.518Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:37:59.626Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:39:05.784Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "adf9466f-d1d9-4083-8d4b-d22e1d8f56c9",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:50:03.077Z",
+    "updatedAt": "2026-03-06T18:50:25.172Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:50:03.080Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:50:03.081Z",
+        "level": "info",
+        "message": "Cliente: Teste IA"
+      },
+      {
+        "timestamp": "2026-03-06T18:50:03.089Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T18:50:03.096Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T18:50:03.102Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T18:50:03.218Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:50:25.172Z",
+        "level": "error",
+        "message": "Erro: result is not defined"
+      }
+    ],
+    "result": null,
+    "error": "result is not defined"
+  },
+  {
+    "jobId": "51c0c6a2-3b6b-48da-b4c5-dc4c73dfce9b",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:51:36.815Z",
+    "updatedAt": "2026-03-06T18:52:30.566Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:51:36.817Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:51:36.825Z",
+        "level": "info",
+        "message": "Cliente: Teste IA"
+      },
+      {
+        "timestamp": "2026-03-06T18:51:36.825Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T18:51:36.826Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T18:51:36.833Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T18:51:36.942Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:52:30.566Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "472ddc05-f9c0-4145-b139-348ca91bb648",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:53:28.798Z",
+    "updatedAt": "2026-03-06T18:54:37.644Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:53:28.800Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:53:28.808Z",
+        "level": "info",
+        "message": "Cliente: Teste IA"
+      },
+      {
+        "timestamp": "2026-03-06T18:53:28.815Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T18:53:28.821Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T18:53:28.828Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T18:53:28.937Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:54:37.644Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "56acb846-07d4-48b6-8e3e-c2827ba6e11c",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-06T18:56:00.810Z",
+    "updatedAt": "2026-03-06T18:56:00.951Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:56:00.811Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:56:00.818Z",
+        "level": "info",
+        "message": "Cliente: Teste IA"
+      },
+      {
+        "timestamp": "2026-03-06T18:56:00.819Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T18:56:00.826Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T18:56:00.832Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T18:56:00.951Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "3b249507-8269-48e9-bdf0-a08d721ec018",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T18:57:21.142Z",
+    "updatedAt": "2026-03-06T18:58:56.158Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T18:57:21.143Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T18:57:21.143Z",
+        "level": "info",
+        "message": "Cliente: Teste IA"
+      },
+      {
+        "timestamp": "2026-03-06T18:57:21.151Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T18:57:21.157Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T18:57:21.162Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T18:57:21.282Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T18:58:56.158Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "5fa48f63-f8cf-49c6-92e2-ca1dff973e21",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-06T19:04:18.285Z",
+    "updatedAt": "2026-03-06T19:09:53.543Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T19:04:18.287Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T19:04:18.294Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-06T19:04:18.300Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T19:04:18.307Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T19:04:18.313Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T19:04:18.314Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-06T19:04:18.428Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T19:09:53.543Z",
+        "level": "info",
+        "message": "Scraping concluído em 334 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 971,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 334,
+      "logs": [],
+      "extractedAt": "2026-03-06T19:09:53.542Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "5ce9f88f-9756-4761-ba40-026feaa27b41",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-06T19:33:23.183Z",
+    "updatedAt": "2026-03-06T19:33:23.324Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T19:33:23.185Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T19:33:23.193Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-06T19:33:23.200Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T19:33:23.200Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T19:33:23.206Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T19:33:23.212Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-06T19:33:23.324Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "35a2f818-5ba6-465d-8a9e-ef30135392bd",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-06T19:37:19.546Z",
+    "updatedAt": "2026-03-06T19:37:19.702Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T19:37:19.548Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T19:37:19.555Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-06T19:37:19.562Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T19:37:19.568Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T19:37:19.574Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T19:37:19.580Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-06T19:37:19.702Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "91119323-127b-4c4a-93d9-8dafc1481d49",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-06T19:38:59.690Z",
+    "updatedAt": "2026-03-06T19:40:41.863Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-06T19:38:59.692Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-06T19:38:59.699Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-06T19:38:59.705Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-06T19:38:59.711Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-06T19:38:59.718Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-06T19:38:59.724Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-06T19:38:59.846Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-06T19:40:41.863Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "d5dec22e-d488-4ff9-b49e-fc479b224ea6",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T13:37:17.669Z",
+    "updatedAt": "2026-03-07T13:38:04.853Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T13:37:17.670Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T13:37:17.671Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T13:37:17.679Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T13:37:17.686Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T13:37:17.692Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T13:37:17.692Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T13:37:17.803Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T13:38:04.853Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "8a9f4486-6d0f-4797-a09e-3708cb83b7ac",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T13:39:36.745Z",
+    "updatedAt": "2026-03-07T13:40:33.013Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T13:39:36.746Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T13:39:36.754Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T13:39:36.760Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T13:39:36.766Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T13:39:36.773Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T13:39:36.780Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T13:39:36.889Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T13:40:33.013Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "660f3606-77ba-4efe-999a-7a21c54b89be",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T13:41:49.574Z",
+    "updatedAt": "2026-03-07T13:42:44.803Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T13:41:49.576Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T13:41:49.583Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T13:41:49.589Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T13:41:49.595Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T13:41:49.601Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T13:41:49.608Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T13:41:49.717Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T13:42:44.803Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "d2ad06d0-0807-4946-b56c-f42561aa47c4",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T13:44:21.136Z",
+    "updatedAt": "2026-03-07T13:45:17.224Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T13:44:21.138Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T13:44:21.145Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T13:44:21.152Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T13:44:21.160Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T13:44:21.167Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T13:44:21.175Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T13:44:21.286Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T13:45:17.224Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "afa53f96-9a31-48b7-8a01-913f3809a3e8",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-07T13:55:22.449Z",
+    "updatedAt": "2026-03-07T13:55:22.598Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T13:55:22.451Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T13:55:22.460Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T13:55:22.467Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T13:55:22.473Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T13:55:22.480Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T13:55:22.488Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T13:55:22.598Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "c6548226-758c-468f-8415-a9a71b0c2d50",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T13:57:41.792Z",
+    "updatedAt": "2026-03-07T13:59:06.465Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T13:57:41.794Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T13:57:41.794Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T13:57:41.802Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T13:57:41.810Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T13:57:41.810Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T13:57:41.817Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T13:57:41.927Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T13:59:06.465Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "0faa63e6-593e-4b25-9df1-0ab19e707eaf",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T14:00:01.117Z",
+    "updatedAt": "2026-03-07T14:00:53.760Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T14:00:01.119Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:01.127Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:01.128Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:01.135Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:01.140Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:01.147Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:01.258Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T14:00:53.760Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "a9fb8362-f42c-4303-bbc1-5270d2d53bc2",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T14:05:45.487Z",
+    "updatedAt": "2026-03-07T14:08:15.274Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T14:05:45.488Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T14:05:45.496Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T14:05:45.502Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T14:05:45.508Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T14:05:45.515Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T14:05:45.521Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T14:05:45.632Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T14:08:15.274Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "d9ba0ee3-bff4-4496-b521-f98e8f5f5723",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T14:09:21.508Z",
+    "updatedAt": "2026-03-07T14:10:20.807Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T14:09:21.509Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T14:09:21.510Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T14:09:21.510Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T14:09:21.519Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T14:09:21.525Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T14:09:21.532Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T14:09:21.641Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T14:10:20.807Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "4a54967f-93e9-4b78-a921-0f6c32fef80a",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T14:12:26.146Z",
+    "updatedAt": "2026-03-07T14:13:34.670Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T14:12:26.148Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T14:12:26.156Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T14:12:26.164Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T14:12:26.172Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T14:12:26.180Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T14:12:26.188Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T14:12:26.300Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T14:13:34.670Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "890d98bc-01d3-4efe-8e18-92bb812677a8",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T14:16:33.451Z",
+    "updatedAt": "2026-03-07T14:17:50.666Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T14:16:33.453Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T14:16:33.462Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T14:16:33.469Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T14:16:33.477Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T14:16:33.483Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T14:16:33.490Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T14:16:33.600Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T14:17:50.666Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "745bce66-9700-4a6c-9908-810aaf6eefac",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-07T14:43:28.517Z",
+    "updatedAt": "2026-03-07T14:47:59.826Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-07T14:43:28.518Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-07T14:43:28.527Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-07T14:43:28.535Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-07T14:43:28.542Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-07T14:43:28.548Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-07T14:43:28.555Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-07T14:43:28.665Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-07T14:47:59.826Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "05ade7a9-9177-40c7-b745-c6fd23424ebf",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T12:30:34.413Z",
+    "updatedAt": "2026-03-12T12:31:18.855Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:30:34.415Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:30:34.423Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:30:34.431Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:30:34.439Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:30:34.447Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:30:34.454Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:30:34.566Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:18.854Z",
+        "level": "error",
+        "message": "Erro: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"domcontentloaded\" event fired\n  \"load\" event fired\n============================================================"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"domcontentloaded\" event fired\n  \"load\" event fired\n============================================================"
+  },
+  {
+    "jobId": "c51db3dc-24e4-464e-b737-f9039cb4eca1",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T12:31:29.392Z",
+    "updatedAt": "2026-03-12T12:32:58.354Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:31:29.393Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:29.401Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:29.409Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:29.416Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:29.424Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:29.430Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:31:29.539Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T12:32:58.354Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "fc703686-9174-49bd-b8c7-be2ec1c3b190",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T12:33:28.179Z",
+    "updatedAt": "2026-03-12T12:39:21.921Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:33:28.181Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:33:28.189Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:33:28.196Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:33:28.203Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:33:28.212Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:33:28.219Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:33:28.330Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T12:39:21.921Z",
+        "level": "info",
+        "message": "Scraping concluído em 352 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 988,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 352,
+      "logs": [],
+      "extractedAt": "2026-03-12T12:39:21.919Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "e4c5f8b7-7991-443c-95a9-38b4807986cf",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T12:40:27.815Z",
+    "updatedAt": "2026-03-12T12:40:27.964Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:40:27.817Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:40:27.825Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:40:27.832Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:40:27.839Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:40:27.846Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:40:27.852Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:40:27.964Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "55892b5d-5ddb-425e-a1c0-1502d59093b0",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T12:51:34.740Z",
+    "updatedAt": "2026-03-12T12:51:34.908Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:51:34.742Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.750Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.756Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.763Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.770Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.776Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.887Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:34.908Z",
+        "level": "error",
+        "message": "Erro: Invalid or unexpected token"
+      }
+    ],
+    "result": null,
+    "error": "Invalid or unexpected token"
+  },
+  {
+    "jobId": "1da13da5-0bb7-4b4e-abbf-6f55dbd995cd",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T12:51:50.090Z",
+    "updatedAt": "2026-03-12T12:51:50.244Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:51:50.092Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.099Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.106Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.112Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.119Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.126Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.236Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T12:51:50.244Z",
+        "level": "error",
+        "message": "Erro: Invalid or unexpected token"
+      }
+    ],
+    "result": null,
+    "error": "Invalid or unexpected token"
+  },
+  {
+    "jobId": "4677a576-0ef6-49c0-8700-73cf6b623d5f",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T12:52:27.565Z",
+    "updatedAt": "2026-03-12T12:52:27.715Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:52:27.566Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:52:27.575Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:52:27.582Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:52:27.589Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:52:27.597Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:52:27.604Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:52:27.715Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "593977c6-0992-4972-91ca-c7c9a930d60f",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T12:56:20.858Z",
+    "updatedAt": "2026-03-12T12:56:21.009Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T12:56:20.860Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T12:56:20.869Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T12:56:20.877Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T12:56:20.883Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T12:56:20.890Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T12:56:20.898Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T12:56:21.009Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "47435436-84b5-4dfb-8b03-8a7fba49f323",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T13:00:08.781Z",
+    "updatedAt": "2026-03-12T13:01:13.787Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:00:08.785Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:00:08.792Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:00:08.799Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:00:08.807Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:00:08.813Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:00:08.820Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:00:08.933Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T13:01:13.787Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "7d34f71b-524e-45ee-b6d9-13a4443724aa",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T13:03:24.738Z",
+    "updatedAt": "2026-03-12T13:03:24.887Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:03:24.740Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:03:24.749Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:03:24.757Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:03:24.763Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:03:24.770Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:03:24.777Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:03:24.887Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "6e35539b-2301-4760-9d6d-880ce9e54473",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T13:04:56.740Z",
+    "updatedAt": "2026-03-12T13:06:09.150Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:04:56.742Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:04:56.750Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:04:56.756Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:04:56.763Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:04:56.768Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:04:56.774Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:04:56.884Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T13:06:09.150Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "7db22340-758c-421c-a4a3-c25e1eab0417",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T13:15:11.314Z",
+    "updatedAt": "2026-03-12T13:17:40.912Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:15:11.318Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:15:11.326Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:15:11.333Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:15:11.340Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:15:11.346Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:15:11.353Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:15:11.465Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T13:17:40.912Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "39e92ef6-174f-4c3d-b071-66041f872e87",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T13:26:02.513Z",
+    "updatedAt": "2026-03-12T13:26:02.656Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:26:02.516Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:26:02.524Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:26:02.530Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:26:02.536Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:26:02.542Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:26:02.547Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:26:02.656Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "68104fc9-afa6-461c-a6ee-ae2d0baa694e",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T13:30:23.205Z",
+    "updatedAt": "2026-03-12T13:31:40.782Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:30:23.207Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:30:23.215Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:30:23.221Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:30:23.228Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:30:23.236Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:30:23.243Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:30:23.357Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T13:31:40.782Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "ab54ee10-88e9-48a9-b0a8-e9442323d38f",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T13:32:46.029Z",
+    "updatedAt": "2026-03-12T13:32:46.177Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:32:46.031Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:32:46.039Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:32:46.045Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:32:46.052Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:32:46.058Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:32:46.065Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:32:46.177Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "c34b65d8-6f04-452a-aa46-04b44537c19a",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T13:38:21.556Z",
+    "updatedAt": "2026-03-12T13:38:21.705Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:38:21.557Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:38:21.565Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:38:21.572Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:38:21.579Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:38:21.585Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:38:21.592Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:38:21.705Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "86dd5bf3-26fd-4803-9e91-e2be0db7e285",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T13:41:29.288Z",
+    "updatedAt": "2026-03-12T13:41:29.439Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:41:29.290Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:41:29.299Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:41:29.305Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:41:29.312Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:41:29.319Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:41:29.326Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:41:29.439Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "b82f2451-098a-4a6e-9303-f63d5c58b6de",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T13:44:27.338Z",
+    "updatedAt": "2026-03-12T13:50:35.764Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T13:44:27.340Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T13:44:27.347Z",
+        "level": "info",
+        "message": "Cliente: João Silva"
+      },
+      {
+        "timestamp": "2026-03-12T13:44:27.348Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T13:44:27.356Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T13:44:27.362Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T13:44:27.369Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T13:44:27.478Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T13:50:35.764Z",
+        "level": "info",
+        "message": "Scraping concluído em 367 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 988,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 367,
+      "logs": [],
+      "extractedAt": "2026-03-12T13:50:35.762Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "daa4f4b3-7300-4873-9440-6dfc80027e20",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T14:17:51.229Z",
+    "updatedAt": "2026-03-12T14:18:34.243Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T14:17:51.231Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T14:17:51.238Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste"
+      },
+      {
+        "timestamp": "2026-03-12T14:17:51.245Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8888"
+      },
+      {
+        "timestamp": "2026-03-12T14:17:51.252Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T14:17:51.259Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T14:17:51.265Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T14:17:51.374Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:34.243Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "d6fc1542-129d-4dd7-bd0d-64025457f623",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T14:18:53.833Z",
+    "updatedAt": "2026-03-12T14:20:18.475Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T14:18:53.834Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:53.842Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:53.848Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8889"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:53.855Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:53.862Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:53.868Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T14:18:53.975Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T14:20:18.475Z",
+        "level": "error",
+        "message": "Erro: page.waitForTimeout: Target page, context or browser has been closed"
+      }
+    ],
+    "result": null,
+    "error": "page.waitForTimeout: Target page, context or browser has been closed"
+  },
+  {
+    "jobId": "0169bda8-cca8-4880-9551-05fe18b81b1a",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T15:22:26.551Z",
+    "updatedAt": "2026-03-12T15:22:58.843Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T15:22:26.554Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:26.561Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:26.568Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8889"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:26.575Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:26.583Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:26.589Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:26.701Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T15:22:58.843Z",
+        "level": "info",
+        "message": "Scraping concluído em 28 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 28,
+      "logs": [],
+      "extractedAt": "2026-03-12T15:22:58.842Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "deb5bd2e-3904-4ae6-89a1-95d8467d52f0",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T15:23:14.300Z",
+    "updatedAt": "2026-03-12T15:25:04.863Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T15:23:14.301Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T15:23:14.309Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 2"
+      },
+      {
+        "timestamp": "2026-03-12T15:23:14.316Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8887"
+      },
+      {
+        "timestamp": "2026-03-12T15:23:14.322Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T15:23:14.329Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T15:23:14.336Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T15:23:14.445Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T15:25:04.863Z",
+        "level": "info",
+        "message": "Scraping concluído em 110 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 110,
+      "logs": [],
+      "extractedAt": "2026-03-12T15:25:04.862Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "74fe1670-27c5-48f1-bd60-1c4053b7637a",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T15:30:07.771Z",
+    "updatedAt": "2026-03-12T15:30:37.994Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T15:30:07.772Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:07.781Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 2"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:07.787Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8887"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:07.797Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:07.803Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:07.810Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:07.922Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:37.994Z",
+        "level": "info",
+        "message": "Scraping concluído em 29 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 29,
+      "logs": [],
+      "extractedAt": "2026-03-12T15:30:37.993Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "32b660c5-310e-4615-861c-1a763af4523f",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T15:30:46.646Z",
+    "updatedAt": "2026-03-12T15:32:38.884Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T15:30:46.647Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:46.648Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 3"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:46.657Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8886"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:46.664Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:46.671Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:46.678Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T15:30:46.787Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T15:32:38.884Z",
+        "level": "info",
+        "message": "Scraping concluído em 112 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 112,
+      "logs": [],
+      "extractedAt": "2026-03-12T15:32:38.883Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "e983ed73-0a26-4f5c-af64-a4542300507b",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T15:34:02.814Z",
+    "updatedAt": "2026-03-12T15:35:45.674Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T15:34:02.816Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T15:34:02.823Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 4"
+      },
+      {
+        "timestamp": "2026-03-12T15:34:02.830Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8885"
+      },
+      {
+        "timestamp": "2026-03-12T15:34:02.836Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T15:34:02.843Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T15:34:02.849Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T15:34:02.962Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T15:35:45.674Z",
+        "level": "info",
+        "message": "Scraping concluído em 97 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 97,
+      "logs": [],
+      "extractedAt": "2026-03-12T15:35:45.672Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "89a9a805-d2d2-47d3-82c4-717b3dae3989",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T15:38:41.595Z",
+    "updatedAt": "2026-03-12T15:40:10.025Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T15:38:41.597Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T15:38:41.605Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 5"
+      },
+      {
+        "timestamp": "2026-03-12T15:38:41.612Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8884"
+      },
+      {
+        "timestamp": "2026-03-12T15:38:41.619Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T15:38:41.625Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T15:38:41.633Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T15:38:41.742Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T15:40:10.025Z",
+        "level": "info",
+        "message": "Scraping concluído em 87 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 87,
+      "logs": [],
+      "extractedAt": "2026-03-12T15:40:10.023Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "46b8334d-d2eb-463a-8359-ecdeb3bf40f5",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T16:00:16.438Z",
+    "updatedAt": "2026-03-12T16:02:45.690Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:00:16.440Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:00:16.447Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 6"
+      },
+      {
+        "timestamp": "2026-03-12T16:00:16.454Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8883"
+      },
+      {
+        "timestamp": "2026-03-12T16:00:16.460Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:00:16.466Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:00:16.473Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:00:16.582Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T16:02:45.690Z",
+        "level": "info",
+        "message": "Scraping concluído em 148 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 148,
+      "logs": [],
+      "extractedAt": "2026-03-12T16:02:45.689Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "a112f4fb-b78e-4b4b-9fd2-06c8f7d7866a",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T16:04:55.248Z",
+    "updatedAt": "2026-03-12T16:04:55.407Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:04:55.251Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:04:55.262Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 7"
+      },
+      {
+        "timestamp": "2026-03-12T16:04:55.271Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8882"
+      },
+      {
+        "timestamp": "2026-03-12T16:04:55.279Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:04:55.287Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:04:55.296Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:04:55.407Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "0708bb3e-6d7d-42bb-baeb-b659fb25abc7",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T16:10:20.591Z",
+    "updatedAt": "2026-03-12T16:10:20.737Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:10:20.593Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:10:20.601Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 8"
+      },
+      {
+        "timestamp": "2026-03-12T16:10:20.608Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8881"
+      },
+      {
+        "timestamp": "2026-03-12T16:10:20.614Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:10:20.620Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:10:20.627Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:10:20.737Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "ae754b06-d341-47b6-9e1a-36397d660c95",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-03-12T16:16:04.305Z",
+    "updatedAt": "2026-03-12T16:16:24.047Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:16:04.307Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPA�O F�CIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.315Z",
+        "level": "info",
+        "message": "Cliente: Jo�o Silva Teste 9"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.321Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8880"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.329Z",
+        "level": "info",
+        "message": "CPF: 12345678903"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.335Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.342Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.348Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.355Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.361Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.368Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.374Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.382Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:04.491Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T16:16:24.046Z",
+        "level": "error",
+        "message": "Erro: Unidade \"ESPA�O F�CIL - LONDRINA\" não encontrada"
+      }
+    ],
+    "result": null,
+    "error": "Unidade \"ESPA�O F�CIL - LONDRINA\" não encontrada"
+  },
+  {
+    "jobId": "adb0cd6f-29a9-4a45-955c-6a144ed8b37e",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T16:18:02.050Z",
+    "updatedAt": "2026-03-12T16:18:42.218Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:18:02.051Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.059Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 9"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.067Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8880"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.074Z",
+        "level": "info",
+        "message": "CPF: 12345678902"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.081Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.089Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.095Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.102Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.109Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.116Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.123Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.130Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:02.239Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T16:18:42.218Z",
+        "level": "info",
+        "message": "Scraping concluído em 39 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 39,
+      "logs": [],
+      "extractedAt": "2026-03-12T16:18:42.217Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "30d45e23-e06c-4fac-9db3-516289fb6369",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-12T16:23:25.014Z",
+    "updatedAt": "2026-03-12T16:23:25.206Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:23:25.016Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.023Z",
+        "level": "info",
+        "message": "Cliente: João Silva Teste 9"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.030Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8880"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.037Z",
+        "level": "info",
+        "message": "CPF: 12345678902"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.044Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.051Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.058Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.065Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.072Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.078Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.085Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.092Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:23:25.206Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null
+  },
+  {
+    "jobId": "0226bb18-7a51-4ae1-a1c6-f1cf0585ede9",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T16:26:22.999Z",
+    "updatedAt": "2026-03-12T16:27:52.834Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:26:23.001Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.008Z",
+        "level": "info",
+        "message": "Cliente: Teste 0"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.015Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8890"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.022Z",
+        "level": "info",
+        "message": "CPF: 12345678902"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.030Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.036Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.043Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.049Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.056Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.062Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.069Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.075Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:26:23.186Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T16:27:52.834Z",
+        "level": "info",
+        "message": "Scraping concluído em 89 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 89,
+      "logs": [],
+      "extractedAt": "2026-03-12T16:27:52.832Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "70511417-3456-41ac-8b79-2738f9bdf12b",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T16:28:39.301Z",
+    "updatedAt": "2026-03-12T16:30:19.271Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:28:39.303Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.311Z",
+        "level": "info",
+        "message": "Cliente: Teste 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.319Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8891"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.326Z",
+        "level": "info",
+        "message": "CPF: 12345678902"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.333Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.339Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.347Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.354Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.360Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.367Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.373Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.381Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:28:39.491Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T16:30:19.271Z",
+        "level": "info",
+        "message": "Scraping concluído em 99 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 99,
+      "logs": [],
+      "extractedAt": "2026-03-12T16:30:19.269Z"
+    },
+    "error": null
+  },
+  {
+    "jobId": "6cde4b11-3dc8-4499-9514-57fe2fbcb14c",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-12T16:31:03.376Z",
+    "updatedAt": "2026-03-12T16:32:51.214Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-12T16:31:03.378Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.386Z",
+        "level": "info",
+        "message": "Cliente: Teste 2"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.392Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8892"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.400Z",
+        "level": "info",
+        "message": "CPF: 01614476004"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.407Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.413Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.419Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.426Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.433Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.439Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.446Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.453Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-12T16:31:03.563Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-12T16:32:51.214Z",
+        "level": "info",
+        "message": "Scraping concluído em 106 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 983,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 106,
+      "logs": [],
+      "extractedAt": "2026-03-12T16:32:51.212Z"
+    },
+    "error": null
   }
 ]
