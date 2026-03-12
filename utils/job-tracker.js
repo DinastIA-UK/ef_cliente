@@ -45,7 +45,27 @@ class JobTracker {
 
   async saveJobs() {
     try {
-      const jobsArray = Array.from(this.jobs.values());
+      let jobsArray = Array.from(this.jobs.values());
+      
+      // 🧹 LIMPEZA: Manter apenas os últimos 100 jobs (evitar arquivo crescer infinitamente)
+      if (jobsArray.length > 100) {
+        // Ordenar por updatedAt (mais recentes primeiro) e guardar apenas os últimos 100
+        jobsArray = jobsArray
+          .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+          .slice(0, 100);
+        
+        // Atualizar a Map com apenas estes jobs
+        this.jobs.clear();
+        jobsArray.forEach(job => {
+          this.jobs.set(job.jobId, job);
+        });
+        
+        console.log(`\n${'█'.repeat(100)}`);
+        console.log(`✨ [JOBTRACKER] LIMPEZA REALIZADA`);
+        console.log(`✨ [JOBTRACKER] Mantidos apenas os 100 jobs mais recentes`);
+        console.log(`${'█'.repeat(100)}\n`);
+      }
+      
       console.log(`\n${'█'.repeat(100)}`);
       console.log(`✨ [JOBTRACKER] SALVANDO ${jobsArray.length} JOBS NO ARQUIVO`);
       console.log(`✨ [JOBTRACKER] Caminho: ${this.jobsFile}`);
