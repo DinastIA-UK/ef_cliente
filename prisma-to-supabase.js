@@ -1626,33 +1626,42 @@ async function selecionarPagamentoEProxima(page, pagamento) {
             await page.waitForTimeout(1500);
         }
         
-        // Procurar e clicar na opção
-        console.log('🔎 Procurando opção no dropdown...');
+        // Procurar e clicar na opção dentro do grupo ASAAS LDN: CC 1116118-9
+        console.log('🔎 Procurando opção no dropdown dentro de ASAAS LDN...');
         
-        const options = await page.$$('span.select2-dropdown:not([style*="display: none"]) li.select2-results__option');
-        console.log(`📋 Opções encontradas: ${options.length}`);
-        
-        if (options.length > 0) {
-            console.log('🖱️ Clicando na primeira opção encontrada...');
+        const pixElementFound = await page.evaluate((searchText) => {
+            // Procurar pelo grupo ASAAS LDN
+            const asaasGroup = Array.from(document.querySelectorAll('li.select2-results__option[role="group"]'))
+                .find(grp => grp.getAttribute('aria-label')?.includes('ASAAS'));
             
-            try {
-                const primeiraOpcao = options[0];
-                const optText = await primeiraOpcao.textContent();
-                console.log(`   Opção: ${optText.trim()}`);
-                
-                await primeiraOpcao.click();
-                console.log('✅ Opção clicada!');
-                
-                await page.waitForTimeout(1000);
-                
-            } catch (clickError) {
-                console.error(`❌ Erro ao clicar na opção: ${clickError.message}`);
-                throw clickError;
+            if (!asaasGroup) {
+                console.error('❌ Grupo ASAAS não encontrado');
+                return false;
             }
-        } else {
-            console.error(`❌ Nenhuma opção encontrada para: ${pagamento}`);
-            throw new Error(`Forma de pagamento "${pagamento}" não encontrada`);
+            
+            console.log('✅ Grupo ASAAS encontrado');
+            
+            // Procurar a opção PIX dentro desse grupo
+            const pixOption = Array.from(asaasGroup.querySelectorAll('li.select2-results__option[role="treeitem"]'))
+                .find(opt => opt.textContent.trim().toUpperCase() === searchText.toUpperCase());
+            
+            if (pixOption) {
+                console.log('✅ Opção PIX encontrada, clicando...');
+                pixOption.click();
+                return true;
+            }
+            
+            console.error('❌ PIX não encontrado no grupo ASAAS');
+            return false;
+        }, pagamento);
+        
+        if (!pixElementFound) {
+            console.error(`❌ Não foi possível selecionar ${pagamento}`);
+            throw new Error(`Forma de pagamento "${pagamento}" não encontrada na lista`);
         }
+        
+        console.log('✅ Opção clicada com sucesso!');
+        await page.waitForTimeout(1000);
         
         // Fechar Select2
         console.log('🔌 Fechando Select2...');
