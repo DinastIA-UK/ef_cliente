@@ -32,25 +32,49 @@ async function performLogin(page) {
     
     // Navegar para a página de login se não estivermos lá
     if (!page.url().includes('/login')) {
-        await page.goto('https://app.prismabox.com.br/login');
-        await page.waitForLoadState('networkidle');
+        console.log('📍 Navegando para página de login...');
+        await page.goto('https://app.prismabox.com.br/login', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForTimeout(2000); // Aguardar brevemente para scripts iniciais
     }
     
     // Aguardar o campo de usuário aparecer
-    await page.waitForSelector('input[name="username"]', { timeout: 10000 });
+    console.log('⏳ Aguardando campo de usuário...');
+    await page.waitForSelector('input[name="username"]', { timeout: 15000 });
     await page.fill('input[name="username"]', process.env.PRISMA_USERNAME);
     
-    await page.waitForSelector('input[name="password"]', { timeout: 10000 });
+    console.log('⏳ Aguardando campo de senha...');
+    await page.waitForSelector('input[name="password"]', { timeout: 15000 });
     await page.fill('input[name="password"]', process.env.PRISMA_PASSWORD);
     
-    await page.waitForSelector('button[type="submit"]:has-text("Entrar")', { timeout: 10000 });
+    console.log('⏳ Procurando botão de login...');
+    await page.waitForSelector('button[type="submit"]:has-text("Entrar")', { timeout: 15000 });
+    
+    console.log('🔑 Clicando em Entrar...');
     await page.click('button[type="submit"]:has-text("Entrar")');
-    await page.waitForLoadState('networkidle');
+    
+    // Aguardar a página carregar após login (usar load em vez de networkidle)
+    console.log('⏳ Aguardando página de proposta carregar...');
+    try {
+        await page.waitForLoadState('load', { timeout: 20000 });
+    } catch (e) {
+        console.warn('⚠️ Timeout em waitForLoadState, continuando mesmo assim...');
+    }
+    
+    // Aguardar um pouco mais para elementos renderizarem
+    await page.waitForTimeout(1500);
     
     // Navegar para a página de criação de proposta
     console.log('📝 Navegando para página de proposta...');
-    await page.goto('https://app.prismabox.com.br/proposal/add');
-    await page.waitForLoadState('networkidle');
+    await page.goto('https://app.prismabox.com.br/proposal/add', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    
+    // Aguardar apenas load, não networkidle (mais rápido)
+    console.log('⏳ Finalizando carregamento...');
+    try {
+        await page.waitForLoadState('load', { timeout: 15000 });
+    } catch (e) {
+        console.warn('⚠️ Timeout em waitForLoadState da proposta, continuando...');
+    }
+    
     await page.waitForTimeout(2000);
     
     console.log('✅ Login realizado! Página de proposta carregada...');
@@ -348,7 +372,7 @@ async function clicarProximo(page) {
         // Aguardar a próxima página carregar
         console.log('⏳ Aguardando próxima página carregar...');
         try {
-            await page.waitForLoadState('networkidle', { timeout: 15000 });
+            await page.waitForLoadState('load', { timeout: 15000 });
             await page.waitForTimeout(2000);
             console.log('✅ Próxima página carregou!');
         } catch (e) {
@@ -1133,7 +1157,7 @@ async function clicarSalvar(page) {
         // Aguardar a próxima página carregar
         console.log('⏳ Aguardando página carregar...');
         try {
-            await page.waitForLoadState('networkidle', { timeout: 15000 });
+            await page.waitForLoadState('load', { timeout: 15000 });
             await page.waitForTimeout(2000);
             console.log('✅ Página carregou com sucesso!');
         } catch (e) {
@@ -1227,7 +1251,8 @@ async function navegarParaContratos(page) {
         const targetUrl = 'https://app.prismabox.com.br/contract/add';
         console.log(`📍 URL destino: ${targetUrl}`);
         
-        await page.goto(targetUrl);
+        await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForTimeout(1500);
         console.log('⏳ Aguardando página carregar...');
         
         // Aguardar o select de proposta carregar
