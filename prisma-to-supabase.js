@@ -2068,14 +2068,21 @@ async function selecionarUnidadeEProxima(page, unidade) {
  */
 async function extractBoxesData() {
     // Versão simplificada - apenas para login
+    // Em produção ou quando PLAYWRIGHT_HEADLESS=true, SEMPRE usar headless
     const headlessEnv = process.env.PLAYWRIGHT_HEADLESS;
-    const headless = typeof headlessEnv === 'string'
-        ? headlessEnv.toLowerCase() === 'true'
-        : process.env.NODE_ENV === 'production';
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    let headless = true; // ✅ PADRÃO: sempre headless (seguro para servidores)
+    
+    // Só usar modo headed em development se explicitamente configurado
+    if (!isProduction && headlessEnv === 'false') {
+        headless = false;
+    }
+    
     const slowMo = headless ? 0 : 100;
     
     console.log(`🧭 Playwright: headless=${headless} (NODE_ENV=${process.env.NODE_ENV || 'undefined'})`);
-    console.log(`💻 Modo visual: ${!headless ? '✅ ATIVO - Janela será exibida' : '❌ Modo headless'}`);
+    console.log(`💻 Modo: ${headless ? '❌ HEADLESS (sem interface)' : '✅ COM INTERFACE GRÁFICA'}`);
 
     const browser = await chromium.launch({
         headless,

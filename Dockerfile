@@ -15,10 +15,14 @@ COPY . .
 
 # Ambiente
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Expor porta da API
-EXPOSE 3001
+EXPOSE 3000
 
 # Comando de inicialização (API local) sem npm wrapper
 # Evita logs de "npm error signal SIGTERM" em reinícios controlados
