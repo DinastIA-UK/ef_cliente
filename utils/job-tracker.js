@@ -18,6 +18,17 @@ class JobTracker {
       try {
         const data = await fs.readFile(this.jobsFile, 'utf8');
         const jobsArray = JSON.parse(data);
+        
+        console.log(`\n${'█'.repeat(100)}`);
+        console.log(`✨ [JOBTRACKER] INICIALIZANDO - CARREGANDO JOBS DO ARQUIVO`);
+        console.log(`✨ [JOBTRACKER] Caminho: ${this.jobsFile}`);
+        console.log(`✨ [JOBTRACKER] Total de jobs no arquivo: ${jobsArray.length}`);
+        if (jobsArray.length > 0) {
+          console.log(`✨ [JOBTRACKER] Conteúdo carregado:`);
+          console.log(JSON.stringify(jobsArray, null, 2));
+        }
+        console.log(`${'█'.repeat(100)}\n`);
+        
         jobsArray.forEach(job => {
           this.jobs.set(job.jobId, job);
         });
@@ -35,6 +46,13 @@ class JobTracker {
   async saveJobs() {
     try {
       const jobsArray = Array.from(this.jobs.values());
+      console.log(`\n${'█'.repeat(100)}`);
+      console.log(`✨ [JOBTRACKER] SALVANDO ${jobsArray.length} JOBS NO ARQUIVO`);
+      console.log(`✨ [JOBTRACKER] Caminho: ${this.jobsFile}`);
+      console.log(`✨ [JOBTRACKER] Conteúdo a ser salvo:`);
+      console.log(JSON.stringify(jobsArray, null, 2));
+      console.log(`${'█'.repeat(100)}\n`);
+      
       await fs.writeFile(this.jobsFile, JSON.stringify(jobsArray, null, 2));
     } catch (error) {
       console.error('❌ Erro ao salvar jobs:', error);
@@ -69,9 +87,20 @@ class JobTracker {
       job = await this.createJob(jobId, 'auto-created');
     }
 
+    console.log(`\n${'█'.repeat(100)}`);
+    console.log(`✨ [JOBTRACKER] ATUALIZANDO JOB: ${jobId}`);
+    console.log(`✨ [JOBTRACKER] Updates recebidos:`);
+    console.log(JSON.stringify(updates, null, 2));
+    console.log(`${'█'.repeat(100)}\n`);
+
     Object.assign(job, updates, {
       updatedAt: new Date().toISOString()
     });
+
+    console.log(`\n${'█'.repeat(100)}`);
+    console.log(`✨ [JOBTRACKER] JOB APÓS ATUALIZAÇÃO:`);
+    console.log(JSON.stringify(job, null, 2));
+    console.log(`${'█'.repeat(100)}\n`);
 
     this.jobs.set(jobId, job);
     await this.saveJobs(); // Aguardar salvamento
@@ -103,7 +132,23 @@ class JobTracker {
   }
 
   getJob(jobId) {
-    return this.jobs.get(jobId) || null;
+    const job = this.jobs.get(jobId) || null;
+    
+    console.log(`\n${'█'.repeat(100)}`);
+    console.log(`✨ [JOBTRACKER] RECUPERANDO JOB: ${jobId}`);
+    console.log(`✨ [JOBTRACKER] Job encontrado:`, job ? 'SIM' : 'NÃO');
+    if (job) {
+      console.log(`✨ [JOBTRACKER] Conteúdo do job:`);
+      console.log(JSON.stringify(job, null, 2));
+      console.log(`✨ [JOBTRACKER] Propriedade 'data' existe:`, job.data ? 'SIM' : 'NÃO');
+      if (job.data) {
+        console.log(`✨ [JOBTRACKER] Conteúdo de 'data':`);
+        console.log(JSON.stringify(job.data, null, 2));
+      }
+    }
+    console.log(`${'█'.repeat(100)}\n`);
+    
+    return job;
   }
 
   getAllJobs() {
