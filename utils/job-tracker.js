@@ -107,20 +107,20 @@ class JobTracker {
       job = await this.createJob(jobId, 'auto-created');
     }
 
-    console.log(`\n${'█'.repeat(100)}`);
-    console.log(`✨ [JOBTRACKER] ATUALIZANDO JOB: ${jobId}`);
-    console.log(`✨ [JOBTRACKER] Updates recebidos:`);
-    console.log(JSON.stringify(updates, null, 2));
-    console.log(`${'█'.repeat(100)}\n`);
+    console.error(`\n${'█'.repeat(100)}`);
+    console.error(`✨ [JOBTRACKER] ATUALIZANDO JOB: ${jobId}`);
+    console.error(`✨ [JOBTRACKER] Updates recebidos:`);
+    console.error(JSON.stringify(updates, null, 2));
+    console.error(`${'█'.repeat(100)}\n`);
 
     Object.assign(job, updates, {
       updatedAt: new Date().toISOString()
     });
 
-    console.log(`\n${'█'.repeat(100)}`);
-    console.log(`✨ [JOBTRACKER] JOB APÓS ATUALIZAÇÃO:`);
-    console.log(JSON.stringify(job, null, 2));
-    console.log(`${'█'.repeat(100)}\n`);
+    console.error(`\n${'█'.repeat(100)}`);
+    console.error(`✨ [JOBTRACKER] JOB APÓS ATUALIZAÇÃO:`);
+    console.error(JSON.stringify(job, null, 2));
+    console.error(`${'█'.repeat(100)}\n`);
 
     this.jobs.set(jobId, job);
     await this.saveJobs(); // Aguardar salvamento

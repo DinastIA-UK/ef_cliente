@@ -29,15 +29,15 @@ function createApp({ basePath = '/api/scraping' } = {}) {
   // 🔍 LOG DE REQUISIÇÕES (para debug)
   app.use((req, res, next) => {
     if (req.method === 'POST' && req.originalUrl.includes('/gerar-proposta')) {
-      console.log('\n' + '='.repeat(80));
-      console.log('🔴 REQUISIÇÃO DETECTADA NA APLICAÇÃO:');
-      console.log(`    Método: ${req.method}`);
-      console.log(`    URL Original: ${req.originalUrl}`);
-      console.log(`    URL Base do basePath: ${basePath}`);
-      console.log(`    Content-Type: ${req.get('content-type')}`);
-      console.log('\n📦 BODY RECEBIDO:');
-      console.log(JSON.stringify(req.body, null, 2));
-      console.log('='.repeat(80) + '\n');
+      console.error('\n' + '='.repeat(80));
+      console.error('🔴 REQUISIÇÃO DETECTADA NA APLICAÇÃO:');
+      console.error(`    Método: ${req.method}`);
+      console.error(`    URL Original: ${req.originalUrl}`);
+      console.error(`    URL Base do basePath: ${basePath}`);
+      console.error(`    Content-Type: ${req.get('content-type')}`);
+      console.error('\n📦 BODY RECEBIDO:');
+      console.error(JSON.stringify(req.body, null, 2));
+      console.error('='.repeat(80) + '\n');
     }
     next();
   });

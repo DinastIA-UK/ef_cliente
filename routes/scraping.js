@@ -12,21 +12,22 @@ router.post('/gerar-proposta', async (req, res) => {
     const timestamp = new Date().toISOString();
     const separator = '█'.repeat(100);
     
-    console.log('\n' + separator);
-    console.log('🚨🚨🚨 ROTA /gerar-proposta ATIVADA EM: ' + timestamp);
-    console.log('🚨🚨🚨 PROCESSO: routes/scraping.js - ARQUIVO NOVO COM DEBUG');
-    console.log(separator);
-    console.log('\n📋 REQ.BODY COMPLETO:');
-    console.log(JSON.stringify(req.body, null, 2));
-    console.log('\n' + separator + '\n');
+    // 🔴 Usar console.error para garantir que aparece nos logs do container
+    console.error('\n' + separator);
+    console.error('🚨🚨🚨 ROTA /gerar-proposta ATIVADA EM: ' + timestamp);
+    console.error('🚨🚨🚨 PROCESSO: routes/scraping.js - ARQUIVO ATUALIZADO');
+    console.error(separator);
+    console.error('\n📋 REQ.BODY COMPLETO:');
+    console.error(JSON.stringify(req.body, null, 2));
+    console.error('\n' + separator + '\n');
 
     const { callbackUrl, unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes } = req.body;
 
-    console.log('\n📍 VARIÁVEIS EXTRAÍDAS:');
-    console.log(`   - callbackUrl: ${callbackUrl}`);
-    console.log(`   - unidade: ${unidade}`);
-    console.log(`   - boxes: ${JSON.stringify(boxes)}`);
-    console.log('');
+    console.error('\n📍 VARIÁVEIS EXTRAÍDAS:');
+    console.error(`   - callbackUrl: ${callbackUrl}`);
+    console.error(`   - unidade: ${unidade}`);
+    console.error(`   - boxes: ${JSON.stringify(boxes)}`);
+    console.error('');
 
     // Validar callback URL
     if (!callbackUrl) {
@@ -106,9 +107,9 @@ router.post('/gerar-proposta', async (req, res) => {
     // Gerar ID único para o job
     const jobId = uuidv4();
     
-    console.log('\n' + '█'.repeat(100));
-    console.log('✨ [ROUTES-1] CRIANDO JOB COM ID: ' + jobId);
-    console.log('█'.repeat(100) + '\n');
+    console.error('\n' + '█'.repeat(100));
+    console.error('✨ [ROUTES-1] CRIANDO JOB COM ID: ' + jobId);
+    console.error('█'.repeat(100) + '\n');
 
     // Criar job no tracker com unidade armazenada
     await jobTracker.createJob(jobId, callbackUrl);
@@ -130,12 +131,12 @@ router.post('/gerar-proposta', async (req, res) => {
       boxes
     };
     
-    console.log('\n' + '█'.repeat(100));
-    console.log('✨ [ROUTES-2] SALVANDO DADOS NO JOBTRACKER');
-    console.log('✨ [ROUTES-2] Job ID: ' + jobId);
-    console.log('✨ [ROUTES-2] InputData:');
-    console.log(JSON.stringify(inputData, null, 2));
-    console.log('█'.repeat(100) + '\n');
+    console.error('\n' + '█'.repeat(100));
+    console.error('✨ [ROUTES-2] SALVANDO DADOS NO JOBTRACKER');
+    console.error('✨ [ROUTES-2] Job ID: ' + jobId);
+    console.error('✨ [ROUTES-2] InputData:');
+    console.error(JSON.stringify(inputData, null, 2));
+    console.error('█'.repeat(100) + '\n');
     
     await jobTracker.updateJob(jobId, { data: inputData });
 
