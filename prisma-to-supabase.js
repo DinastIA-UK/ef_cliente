@@ -2159,8 +2159,14 @@ async function extractBoxesData() {
  */
 async function main(options = {}) {
     try {
+        console.log('\n' + '='.repeat(70));
+        console.log('🚀 FUNÇÃO MAIN() INICIADA COM OPÇÕES:');
+        console.log('='.repeat(70));
+        console.log(JSON.stringify(options, null, 2));
+        console.log('='.repeat(70) + '\n');
+
         console.log('🎯 Iniciando processo de login Prisma Box');
-        console.log('=' .repeat(50));
+        console.log('='.repeat(50));
         
         const { 
             unidade, 

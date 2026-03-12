@@ -9,6 +9,13 @@ const router = express.Router();
 // POST /api/scraping/gerar-proposta - Gerar proposta
 router.post('/gerar-proposta', async (req, res) => {
   try {
+    // LOG: Exibir payload completo recebido
+    console.log('\n' + '='.repeat(70));
+    console.log('📥 PAYLOAD RECEBIDO NA ROTA /gerar-proposta:');
+    console.log('='.repeat(70));
+    console.log(JSON.stringify(req.body, null, 2));
+    console.log('='.repeat(70) + '\n');
+
     const { callbackUrl, unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes } = req.body;
 
     // Validar callback URL
@@ -108,6 +115,12 @@ router.post('/gerar-proposta', async (req, res) => {
       vendedorId,
       boxes
     };
+    
+    console.log('\n' + '='.repeat(70));
+    console.log('💾 DADOS ARMAZENADOS NO JOB TRACKER:');
+    console.log('='.repeat(70));
+    console.log(JSON.stringify(inputData, null, 2));
+    console.log('='.repeat(70) + '\n');
     
     await jobTracker.updateJob(jobId, { data: inputData });
 

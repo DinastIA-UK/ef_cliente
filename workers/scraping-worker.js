@@ -127,7 +127,13 @@ if (isMainThread) {
       const job = jobTracker.getJob(jobId);
       const inputData = job?.data || {};
       
-      console.log(`📊 DEBUG: Dados recuperados:`, inputData);
+      console.log('\n' + '='.repeat(70));
+      console.log('📦 DADOS RECUPERADOS DO JOB TRACKER:');
+      console.log('='.repeat(70));
+      console.log(`Job ID: ${jobId}`);
+      console.log('InputData:');
+      console.log(JSON.stringify(inputData, null, 2));
+      console.log('='.repeat(70) + '\n');
       
       // Executar o scraping com os dados de entrada
       const startTime = Date.now();
