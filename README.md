@@ -78,29 +78,33 @@ GET /api/health
 
 #### Automação de Propostas e Contratos
 ```http
-POST /api/scraping/proposal
+POST /api/prisma/gerar-proposta
 Content-Type: application/json
 
 {
-  "clienteNome": "João Silva",
-  "clienteTelCel": "11999999999",
-  "previsaoEntrada": "2026-04-15",
+  "callbackUrl": "http://localhost:3000/api/prisma/callback",
+  "unidade": "ESPAÇO FÁCIL - LONDRINA",
+  "clienteNome": "Teste 2",
+  "clienteTelCel": "(43) 99999-8892",
+  "cpf": "01614476004",
+  "sexo": "M",
+  "cep": "01311-100",
+  "numero_endereco": "123",
+  "pagamento": "PIX",
+  "valorBens": "5000.00",
+  "propostaPrevisaoEntrada": "2025-12-25",
   "motivoLocacaoId": "1",
-  "vendedorId": "1",
+  "vendedorId": "2314",
   "boxes": [
     {
-      "nome": "Box 01",
+      "nome": "box | 4m",
+      "tipo": "MENSAL"
+    },
+    {
+      "nome": "sobrebox | 4m",
       "tipo": "MENSAL"
     }
-  ],
-  "dadosCliente": {
-    "cpf": "12345678902",
-    "sexo": "M",
-    "cep": "01311-100",
-    "numero_endereco": "123",
-    "pagamento": "PIX",
-    "valorBens": "5000.00"
-  }
+  ]
 }
 ```
 
@@ -148,23 +152,32 @@ Content-Type: application/json
 ### Automatizar Criação de Proposta via cURL
 
 ```bash
-curl -X POST http://localhost:3000/api/scraping/proposal \
+curl -X POST http://localhost:3000/api/prisma/gerar-proposta \
   -H "Content-Type: application/json" \
   -d '{
-    "clienteNome": "João Silva",
-    "clienteTelCel": "11999999999",
-    "previsaoEntrada": "2026-04-15",
+    "callbackUrl": "http://localhost:3000/api/prisma/callback",
+    "unidade": "ESPAÇO FÁCIL - LONDRINA",
+    "clienteNome": "Teste 2",
+    "clienteTelCel": "(43) 99999-8892",
+    "cpf": "01614476004",
+    "sexo": "M",
+    "cep": "01311-100",
+    "numero_endereco": "123",
+    "pagamento": "PIX",
+    "valorBens": "5000.00",
+    "propostaPrevisaoEntrada": "2025-12-25",
     "motivoLocacaoId": "1",
-    "vendedorId": "1",
-    "boxes": [{"nome": "Box 01", "tipo": "MENSAL"}],
-    "dadosCliente": {
-      "cpf": "12345678902",
-      "sexo": "M",
-      "cep": "01311-100",
-      "numero_endereco": "123",
-      "pagamento": "PIX",
-      "valorBens": "5000.00"
-    }
+    "vendedorId": "2314",
+    "boxes": [
+      {
+        "nome": "box | 4m",
+        "tipo": "MENSAL"
+      },
+      {
+        "nome": "sobrebox | 4m",
+        "tipo": "MENSAL"
+      }
+    ]
   }'
 ```
 
