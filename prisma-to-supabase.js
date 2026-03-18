@@ -1065,13 +1065,29 @@ async function preencherFeedback(page) {
         
         // 1️⃣ Selecionar "Meio de contato"
         console.log(`   [1] Selecionando Meio de contato: TELEFONE...`);
-        await page.selectOption('select[name="feedBackMeioId"]', '3'); // 1 = TELEFONE
+        await page.evaluate(() => {
+            const select = document.querySelector('select[name="feedBackMeioId"]');
+            if (select) {
+                select.value = '3'; // 1 = TELEFONE
+                select.dispatchEvent(new Event('input', { bubbles: true }));
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+                select.dispatchEvent(new Event('blur', { bubbles: true }));
+            }
+        });
         console.log(`   ✅ Meio de contato selecionado`);
         await page.waitForTimeout(500);
         
         // 2️⃣ Selecionar "Chances"
         console.log(`   [2] Selecionando Chances: 80%...`);
-        await page.selectOption('select[name="feedBackChances"]', '80');
+        await page.evaluate(() => {
+            const select = document.querySelector('select[name="feedBackChances"]');
+            if (select) {
+                select.value = '80';
+                select.dispatchEvent(new Event('input', { bubbles: true }));
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+                select.dispatchEvent(new Event('blur', { bubbles: true }));
+            }
+        });
         console.log(`   ✅ Chances selecionadas`);
         await page.waitForTimeout(500);
         
