@@ -1224,64 +1224,160 @@ async function extrairNumeroProposta(page) {
     try {
         console.log('\n🔍 Extraindo número da proposta...');
         
-        // Procurar por seletores específicos para o heading de proposta
+        // Estratégia 1: Procurar por seletores específicos
+        console.log('📍 Estratégia 1: Procurando por seletores conhecidos...');
         const seletores = [
             'span.caption-subject.font-blue-sharp',
             'span.caption-subject',
             '.page-title h1',
             '[class*="proposal"] [class*="heading"]',
-            'h1.page-title'
+            'h1.page-title',
+            '.contract-title',
+            '[class*="proposal-number"]',
+            'h1, h2, h3',
+            'div.page-header > h1'
         ];
         
-        let headingText = null;
+        let numeroProposta = null;
+        
         for (const seletor of seletores) {
             try {
-                headingText = await page.textContent(seletor);
-                if (headingText && headingText.includes('Proposta')) {
-                    console.log(`📄 Encontrado no seletor: ${seletor}`);
-                    break;
+                const headingText = await page.textContent(seletor);
+                if (headingText && headingText.trim()) {
+                    console.log(`   Testando seletor "${seletor}": "${headingText.substring(0, 80)}..."`);
+                    
+                    // Procurar número entre parênteses
+                    let match = headingText.match(/\((\d+)\)/);
+                    if (match && match[1]) {
+                        numeroProposta = match[1];
+                        console.log(`   ✅ Encontrado: ${numeroProposta}`);
+                        break;
+                    }
                 }
             } catch (e) {
                 // continuar
             }
         }
         
-        // Fallback: procurar todo o texto da página
-        if (!headingText || !headingText.includes('Proposta')) {
-            const allText = await page.evaluate(() => {
-                // Procurar em todos os elementos que possam conter o texto de proposta
-                const elements = document.querySelectorAll('span, h1, h2, h3, div[class*="title"], div[class*="heading"]');
-                for (let el of elements) {
-                    if (el.textContent.includes('Proposta') && el.textContent.includes('(')) {
-                        return el.textContent;
+        // Estratégia 2: Se não encontrou, procurar em toda a página
+        if (!numeroProposta) {
+            console.log('📍 Estratégia 2: Procurando em todo o texto da página...');
+            const resultado = await page.evaluate(() => {
+                // Procurar em todos os elementos significativos
+                const elementos = [
+                    ...document.querySelectorAll('span, h1, h2, h3, div[class*="title"], div[class*="heading"], strong, b, .alert, .badge')
+                ];
+                
+                console.log(`   📋 Elementos encontrados: ${elementos.length}`);
+                
+                for (let el of elementos) {
+                    const texto = el.textContent.trim();
+                    if (!texto) continue;
+                    
+                    // Logs detalhados
+                    if (texto.includes('Proposta') || /\(\d+\)/.test(texto)) {
+                        console.log(`   📝 Elemento: "${texto.substring(0, 100)}"`);
+                    }
+                    
+                    // Procurar padrão "Proposta (123)"
+                    if (texto.includes('Proposta')) {
+                        const match = texto.match(/\((\d+)\)/);
+                        if (match && match[1]) {
+                            console.log(`   ✅ Encontrado com padrão Proposta: ${match[1]}`);
+                            return match[1];
+                        }
+                    }
+                    
+                    // Procurar apenas números entre parênteses
+                    const match = texto.match(/\((\d{5,})\)/);
+                    if (match && match[1]) {
+                        console.log(`   ✅ Encontrado número: ${match[1]}`);
+                        return match[1];
                     }
                 }
+                
                 return null;
             });
-            headingText = allText;
+            
+            if (resultado) {
+                numeroProposta = resultado;
+            }
         }
         
-        if (!headingText) {
-            throw new Error('Não foi possível encontrar a heading com o texto da proposta');
+        // Estratégia 3: Procurar na URL
+        if (!numeroProposta) {
+            console.log('📍 Estratégia 3: Procurando na URL...');
+            const url = page.url();
+            console.log(`   URL: ${url}`);
+            
+            // Procurar padrão /proposal/view/123 ou similar
+            const urlMatch = url.match(/\/proposal\/view\/(\d+)/i);
+            if (urlMatch && urlMatch[1]) {
+                numeroProposta = urlMatch[1];
+                console.log(`   ✅ Encontrado na URL: ${numeroProposta}`);
+            }
         }
         
-        console.log(`📄 Texto encontrado: "${headingText.substring(0, 100)}..."`);
-        
-        // Usar regex para extrair o número entre parênteses
-        const match = headingText.match(/\((\d+)\)/);
-        
-        if (!match || !match[1]) {
-            throw new Error(`Não foi possível extrair o número da proposta do texto: "${headingText}"`);
+        // Estratégia 4: Dumps de debug - mostrar conteúdo visível
+        if (!numeroProposta) {
+            console.log('📍 Estratégia 4: Dump de conteúdo visível da página...');
+            const dump = await page.evaluate(() => {
+                // Pegar todos os textos visíveis que possam ser número de proposta
+                const textos = [];
+                
+                // Headers
+                document.querySelectorAll('h1, h2, h3, .page-title, [class*="title"]').forEach(el => {
+                    const txt = el.textContent.trim();
+                    if (txt && txt.length < 200) textos.push(`[HEADER] ${txt}`);
+                });
+                
+                // Badges/labels
+                document.querySelectorAll('.badge, .label, strong').forEach(el => {
+                    const txt = el.textContent.trim();
+                    if (txt && txt.length < 100) textos.push(`[LABEL] ${txt}`);
+                });
+                
+                // Elementos com "proposta" ou números
+                document.querySelectorAll('*').forEach(el => {
+                    const txt = el.textContent.trim();
+                    if ((txt.includes('proposta') || txt.includes('Proposta') || /\(\d+\)/.test(txt)) && 
+                        txt.length < 300 && el.children.length === 0) {
+                        textos.push(`[CONTENT] ${txt.substring(0, 150)}`);
+                    }
+                });
+                
+                return textos.slice(0, 20); // Limitado a 20 linhas
+            });
+            
+            if (dump && dump.length > 0) {
+                console.log('   📋 Conteúdo encontrado:');
+                dump.forEach(item => console.log(`      ${item}`));
+                
+                // Tentar extrair número do dump
+                for (let item of dump) {
+                    const match = item.match(/\((\d+)\)/);
+                    if (match && match[1]) {
+                        numeroProposta = match[1];
+                        console.log(`   ✅ Encontrado no dump: ${numeroProposta}`);
+                        break;
+                    }
+                }
+            }
         }
         
-        const numeroProposta = match[1];
+        if (!numeroProposta) {
+            console.warn('⚠️ Não foi possível extrair número da proposta');
+            console.log('   Retornando "0" como fallback');
+            return '0';
+        }
+        
         console.log(`✅ Número da proposta extraído: ${numeroProposta}`);
-        
         return numeroProposta;
         
     } catch (error) {
         console.error(`❌ Erro ao extrair número da proposta:`, error.message);
-        throw error;
+        console.warn('⚠️ Retornando "0" como fallback');
+        return '0'; // Retorna 0 em vez de lançar erro
     }
 }
 
