@@ -1218,166 +1218,167 @@ async function clicarSalvar(page) {
 /**
  * Extrair o número da proposta do heading da página
  * @param {Object} page - Página do Playwright
- * @returns {string} O número da proposta (ex: "01767")
+ * @returns {string} O número da proposta (ex: "01768")
  */
 async function extrairNumeroProposta(page) {
     try {
         console.log('\n🔍 Extraindo número da proposta...');
         
-        // Estratégia 1: Procurar por seletores específicos
-        console.log('📍 Estratégia 1: Procurando por seletores conhecidos...');
-        const seletores = [
-            'span.caption-subject.font-blue-sharp',
-            'span.caption-subject',
-            '.page-title h1',
-            '[class*="proposal"] [class*="heading"]',
-            'h1.page-title',
-            '.contract-title',
-            '[class*="proposal-number"]',
-            'h1, h2, h3',
-            'div.page-header > h1'
-        ];
-        
-        let numeroProposta = null;
-        
-        for (const seletor of seletores) {
-            try {
-                const headingText = await page.textContent(seletor);
-                if (headingText && headingText.trim()) {
-                    console.log(`   Testando seletor "${seletor}": "${headingText.substring(0, 80)}..."`);
-                    
-                    // Procurar número entre parênteses
-                    let match = headingText.match(/\((\d+)\)/);
-                    if (match && match[1]) {
-                        numeroProposta = match[1];
-                        console.log(`   ✅ Encontrado: ${numeroProposta}`);
-                        break;
-                    }
-                }
-            } catch (e) {
-                // continuar
-            }
+        // Aguardar o elemento estar presente
+        console.log('⏳ Aguardando elemento com número da proposta...');
+        try {
+            await page.waitForFunction(() => {
+                const element = document.querySelector('span.caption-subject');
+                return element && element.textContent && element.textContent.includes('Proposta');
+            }, { timeout: 5000 });
+            console.log('✅ Elemento com a proposta encontrado!');
+        } catch (e) {
+            console.warn('⚠️ Timeout aguardando elemento, tentando mesmo assim...');
         }
         
-        // Estratégia 2: Se não encontrou, procurar em toda a página
-        if (!numeroProposta) {
-            console.log('📍 Estratégia 2: Procurando em todo o texto da página...');
-            const resultado = await page.evaluate(() => {
-                // Procurar em todos os elementos significativos
-                const elementos = [
-                    ...document.querySelectorAll('span, h1, h2, h3, div[class*="title"], div[class*="heading"], strong, b, .alert, .badge')
-                ];
+        // Estratégia 1: Seletor específico (mais preciso)
+        console.log('📍 Estratégia 1: Procurando «span.caption-subject»...');
+        let numeroProposta = await page.evaluate(() => {
+            const element = document.querySelector('span.caption-subject.font-blue-sharp');
+            if (element) {
+                const texto = element.textContent.trim();
+                console.log(`   Texto encontrado: "${texto}"`);
                 
-                console.log(`   📋 Elementos encontrados: ${elementos.length}`);
-                
-                for (let el of elementos) {
-                    const texto = el.textContent.trim();
-                    if (!texto) continue;
-                    
-                    // Logs detalhados
-                    if (texto.includes('Proposta') || /\(\d+\)/.test(texto)) {
-                        console.log(`   📝 Elemento: "${texto.substring(0, 100)}"`);
-                    }
-                    
-                    // Procurar padrão "Proposta (123)"
-                    if (texto.includes('Proposta')) {
-                        const match = texto.match(/\((\d+)\)/);
-                        if (match && match[1]) {
-                            console.log(`   ✅ Encontrado com padrão Proposta: ${match[1]}`);
-                            return match[1];
-                        }
-                    }
-                    
-                    // Procurar apenas números entre parênteses
-                    const match = texto.match(/\((\d{5,})\)/);
+                const match = texto.match(/\((\d+)\)/);
+                if (match && match[1]) {
+                    console.log(`   ✅ Número extraído: ${match[1]}`);
+                    return match[1];
+                }
+            }
+            return null;
+        });
+        
+        if (numeroProposta) {
+            console.log(`✅ Número da proposta (Estratégia 1): ${numeroProposta}`);
+            return numeroProposta;
+        }
+        
+        // Estratégia 2: Seletor menos específico
+        console.log('📍 Estratégia 2: Procurando «span.caption-subject» (qualquer uma)...');
+        numeroProposta = await page.evaluate(() => {
+            const elements = document.querySelectorAll('span.caption-subject');
+            console.log(`   Elementos encontrados: ${elements.length}`);
+            
+            for (let el of elements) {
+                const texto = el.textContent.trim();
+                if (texto.includes('Proposta')) {
+                    console.log(`   Testando: "${texto.substring(0, 100)}"`);
+                    const match = texto.match(/\((\d+)\)/);
                     if (match && match[1]) {
-                        console.log(`   ✅ Encontrado número: ${match[1]}`);
+                        console.log(`   ✅ Encontrado: ${match[1]}`);
                         return match[1];
                     }
                 }
-                
-                return null;
-            });
-            
-            if (resultado) {
-                numeroProposta = resultado;
             }
+            return null;
+        });
+        
+        if (numeroProposta) {
+            console.log(`✅ Número da proposta (Estratégia 2): ${numeroProposta}`);
+            return numeroProposta;
         }
         
-        // Estratégia 3: Procurar na URL
-        if (!numeroProposta) {
-            console.log('📍 Estratégia 3: Procurando na URL...');
-            const url = page.url();
-            console.log(`   URL: ${url}`);
+        // Estratégia 3: Buscar em toda a página por padrão
+        console.log('📍 Estratégia 3: Busca global por padrão «(número)»...');
+        numeroProposta = await page.evaluate(() => {
+            // Procurar em todos os elementos de texto
+            const allElements = document.querySelectorAll('*');
             
-            // Procurar padrão /proposal/view/123 ou similar
-            const urlMatch = url.match(/\/proposal\/view\/(\d+)/i);
-            if (urlMatch && urlMatch[1]) {
-                numeroProposta = urlMatch[1];
-                console.log(`   ✅ Encontrado na URL: ${numeroProposta}`);
-            }
-        }
-        
-        // Estratégia 4: Dumps de debug - mostrar conteúdo visível
-        if (!numeroProposta) {
-            console.log('📍 Estratégia 4: Dump de conteúdo visível da página...');
-            const dump = await page.evaluate(() => {
-                // Pegar todos os textos visíveis que possam ser número de proposta
-                const textos = [];
-                
-                // Headers
-                document.querySelectorAll('h1, h2, h3, .page-title, [class*="title"]').forEach(el => {
-                    const txt = el.textContent.trim();
-                    if (txt && txt.length < 200) textos.push(`[HEADER] ${txt}`);
-                });
-                
-                // Badges/labels
-                document.querySelectorAll('.badge, .label, strong').forEach(el => {
-                    const txt = el.textContent.trim();
-                    if (txt && txt.length < 100) textos.push(`[LABEL] ${txt}`);
-                });
-                
-                // Elementos com "proposta" ou números
-                document.querySelectorAll('*').forEach(el => {
-                    const txt = el.textContent.trim();
-                    if ((txt.includes('proposta') || txt.includes('Proposta') || /\(\d+\)/.test(txt)) && 
-                        txt.length < 300 && el.children.length === 0) {
-                        textos.push(`[CONTENT] ${txt.substring(0, 150)}`);
-                    }
-                });
-                
-                return textos.slice(0, 20); // Limitado a 20 linhas
-            });
-            
-            if (dump && dump.length > 0) {
-                console.log('   📋 Conteúdo encontrado:');
-                dump.forEach(item => console.log(`      ${item}`));
-                
-                // Tentar extrair número do dump
-                for (let item of dump) {
-                    const match = item.match(/\((\d+)\)/);
-                    if (match && match[1]) {
-                        numeroProposta = match[1];
-                        console.log(`   ✅ Encontrado no dump: ${numeroProposta}`);
-                        break;
+            for (let el of allElements) {
+                // Apenas elementos com texto direto (não considerar elementos com filhos)
+                if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
+                    const texto = el.textContent.trim();
+                    
+                    // Procurar padrão (números)
+                    if (/\(\d+\)/.test(texto)) {
+                        // Priorizar se contiver "Proposta"
+                        if (texto.includes('Proposta') || texto.includes('proposta')) {
+                            const match = texto.match(/\((\d+)\)/);
+                            if (match && match[1]) {
+                                console.log(`   ✅ Encontrado em elemento de texto: ${match[1]}`);
+                                return match[1];
+                            }
+                        }
                     }
                 }
             }
+            return null;
+        });
+        
+        if (numeroProposta) {
+            console.log(`✅ Número da proposta (Estratégia 3): ${numeroProposta}`);
+            return numeroProposta;
         }
         
-        if (!numeroProposta) {
-            console.warn('⚠️ Não foi possível extrair número da proposta');
-            console.log('   Retornando "0" como fallback');
-            return '0';
+        // Estratégia 4: Usar regex em todo o corpo da página
+        console.log('📍 Estratégia 4: Busca em todo o HTML por padrão «(número)»...');
+        numeroProposta = await page.evaluate(() => {
+            const html = document.documentElement.innerHTML;
+            
+            // Procurar padrão Proposta (número)
+            let match = html.match(/Proposta[^)]*\((\d+)\)/i);
+            if (match && match[1]) {
+                console.log(`   ✅ Encontrado no HTML: ${match[1]}`);
+                return match[1];
+            }
+            
+            // Fallback: procurar qualquer número entre parênteses (5+ dígitos)
+            match = html.match(/\((\d{5,})\)/);
+            if (match && match[1]) {
+                console.log(`   ⚠️ Número entre parênteses: ${match[1]}`);
+                return match[1];
+            }
+            
+            return null;
+        });
+        
+        if (numeroProposta) {
+            console.log(`✅ Número da proposta (Estratégia 4): ${numeroProposta}`);
+            return numeroProposta;
         }
         
-        console.log(`✅ Número da proposta extraído: ${numeroProposta}`);
-        return numeroProposta;
+        // Estratégia 5: Dump completo para debug
+        console.log('📍 Estratégia 5: Dump de todas as spans com "caption-subject"...');
+        const allSpans = await page.evaluate(() => {
+            const spans = document.querySelectorAll('span.caption-subject');
+            const results = [];
+            
+            spans.forEach((span, idx) => {
+                results.push({
+                    index: idx,
+                    text: span.textContent.trim().substring(0, 150),
+                    classes: span.className,
+                    html: span.outerHTML.substring(0, 200)
+                });
+            });
+            
+            return results;
+        });
+        
+        if (allSpans && allSpans.length > 0) {
+            console.log(`   📋 Spans encontradas:`);
+            allSpans.forEach((span, idx) => {
+                console.log(`      [${idx}] ${span.text}`);
+                console.log(`          Classes: ${span.classes}`);
+            });
+        } else {
+            console.log('   ℹ️ Nenhuma span com classe "caption-subject" encontrada');
+        }
+        
+        // Se chegou aqui sem encontrar, retornar fallback
+        console.warn('⚠️ Não foi possível extrair número da proposta após todas as estratégias');
+        console.log('   Retornando "0" como fallback');
+        return '0';
         
     } catch (error) {
         console.error(`❌ Erro ao extrair número da proposta:`, error.message);
         console.warn('⚠️ Retornando "0" como fallback');
-        return '0'; // Retorna 0 em vez de lançar erro
+        return '0';
     }
 }
 
