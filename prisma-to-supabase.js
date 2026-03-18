@@ -1046,13 +1046,26 @@ async function preencherFeedback(page) {
     try {
         console.log('\n📋 Preenchendo formulário de Feedback...');
         
-        // Aguardar os campos aparecerem
-        await page.waitForSelector('select[name="feedBackMeioId"]', { timeout: 10000 });
-        console.log('✅ Formulário de Feedback encontrado');
+        // Aguardar os campos aparecerem E ficarem visíveis
+        console.log('⏳ Aguardando formulário de Feedback ficar visível...');
+        await page.waitForFunction(() => {
+            const element = document.querySelector('select[name="feedBackMeioId"]');
+            if (!element) return false;
+            const style = window.getComputedStyle(element);
+            return style.display !== 'none' && style.visibility !== 'hidden';
+        }, { timeout: 10000 });
+        console.log('✅ Formulário de Feedback encontrado e visível');
+        
+        // Scroll para o elemento para garantir que está visível
+        await page.evaluate(() => {
+            const element = document.querySelector('select[name="feedBackMeioId"]');
+            if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        await page.waitForTimeout(500);
         
         // 1️⃣ Selecionar "Meio de contato"
         console.log(`   [1] Selecionando Meio de contato: TELEFONE...`);
-        await page.selectOption('select[name="feedBackMeioId"]', '1'); // 1 = TELEFONE
+        await page.selectOption('select[name="feedBackMeioId"]', '3'); // 1 = TELEFONE
         console.log(`   ✅ Meio de contato selecionado`);
         await page.waitForTimeout(500);
         
