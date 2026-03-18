@@ -1534,66 +1534,94 @@ async function selecionarPagamentoEProxima(page, pagamento) {
             return;
         }
         
-        // Aguardar o select estar disponível (não usar visible: true, pois pode estar oculto)
-        console.log('⏳ Aguardando select de pagamento (#carteiraSubId)...');
-        try {
-            await page.waitForSelector('#carteiraSubId', { timeout: 10000 });
-            console.log('✅ Select de pagamento encontrado');
-        } catch (e) {
+        // NÃO aguardar visibilidade! Select2 mantém o select oculto e mostra um dropdown customizado
+        console.log('⏳ Procurando select de pagamento (#carteiraSubId)...');
+        const carteiraSelectElement = await page.$('#carteiraSubId');
+        if (!carteiraSelectElement) {
             console.error('❌ Select #carteiraSubId não encontrado!');
-            throw e;
+            throw new Error('Select #carteiraSubId não encontrado na página');
         }
+        console.log('✅ Select de pagamento encontrado (oculto por Select2)');
         
-        // Fazer scroll para o elemento
-        console.log('📍 Scrollando para o elemento de pagamento...');
+        // Scroll para o dropdown (usar a versão visível do Select2)
+        console.log('📍 Scrollando para o dropdown customizado...');
         await page.evaluate(() => {
-            const el = document.querySelector('#carteiraSubId');
+            const el = document.querySelector('span.select2-container');
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
         await page.waitForTimeout(800);
         
-        // Tentar usar selectOption primeiro (se for um valor de ID numérico)
-        console.log(`📍 Tentando selecionar forma de pagamento: ${pagamento}`);
-        try {
-            await page.selectOption('#carteiraSubId', pagamento);
-            console.log(`✅ Forma de pagamento selecionada diretamente!`);
-            await page.waitForTimeout(500);
-            return;
-        } catch (selectError) {
-            console.warn(`⚠️ Falha ao usar selectOption, buscando por texto...`);
-        }
+        // Tentar usar a API Select2 diretamente
+        console.log(`\n📍 Tentando selecionar forma de pagamento: ${pagamento}`);
         
-        // Se for um nome (texto), tentar encontrar a opção
-        console.log(`🔍 Procurando opção por texto: ${pagamento}`);
-        const optionValue = await page.evaluate((textBuscado) => {
-            const options = document.querySelectorAll('#carteiraSubId option');
-            for (let opt of options) {
-                if (opt.textContent.trim().toUpperCase().includes(textBuscado.toUpperCase())) {
-                    return opt.value;
+        // Primeiro, listar as opções disponíveis
+        const options = await page.evaluate(() => {
+            const select = document.querySelector('#carteiraSubId');
+            if (!select) return [];
+            
+            const opts = [];
+            for (let option of Array.from(select.options)) {
+                if (option.value) {
+                    opts.push({
+                        value: option.value,
+                        text: option.textContent.trim()
+                    });
                 }
             }
-            return null;
-        }, pagamento);
+            return opts;
+        });
         
-        if (optionValue) {
-            console.log(`✅ Encontrada opção com valor: ${optionValue}`);
-            await page.selectOption('#carteiraSubId', optionValue);
-            console.log(`✅ Forma de pagamento selecionada por texto!`);
-            await page.waitForTimeout(500);
+        console.log(`📋 Opções disponíveis: ${options.length}`);
+        options.forEach(opt => console.log(`   - ${opt.text} (${opt.value})`));
+        
+        // Procurar correspondência por valor exato ou por texto
+        let matchedValue = null;
+        
+        // Tentar por valor exato primeiro
+        if (options.find(opt => opt.value === pagamento)) {
+            matchedValue = pagamento;
+            console.log(`✅ Encontrada correspondência exata por valor: ${pagamento}`);
+        } else {
+            // Tentar por texto (case-insensitive)
+            const match = options.find(opt => 
+                opt.text.toUpperCase().includes(pagamento.toUpperCase())
+            );
+            if (match) {
+                matchedValue = match.value;
+                console.log(`✅ Encontrada correspondência por texto: "${match.text}"`);
+            }
+        }
+        
+        if (matchedValue) {
+            console.log(`🎯 Selecionando via JavaScript direto...`);
+            await page.evaluate((valor) => {
+                const select = document.querySelector('#carteiraSubId');
+                if (select) {
+                    select.value = valor;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    
+                    // Disparar evento Select2 se disponível
+                    if (typeof jQuery !== 'undefined') {
+                        try {
+                            jQuery(select).trigger('change');
+                        } catch (e) {}
+                    }
+                }
+            }, matchedValue);
+            
+            console.log(`✅ Forma de pagamento selecionada!`);
+            await page.waitForTimeout(1000);
             return;
         }
         
-        // Se não encontrou, tentar com Select2
-        console.warn(`⚠️ Opção não encontrada por ID ou texto, tentando Select2...`);
+        console.warn(`⚠️ Forma de pagamento "${pagamento}" não encontrada por correspondência exata`);
+        console.log(`🔍 Tentando abrir Select2 e buscar manualmente...`);
         
-        const carteiraSelect = await page.$('#carteiraSubId');
-        if (!carteiraSelect) {
-            throw new Error('Select de pagamento não encontrado');
-        }
         
         // Limpar dropdowns anteriores
+        console.log('🧹 Limpando dropdowns anteriores...');
         await page.evaluate(() => {
             if (typeof jQuery !== 'undefined') {
                 jQuery('select').each(function() {
@@ -1604,12 +1632,21 @@ async function selecionarPagamentoEProxima(page, pagamento) {
                     } catch (e) {}
                 });
             }
+            
+            // Remover dropdowns visíveis
+            const dropdowns = document.querySelectorAll('span.select2-dropdown');
+            dropdowns.forEach(dd => dd.remove());
         });
         
         await page.waitForTimeout(500);
         
-        // Abrir Select2
-        console.log('🎯 Abrindo Select2...');
+        // Abrir Select2 para a carteira
+        console.log('🎯 Abrindo Select2 da carteira...');
+        const carteiraSelect = await page.$('#carteiraSubId');
+        if (!carteiraSelect) {
+            throw new Error('Select de pagamento não encontrado');
+        }
+        
         const openedOk = await carteiraSelect.evaluate((el) => {
             try {
                 if (typeof jQuery !== 'undefined' && jQuery(el).data('select2')) {
@@ -1624,73 +1661,80 @@ async function selecionarPagamentoEProxima(page, pagamento) {
         
         if (openedOk) {
             console.log('✅ Select2 aberto!');
+        } else {
+            console.warn('⚠️ Falha ao abrir Select2 via jQuery');
         }
         
-        await page.waitForTimeout(1000);
         
-        // Procurar campo de busca
-        console.log('🔍 Procurando campo de busca...');
-        let searchInput = null;
+        // Aguardar campo de busca aparecer
+        console.log('⏳ Aguardando campo de busca do Select2...');
         try {
-            await page.waitForSelector('input.select2-search__field', { timeout: 2000 });
-            searchInput = await page.$('input.select2-search__field');
-            if (searchInput) {
-                console.log('✅ Campo de busca encontrado!');
+            await page.waitForFunction(() => {
+                const input = document.querySelector('input.select2-search__field');
+                return input && window.getComputedStyle(input).display !== 'none';
+            }, { timeout: 3000 });
+            console.log('✅ Campo de busca está visível!');
+        } catch (e) {
+            console.warn('⚠️ Campo de busca não apareceu, tentando mesmo assim...');
+        }
+        
+        // Procurar e clicar na primeira opção que contém o texto
+        console.log(`🔎 Procurando opção com: "${pagamento}"`);
+        let optionFound = false;
+        
+        try {
+            optionFound = await page.evaluate((searchText) => {
+                const dropdown = document.querySelector('span.select2-dropdown');
+                if (!dropdown) {
+                    console.error('❌ Dropdown não visível');
+                    return false;
+                }
+                
+                // Procurar por qualquer opção que contenha o texto
+                const options = Array.from(dropdown.querySelectorAll('li.select2-results__option'));
+                console.log(`📋 Opções encontradas no dropdown: ${options.length}`);
+                
+                for (let option of options) {
+                    const text = option.textContent.trim();
+                    console.log(`   - Verificando: "${text}"`);
+                    
+                    // Pular labels de grupos/mensagens vazias
+                    if (text === '' || text.startsWith('Digite') || text.startsWith('Selecione')) {
+                        continue;
+                    }
+                    
+                    // Se contém o texto procurado (case-insensitive)
+                    if (text.toUpperCase().includes(searchText.toUpperCase())) {
+                        console.log(`✅ Encontrada correspondência!`);
+                        
+                        // Scroll para visibilidade
+                        option.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        
+                        // Aguardar renderização
+                        setTimeout(() => {}, 100);
+                        
+                        // Clicar
+                        option.click();
+                        
+                        return true;
+                    }
+                }
+                
+                console.error(`❌ Nenhuma opção encontrada contendo "${searchText}"`);
+                return false;
+            }, pagamento);
+            
+            if (optionFound) {
+                console.log('✅ Opção selecionada com sucesso!');
+                await page.waitForTimeout(1000);
+            } else {
+                throw new Error(`Opção "${pagamento}" não encontrada no dropdown`);
             }
         } catch (e) {
-            console.warn('⚠️ Campo de busca não encontrado');
+            console.error(`❌ Erro ao selecionar opção: ${e.message}`);
+            throw e;
         }
         
-        if (searchInput) {
-            console.log(`💬 Digitando no campo de busca: ${pagamento}`);
-            
-            // Limpar e digitar
-            await searchInput.focus();
-            await searchInput.evaluate(el => el.value = '');
-            await page.waitForTimeout(100);
-            
-            await searchInput.type(pagamento, { delay: 50 });
-            
-            console.log('⏳ Aguardando resultados...');
-            await page.waitForTimeout(1500);
-        }
-        
-        // Procurar e clicar na opção dentro do grupo ASAAS LDN: CC 1116118-9
-        console.log('🔎 Procurando opção no dropdown dentro de ASAAS LDN...');
-        
-        const pixElementFound = await page.evaluate((searchText) => {
-            // Procurar pelo grupo ASAAS LDN
-            const asaasGroup = Array.from(document.querySelectorAll('li.select2-results__option[role="group"]'))
-                .find(grp => grp.getAttribute('aria-label')?.includes('ASAAS'));
-            
-            if (!asaasGroup) {
-                console.error('❌ Grupo ASAAS não encontrado');
-                return false;
-            }
-            
-            console.log('✅ Grupo ASAAS encontrado');
-            
-            // Procurar a opção PIX dentro desse grupo
-            const pixOption = Array.from(asaasGroup.querySelectorAll('li.select2-results__option[role="treeitem"]'))
-                .find(opt => opt.textContent.trim().toUpperCase() === searchText.toUpperCase());
-            
-            if (pixOption) {
-                console.log('✅ Opção PIX encontrada, clicando...');
-                pixOption.click();
-                return true;
-            }
-            
-            console.error('❌ PIX não encontrado no grupo ASAAS');
-            return false;
-        }, pagamento);
-        
-        if (!pixElementFound) {
-            console.error(`❌ Não foi possível selecionar ${pagamento}`);
-            throw new Error(`Forma de pagamento "${pagamento}" não encontrada na lista`);
-        }
-        
-        console.log('✅ Opção clicada com sucesso!');
-        await page.waitForTimeout(1000);
         
         // Fechar Select2
         console.log('🔌 Fechando Select2...');
