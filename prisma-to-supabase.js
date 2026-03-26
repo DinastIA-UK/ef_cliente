@@ -121,6 +121,58 @@ async function fecharModalNotificacao(page) {
 }
 
 /**
+ * Validar e fechar modal de cliente duplicado (Bootbox)
+ * Aparece quando um cliente com mesmo telefone já existe no cadastro
+ * @param {Object} page - Página do Playwright
+ */
+async function validarEFecharModalClienteDuplicado(page) {
+    try {
+        console.log('\n🔍 Validando se há modal de cliente duplicado...');
+        
+        // Aguardar um pouco para o modal aparecer (se existir)
+        await page.waitForTimeout(1500);
+        
+        // Procurar pelo modal (Bootbox usa .bootbox-body)
+        const modalBody = await page.$('.bootbox-body');
+        
+        if (modalBody) {
+            // Obter o texto do modal para validar
+            const textoModal = await page.evaluate(() => {
+                const body = document.querySelector('.bootbox-body');
+                return body ? body.textContent.trim() : '';
+            });
+            
+            console.log('⚠️ Modal de cliente duplicado DETECTADO!');
+            console.log(`   Mensagem: "${textoModal.substring(0, 100)}..."`);
+            
+            // Procurar pelo botão "Não" (data-bb-handler="danger")
+            const botaoNao = await page.$('button[data-bb-handler="danger"]');
+            
+            if (botaoNao) {
+                console.log('👆 Clicando em "Não" para REJEITAR o cadastro duplicado...');
+                await botaoNao.click();
+                
+                // Aguardar o modal fechar e a página processar
+                await page.waitForTimeout(1500);
+                console.log('✅ Modal fechado! Continuando com novo cadastro...');
+                return true;
+            } else {
+                console.warn('⚠️ Botão "Não" não encontrado no modal de cliente duplicado');
+                return false;
+            }
+        } else {
+            console.log('✅ Nenhum modal de cliente duplicado detectado - prosseguindo normalmente');
+            return false;
+        }
+        
+    } catch (error) {
+        console.log(`⚠️ Erro ao validar modal de cliente duplicado: ${error.message}`);
+        // Continuar mesmo assim
+        return false;
+    }
+}
+
+/**
  * Sistema de keep-alive para manter sessão ativa
  * @param {Object} page - Página do Playwright
  */
@@ -2309,6 +2361,8 @@ async function extractBoxesData() {
     if (!isProduction && headlessEnv === 'false') {
         headless = false;
     }
+
+    headless = false;
     
     const slowMo = headless ? 0 : 100;
     
@@ -2489,6 +2543,11 @@ async function main(options = {}) {
                         console.log('\n👉 [3.2/4] Clicando em Próximo para continuar...');
                         await clicarProximo(result.page);
                         console.log('✅ [3.2/4] Avançado para próximo passo!');
+                        
+                        // Validar se há modal de cliente duplicado
+                        console.log('\n🔍 [3.2.1/4] Validando modal de cliente duplicado...');
+                        await validarEFecharModalClienteDuplicado(result.page);
+                        
                     } catch (clienteError) {
                         console.error('❌ [3.1/4] Erro ao preencher cliente:', clienteError.message);
                         console.log('⚠️ Continuando mesmo assim...');
@@ -2634,6 +2693,7 @@ if (require.main === module) {
 module.exports = {
     extractBoxesData,
     fecharModalNotificacao,
+    validarEFecharModalClienteDuplicado,
     selecionarUnidadeEProxima,
     clicarCriarNovoCliente,
     preencherDadosCliente,

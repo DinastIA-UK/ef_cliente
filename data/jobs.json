@@ -1,1 +1,662 @@
-[]
+[
+  {
+    "jobId": "48b96600-746b-411f-b112-95eff59f1682",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-03-23T10:56:20.077Z",
+    "updatedAt": "2026-03-23T10:56:20.270Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-03-23T10:56:20.085Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.091Z",
+        "level": "info",
+        "message": "Cliente: teste t8"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.097Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8898"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.104Z",
+        "level": "info",
+        "message": "CPF: 33356697030"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.109Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.117Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.123Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.130Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.136Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.142Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.149Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.156Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-23T10:56:20.270Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "teste t8",
+      "clienteTelCel": "(43) 99999-8898",
+      "cpf": "33356697030",
+      "sexo": "M",
+      "cep": "01311-100",
+      "numero_endereco": "123",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2025-12-25",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "box | 4m",
+          "tipo": "MENSAL"
+        },
+        {
+          "nome": "sobrebox | 4m",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "e327d779-3822-4670-950d-ee1c56c997e5",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-23T10:57:09.445Z",
+    "updatedAt": "2026-03-23T10:59:05.259Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-23T10:57:09.455Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.461Z",
+        "level": "info",
+        "message": "Cliente: teste t8"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.466Z",
+        "level": "info",
+        "message": "Celular: (43) 99999-8898"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.472Z",
+        "level": "info",
+        "message": "CPF: 33356697030"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.477Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.484Z",
+        "level": "info",
+        "message": "CEP: 01311-100"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.489Z",
+        "level": "info",
+        "message": "Número Endereço: 123"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.495Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.501Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.507Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2025-12-25"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.513Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.518Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-23T10:57:09.647Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-23T10:59:05.259Z",
+        "level": "info",
+        "message": "Scraping concluído em 114 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 972,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 114,
+      "logs": [],
+      "extractedAt": "2026-03-23T10:59:05.255Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "teste t8",
+      "clienteTelCel": "(43) 99999-8898",
+      "cpf": "33356697030",
+      "sexo": "M",
+      "cep": "01311-100",
+      "numero_endereco": "123",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2025-12-25",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "box | 4m",
+          "tipo": "MENSAL"
+        },
+        {
+          "nome": "sobrebox | 4m",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "ac411d1f-109d-47a6-b44a-cc1bd78b987d",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-26T17:23:04.741Z",
+    "updatedAt": "2026-03-26T17:24:39.736Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-26T17:23:04.751Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.758Z",
+        "level": "info",
+        "message": "Cliente: MARIA C A L"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.764Z",
+        "level": "info",
+        "message": "Celular: 43996799765"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.771Z",
+        "level": "info",
+        "message": "CPF: 01101975653"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.776Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.781Z",
+        "level": "info",
+        "message": "CEP: 86087250"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.787Z",
+        "level": "info",
+        "message": "Número Endereço: 58"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.791Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.797Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.802Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-02"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.807Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.812Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-26T17:23:04.934Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:39.736Z",
+        "level": "info",
+        "message": "Scraping concluído em 89 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 280,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 89,
+      "logs": [],
+      "extractedAt": "2026-03-26T17:24:39.732Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "MARIA C A L",
+      "clienteTelCel": "43996799765",
+      "cpf": "01101975653",
+      "sexo": "F",
+      "cep": "86087250",
+      "numero_endereco": "58",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-02",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Box 2m²",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "790b013e-a4c0-4ea7-b5f3-b152a8b7dbf7",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-26T17:24:45.442Z",
+    "updatedAt": "2026-03-26T17:25:39.063Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-26T17:24:45.453Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.458Z",
+        "level": "info",
+        "message": "Cliente: MARIA C A L"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.465Z",
+        "level": "info",
+        "message": "Celular: 43996799765"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.470Z",
+        "level": "info",
+        "message": "CPF: 01101975653"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.476Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.482Z",
+        "level": "info",
+        "message": "CEP: 86087250"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.487Z",
+        "level": "info",
+        "message": "Número Endereço: 58"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.493Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.498Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.504Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-02"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.509Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.514Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-26T17:24:45.639Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-26T17:25:39.063Z",
+        "level": "info",
+        "message": "Scraping concluído em 52 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 280,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 52,
+      "logs": [],
+      "extractedAt": "2026-03-26T17:25:39.058Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "MARIA C A L",
+      "clienteTelCel": "43996799765",
+      "cpf": "01101975653",
+      "sexo": "F",
+      "cep": "86087250",
+      "numero_endereco": "58",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-02",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Box 2m²",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "99d87327-d3b5-44cb-9e7d-3d6633ed6ad2",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-26T17:28:48.041Z",
+    "updatedAt": "2026-03-26T17:30:09.996Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-26T17:28:48.053Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.059Z",
+        "level": "info",
+        "message": "Cliente: MARIA C A L"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.064Z",
+        "level": "info",
+        "message": "Celular: 43996799765"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.070Z",
+        "level": "info",
+        "message": "CPF: 01101975653"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.076Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.081Z",
+        "level": "info",
+        "message": "CEP: 86087250"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.086Z",
+        "level": "info",
+        "message": "Número Endereço: 58"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.091Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.097Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.102Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-02"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.107Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.112Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-26T17:28:48.224Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-26T17:30:09.996Z",
+        "level": "info",
+        "message": "Scraping concluído em 81 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 280,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 81,
+      "logs": [],
+      "extractedAt": "2026-03-26T17:30:09.992Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "MARIA C A L",
+      "clienteTelCel": "43996799765",
+      "cpf": "01101975653",
+      "sexo": "F",
+      "cep": "86087250",
+      "numero_endereco": "58",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-02",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Box 2m²",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "4d997c7e-f533-43ef-b09e-4d2bad706cd4",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-03-26T17:36:30.329Z",
+    "updatedAt": "2026-03-26T17:38:42.651Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-03-26T17:36:30.343Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.348Z",
+        "level": "info",
+        "message": "Cliente: MARIA C A L"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.354Z",
+        "level": "info",
+        "message": "Celular: 43996799765"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.359Z",
+        "level": "info",
+        "message": "CPF: 01101975653"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.365Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.370Z",
+        "level": "info",
+        "message": "CEP: 86087250"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.375Z",
+        "level": "info",
+        "message": "Número Endereço: 58"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.381Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.387Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.393Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-02"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.398Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.404Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-03-26T17:36:30.534Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-03-26T17:38:42.651Z",
+        "level": "info",
+        "message": "Scraping concluído em 131 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 280,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 131,
+      "logs": [],
+      "extractedAt": "2026-03-26T17:38:42.644Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "MARIA C A L",
+      "clienteTelCel": "43996799765",
+      "cpf": "01101975653",
+      "sexo": "F",
+      "cep": "86087250",
+      "numero_endereco": "58",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-02",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Box 2m²",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  }
+]
