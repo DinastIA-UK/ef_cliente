@@ -2509,8 +2509,6 @@ async function extractBoxesData() {
         headless = false;
     }
 
-    headless = false;
-    
     const slowMo = headless ? 0 : 100;
     
     console.log(`🧭 Playwright: headless=${headless} (NODE_ENV=${process.env.NODE_ENV || 'undefined'})`);
