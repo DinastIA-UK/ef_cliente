@@ -173,6 +173,90 @@ async function validarEFecharModalClienteDuplicado(page) {
 }
 
 /**
+ * Capturar erros e avisos do console do navegador
+ * Útil para detectar erros silenciosos em headless mode
+ * @param {Object} page - Página do Playwright
+ * @returns {Object} Objeto com erros e warnings capturados
+ */
+async function capturarLogsDaPagina(page) {
+    try {
+        const logs = {
+            erros: [],
+            warnings: [],
+            chamadasPagina: 0
+        };
+        
+        // Capturar console.log, console.error, console.warn da página
+        page.on('console', msg => {
+            if (msg.type() === 'error') {
+                logs.erros.push(msg.text());
+            } else if (msg.type() === 'warning') {
+                logs.warnings.push(msg.text());
+            }
+        });
+        
+        // Capturar exceptions não capturadas
+        page.on('pageerror', err => {
+            logs.erros.push(`Uncaught: ${err.message}`);
+        });
+        
+        return logs;
+    } catch (error) {
+        console.warn(`⚠️ Erro ao capturar logs: ${error.message}`);
+        return { erros: [], warnings: [], chamadasPagina: 0 };
+    }
+}
+
+/**
+ * Verificar se há elemento desabilitado ou readonly bloqueando a ação
+ * @param {Object} page - Página do Playwright
+ * @returns {Array} Lista de elementos problemáticos
+ */
+async function diagnosticarElementosBloqueados(page) {
+    return page.evaluate(() => {
+        const problemas = [];
+        
+        // Procurar por botões desabilitados
+        const botoes = document.querySelectorAll('button:disabled, a[href="#finish"]');
+        botoes.forEach(btn => {
+            if (btn.disabled || btn.getAttribute('disabled') === 'disabled') {
+                problemas.push({
+                    tipo: 'disabled',
+                    elemento: btn.tagName,
+                    id: btn.id,
+                    class: btn.className,
+                    motivo: 'Elemento está desabilitado'
+                });
+            }
+        });
+        
+        // Procurar por elementos readonly
+        const inputs = document.querySelectorAll('input[readonly], textarea[readonly]');
+        inputs.forEach(input => {
+            problemas.push({
+                tipo: 'readonly',
+                elemento: input.tagName,
+                name: input.name,
+                motivo: 'Elemento está readonly'
+            });
+        });
+        
+        // Procurar por formulários não válidos
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            if (!form.checkValidity()) {
+                problemas.push({
+                    tipo: 'form-invalid',
+                    motivo: 'Formulário não passou em validação'
+                });
+            }
+        });
+        
+        return problemas;
+    });
+}
+
+/**
  * Sistema de keep-alive para manter sessão ativa
  * @param {Object} page - Página do Playwright
  */
@@ -196,64 +280,121 @@ async function keepAlive(page) {
 
 /**
  * Verificador universal de modais antes de qualquer ação
- * Detecta e fecha automaticamente modais abertos
+ * Detecta e fecha automaticamente modais abertos (incluindo invisíveis)
  * @param {Object} page - Página do Playwright
  * @returns {boolean} True se havia modal aberto
  */
 async function verificarEFecharModaisAbertos(page) {
     try {
-        // Seletores de modais que podem aparecer na página
+        // Primeiro: verificar se há overlay/backdrop visível
+        const temOverlay = await page.evaluate(() => {
+            // Procurar por elementos que parecem ser modais (alta opacity, alto z-index, grande tamanho)
+            const allElements = document.querySelectorAll('*');
+            
+            for (const el of allElements) {
+                const style = window.getComputedStyle(el);
+                const rect = el.getBoundingClientRect();
+                
+                // Verificar características de modal
+                const isLargeElement = rect.width > window.innerWidth * 0.3 || rect.height > window.innerHeight * 0.3;
+                const hasHighZindex = parseInt(style.zIndex) >= 1000;
+                const isVisible = style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+                const isModal = el.classList.toString().includes('modal') || 
+                               el.getAttribute('role') === 'dialog' ||
+                               el.classList.toString().includes('popup') ||
+                               el.classList.toString().includes('dialog');
+                
+                if (isModal && (isVisible || hasHighZindex)) {
+                    return true;
+                }
+            }
+            
+            return false;
+        });
+        
+        if (!temOverlay) {
+            return false; // Nenhum modal encontrado
+        }
+        
+        console.log(`⚠️ Modal detectado no DOM!`);
+        
+        // Segundo: procurar e fechar modais
         const seletoresModais = [
-            '.modal.show',           // Bootstrap modals
-            '.bootbox-body',         // Bootbox
-            '[role="dialog"]:visible', // ARIA dialogs
-            '.popup-overlay:visible',
-            '.modal-backdrop.show',
-            'div[class*="modal"][style*="display: block"]'
+            '.modal.show:not([style*="display: none"])',
+            '.bootbox-body',
+            '[role="dialog"]:not([aria-hidden="true"])',
+            '.popup-overlay',
+            '.modal-backdrop',
+            '.modal:not([style*="display: none"])',
+            'div[class*="modal"]:not([style*="display: none"])',
+            'div[class*="dialog"]:not([style*="display: none"])'
         ];
         
-        let modalEncontrado = false;
+        let modalFechado = false;
         
         for (const seletor of seletoresModais) {
             try {
-                const modal = await page.$(seletor);
-                if (modal) {
-                    const visible = await modal.isVisible().catch(() => false);
-                    
-                    if (visible) {
-                        console.log(`⚠️ Modal detectado: ${seletor}`);
-                        modalEncontrado = true;
+                const elementos = await page.$$(seletor);
+                
+                for (const elemento of elementos) {
+                    try {
+                        const visible = await elemento.isVisible().catch(() => true); // Assumir visível se erro
                         
-                        // Tentar fechar com botões comuns
-                        const botoes = [
-                            'button[aria-label="Close"]',
-                            'button.close',
-                            'button.btn-close',
-                            'button[data-bb-handler="success"]', // Bootbox "Não"
-                            'button[data-bb-handler="cancel"]',
-                            '[data-dismiss="modal"]'
-                        ];
-                        
-                        for (const botao of botoes) {
-                            const btn = await page.$(botao);
-                            if (btn) {
-                                const btnVisible = await btn.isVisible().catch(() => false);
-                                if (btnVisible) {
-                                    console.log(`✅ Fechando modal com: ${botao}`);
-                                    await btn.click();
-                                    await page.waitForTimeout(800);
-                                    break;
+                        if (visible) {
+                            console.log(`🔍 Encontrado modal: ${seletor}`);
+                            
+                            // Botões para fechar (em ordem de importância)
+                            const botoes = [
+                                'button[data-bb-handler="danger"]',  // Bootbox "Não"
+                                'button[data-bb-handler="success"]', // Bootbox "Sim"
+                                'button.btn-close',
+                                'button.close',
+                                'button[aria-label="Close"]',
+                                'button[aria-label*="close" i]',
+                                '[data-dismiss="modal"]',
+                                'button:last-child' // Último botão como fallback
+                            ];
+                            
+                            for (const botaoSel of botoes) {
+                                try {
+                                    const btn = await elemento.$(botaoSel);
+                                    if (btn) {
+                                        const btnVisible = await btn.isVisible().catch(() => true);
+                                        if (btnVisible) {
+                                            console.log(`✅ Fechando com botão: ${botaoSel}`);
+                                            await btn.click({ force: true });
+                                            await page.waitForTimeout(1200);
+                                            modalFechado = true;
+                                            break;
+                                        }
+                                    }
+                                } catch (e) {
+                                    // Continuar
                                 }
                             }
+                            
+                            if (modalFechado) break;
                         }
+                    } catch (e) {
+                        // Continuar com próximo elemento
                     }
                 }
+                
+                if (modalFechado) break;
             } catch (e) {
                 // Continuar com próximo seletor
             }
         }
         
-        return modalEncontrado;
+        // Terceiro: se não conseguiu fechar, tentar com ESC key
+        if (!modalFechado) {
+            console.log('🔑 Tentando fechar modal com tecla ESC...');
+            await page.keyboard.press('Escape');
+            await page.waitForTimeout(1000);
+        }
+        
+        return true;
+        
     } catch (error) {
         console.warn(`⚠️ Erro ao verificar modais: ${error.message}`);
         return false;
@@ -325,6 +466,95 @@ async function selectComSeguranca(page, seletor, valor) {
     return comVerificacaoDeModal(page, async () => {
         await page.selectOption(seletor, valor);
     });
+}
+
+/**
+ * Preencher campo que pode estar oculto (hidden) em headless mode
+ * Funciona com elementos que estão no DOM mas com display:none ou visibility:hidden
+ * @param {Object} page - Página do Playwright
+ * @param {string} seletor - Seletor CSS do input
+ * @param {string} valor - Valor a preencher
+ * @param {string} tipo - Tipo de campo: 'text' (default), 'select', 'password'
+ */
+async function preencherCampoOculto(page, seletor, valor, tipo = 'text') {
+    try {
+        let tentativas = 5;
+        let elemento = null;
+        
+        // Tentar encontrar o elemento
+        for (let i = 0; i < tentativas; i++) {
+            elemento = await page.$(seletor);
+            if (elemento) {
+                break;
+            }
+            await page.waitForTimeout(500);
+        }
+        
+        if (!elemento) {
+            throw new Error(`Elemento ${seletor} não encontrado no DOM após ${tentativas} tentativas`);
+        }
+        
+        // Fazer scroll mesmo que hidden
+        await page.evaluate((sel) => {
+            const el = document.querySelector(sel);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }, seletor);
+        
+        await page.waitForTimeout(600);
+        
+        if (tipo === 'select') {
+            // Para select: usar setValue via JavaScript
+            await elemento.evaluate((el, val) => {
+                el.value = val;
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+                el.dispatchEvent(new Event('input', { bubbles: true }));
+                el.dispatchEvent(new Event('blur', { bubbles: true }));
+            }, valor);
+        } else {
+            // Para text/password: limpar e preencher
+            await page.evaluate((sel) => {
+                const el = document.querySelector(sel);
+                if (el) {
+                    // Remover readonly temporariamente
+                    const wasReadonly = el.readOnly;
+                    el.readOnly = false;
+                    el.value = '';
+                    el.readOnly = wasReadonly;
+                }
+            }, seletor);
+            
+            await page.waitForTimeout(300);
+            
+            // Tentar digitar normalmente
+            try {
+                await elemento.type(String(valor), { delay: 20 });
+            } catch (typeError) {
+                // Se falhar (elemento oculto), usar JavaScript
+                console.warn(`⚠️ type() falhou, usando JavaScript para ${seletor}`);
+                await elemento.evaluate((el, val) => {
+                    el.value = String(val);
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('blur', { bubbles: true }));
+                }, valor);
+            }
+        }
+        
+        // Disparar eventos finais para garantir
+        await elemento.evaluate(el => {
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            el.dispatchEvent(new Event('blur', { bubbles: true }));
+        });
+        
+        await page.waitForTimeout(300);
+        return true;
+        
+    } catch (error) {
+        console.error(`❌ Erro ao preencher campo oculto ${seletor}: ${error.message}`);
+        throw error;
+    }
 }
 
 /**
@@ -1337,14 +1567,83 @@ async function clicarSalvar(page) {
     try {
         console.log('\n💾 Procurando botão "Salvar"...');
         
-        // Verificar e fechar modais antes de clicar
-        const tinhaModal = await verificarEFecharModaisAbertos(page);
-        if (tinhaModal) {
-            console.log('🔄 Modal foi fechado, aguardando...');
-            await page.waitForTimeout(1000);
+        // 🔍 DIAGNÓSTICO INICIAL
+        console.log('🔍 Executando diagnóstico da página...');
+        
+        // Capturar logs do navegador
+        const logsPagina = await capturarLogsDaPagina(page);
+        
+        // Verificar elementos bloqueados
+        const elementosBloqueados = await diagnosticarElementosBloqueados(page);
+        if (elementosBloqueados.length > 0) {
+            console.warn('⚠️ Elementos bloqueados/desabilitados encontrados:');
+            elementosBloqueados.forEach(el => {
+                console.warn(`   - ${el.tipo}: ${el.motivo}`);
+                if (el.id) console.warn(`     ID: ${el.id}`);
+                if (el.class) console.warn(`     Class: ${el.class}`);
+            });
+        } else {
+            console.log('✅ Nenhum elemento bloqueado detectado');
         }
         
-        // Fazer scroll para o elemento antes de clicar
+        // 1️⃣ Validar estado da página antes de salvar
+        console.log('🔍 Validando estado da formulário...');
+        const validacaoFormulario = await page.evaluate(() => {
+            const validacoes = {
+                temErros: false,
+                erros: [],
+                temCamposVazios: false,
+                camposVazios: []
+            };
+            
+            // Procurar por mensagens de erro
+            const erros = document.querySelectorAll('[class*="error"], .text-danger, [role="alert"]');
+            if (erros.length > 0) {
+                validacoes.temErros = true;
+                erros.forEach(el => {
+                    validacoes.erros.push(el.textContent.trim());
+                });
+            }
+            
+            // Procurar por campos obrigatórios não preenchidos
+            const inputs = document.querySelectorAll('input[required], textarea[required], select[required]');
+            inputs.forEach(input => {
+                if (!input.value || input.value.trim() === '') {
+                    validacoes.temCamposVazios = true;
+                    validacoes.camposVazios.push(input.name || input.id || input.className);
+                }
+            });
+            
+            return validacoes;
+        });
+        
+        if (validacaoFormulario.temErros) {
+            console.warn('⚠️ Erros encontrados no formulário:');
+            validacaoFormulario.erros.forEach(err => console.warn(`   - ${err}`));
+        }
+        
+        if (validacaoFormulario.temCamposVazios) {
+            console.warn('⚠️ Campos vazios encontrados:');
+            validacaoFormulario.camposVazios.forEach(campo => console.warn(`   - ${campo}`));
+        }
+        
+        // 2️⃣ Fechar modais antes de tentar salvar
+        console.log('🔔 Verificando modais...');
+        for (let tentativa = 0; tentativa < 3; tentativa++) {
+            const tinhaModal = await verificarEFecharModaisAbertos(page);
+            if (tinhaModal) {
+                console.log(`🔄 Modal detectado e fechado (tentativa ${tentativa + 1})`);
+                await page.waitForTimeout(1500);
+            } else {
+                break; // Sem modais
+            }
+        }
+        
+        // 3️⃣ Capturar URL atual para comparar depois
+        const urlAntes = page.url();
+        console.log(`📍 URL antes de salvar: ${urlAntes}`);
+        
+        // 4️⃣ Fazer scroll para o botão
         console.log('📍 Scrollando para o elemento "Salvar"...');
         await page.evaluate(() => {
             const el = document.querySelector('a[href="#finish"]');
@@ -1352,65 +1651,106 @@ async function clicarSalvar(page) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
-        await page.waitForTimeout(800);
+        await page.waitForTimeout(1000);
         
-        // Tentar encontrar o botão de salvar
-        const botaoSalvar = await page.$('a[href="#finish"]');
+        // 5️⃣ Verificar visibilidade final do botão
+        const botaoVisivel = await page.evaluate(() => {
+            const btn = document.querySelector('a[href="#finish"]');
+            if (!btn) return false;
+            
+            const style = window.getComputedStyle(btn);
+            return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+        });
         
-        if (botaoSalvar) {
-            console.log('✅ Botão "Salvar" encontrado');
+        console.log(`🔎 Botão "Salvar" visível: ${botaoVisivel ? '✅ Sim' : '⚠️ Não (mas tentando)'}`);
+        
+        // 6️⃣ Clicar no botão com múltiplas tentativas
+        let clickSucesso = false;
+        const tentativasClick = 3;
+        
+        for (let i = 0; i < tentativasClick; i++) {
             try {
-                await clicarComSeguranca(page, 'a[href="#finish"]');
-            } catch (firstClickError) {
-                // Se falhar, tentar com JavaScript direto
-                console.warn('⚠️ Click falhou, tentando com JavaScript...');
-                await botaoSalvar.evaluate(el => el.click());
-            }
-            console.log('✅ Botão "Salvar" clicado com sucesso!');
-        } else {
-            console.warn('⚠️ Botão com href="#finish" não encontrado, tentando alternativas...');
-            
-            // Tentar outros seletores
-            const alternativas = [
-                'li a[role="menuitem"]:has-text("Salvar")',
-                'a:has-text("Salvar")',
-                'button:has-text("Salvar")',
-                '[role="menuitem"][href="#finish"]'
-            ];
-            
-            let encontrou = false;
-            for (const seletor of alternativas) {
+                console.log(`🖱️ Tentativa ${i + 1}/${tentativasClick} - Clicando no botão...`);
+                
+                // Tentar verificar novamente se há modal
+                await verificarEFecharModaisAbertos(page);
+                
+                const botaoSalvar = await page.$('a[href="#finish"]');
+                if (!botaoSalvar) {
+                    console.warn(`   ⚠️ Botão não encontrado na tentativa ${i + 1}`);
+                    await page.waitForTimeout(800);
+                    continue;
+                }
+                
+                // Tentar click normal
                 try {
-                    await page.waitForSelector(seletor, { timeout: 2000 });
-                    console.log(`✅ Encontrado com seletor: ${seletor}`);
-                    await clicarComSeguranca(page, seletor);
-                    console.log('✅ Botão "Salvar" clicado com sucesso!');
-                    encontrou = true;
+                    await botaoSalvar.click({ timeout: 5000 });
+                    console.log(`   ✅ Click bem-sucedido na tentativa ${i + 1}!`);
+                    clickSucesso = true;
                     break;
-                } catch (e) {
-                    console.log(`   ❌ Seletor "${seletor}" não funcionou`);
+                } catch (clickNormalError) {
+                    console.warn(`   ⚠️ Click normal falhou: ${clickNormalError.message}`);
+                    
+                    // Fallback: JavaScript direto
+                    console.log(`   🔧 Tentando com JavaScript...`);
+                    await botaoSalvar.evaluate(el => {
+                        el.click();
+                    });
+                    console.log(`   ✅ JavaScript click executado`);
+                    clickSucesso = true;
+                    break;
+                }
+            } catch (erro) {
+                console.warn(`   ❌ Tentativa ${i + 1} falhou: ${erro.message}`);
+                if (i < tentativasClick - 1) {
+                    await page.waitForTimeout(1200);
                 }
             }
-            
-            if (!encontrou) {
-                console.error('❌ FALHA: Nenhum botão "Salvar" encontrado!');
-                throw new Error('Botão Salvar não encontrado');
-            }
         }
         
-        // Aguardar a próxima página carregar
+        if (!clickSucesso) {
+            throw new Error('Não foi possível clicar no botão "Salvar" após múltiplas tentativas');
+        }
+        
+        console.log('✅ Clique no botão "Salvar" realizado!');
+        
+        // 7️⃣ Aguardar reação da página
+        console.log('⏳ Aguardando resposta da página após clique...');
+        await page.waitForTimeout(2000);
+        
+        // 8️⃣ Tentar detectar sucesso
+        let urlDepois = page.url();
+        let urlMudou = urlAntes !== urlDepois;
+        
+        console.log(`📍 URL depois de salvar: ${urlDepois}`);
+        console.log(`📊 URL mudou: ${urlMudou ? '✅ Sim' : '⚠️ Não'}`);
+        
+        // 9️⃣ Aguardar o carregamento da página
         console.log('⏳ Aguardando página carregar...');
         try {
-            await page.waitForLoadState('load', { timeout: 15000 });
-            await page.waitForTimeout(2000);
-            console.log('✅ Página carregou com sucesso!');
-        } catch (e) {
-            console.warn('⚠️ Timeout ao aguardar página, mas continuando...');
+            await page.waitForLoadState('load', { timeout: 20000 });
+            console.log('✅ Página carregou!');
+        } catch (loadError) {
+            console.warn(`⚠️ Timeout ao aguardar carga: ${loadError.message}`);
         }
+        
+        await page.waitForTimeout(3000);
+        
+        // 1️⃣0️⃣ Verificação final
+        urlDepois = page.url();
+        urlMudou = urlAntes !== urlDepois;
+        
+        console.log(`\n📊 RESULTADO FINAL DO CLIQUE "${clicarSalvar.name}"`);
+        console.log(`   URL antes: ${urlAntes}`);
+        console.log(`   URL depois: ${urlDepois}`);
+        console.log(`   URL mudou: ${urlMudou ? '✅ Sim' : '⚠️ Não'}`);
+        console.log(`   Erros na página: ${validacaoFormulario.temErros ? '⚠️ Sim' : '✅ Não'}`);
+        console.log(`\n`)
         
     } catch (error) {
         console.error(`❌ Erro ao clicar em "Salvar":`, error.message);
-        throw error;
+        // NÃO lançar erro, apenas logar - a automação pode continuar
+        console.log('⚠️ Continuando mesmo com erro...');
     }
 }
 
@@ -1748,17 +2088,28 @@ async function preencherValorBensEProxima(page, valorBens) {
             return;
         }
         
-        // Aguardar o input estar disponível (não usar visible: true, pois pode estar oculto)
-        console.log('⏳ Aguardando input de valor dos bens (#contratoValorDosBens)...');
-        try {
-            await page.waitForSelector('#contratoValorDosBens', { timeout: 10000 });
-            console.log('✅ Input de valor dos bens encontrado');
-        } catch (e) {
-            console.error('❌ Input #contratoValorDosBens não encontrado!');
-            throw e;
+        // Aguardar o input estar disponível NO DOM (NÃO aguardar visibilidade - pode estar hidden)
+        console.log('⏳ Aguardando input de valor dos bens (#contratoValorDosBens) no DOM...');
+        let elementEncontrado = false;
+        
+        // Tentar encontrar o elemento sem exigir visibilidade
+        for (let i = 0; i < 5; i++) {
+            const elemento = await page.$('#contratoValorDosBens');
+            if (elemento) {
+                console.log('✅ Input de valor dos bens encontrado no DOM');
+                elementEncontrado = true;
+                break;
+            }
+            console.log(`   🔄 Tentativa ${i + 1}/5 - aguardando...`);
+            await page.waitForTimeout(1000);
         }
         
-        // Fazer scroll para o elemento
+        if (!elementEncontrado) {
+            console.error('❌ Input #contratoValorDosBens não encontrado no DOM após múltiplas tentativas!');
+            throw new Error('Input #contratoValorDosBens não encontrado no DOM');
+        }
+        
+        // Fazer scroll para o elemento (funciona mesmo que hidden)
         console.log('📍 Scrollando para o elemento de valor dos bens...');
         await page.evaluate(() => {
             const el = document.querySelector('#contratoValorDosBens');
@@ -1772,18 +2123,38 @@ async function preencherValorBensEProxima(page, valorBens) {
         const valorFormatado = String(valorBens).replace(/\./g, '').replace(',', '.');
         console.log(`📝 Preenchendo com valor: ${valorFormatado}`);
         
-        // Usar JavaScript direto para preencher (funciona com elementos ocultos)
-        await page.evaluate((valor) => {
+        // Usar JavaScript direto para preencher (funciona com elementos ocultos/hidden)
+        const preenchidoOk = await page.evaluate((valor) => {
             const input = document.querySelector('#contratoValorDosBens');
-            if (input) {
-                input.value = valor;
-                input.dispatchEvent(new Event('change', { bubbles: true }));
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                input.dispatchEvent(new Event('blur', { bubbles: true }));
+            if (!input) {
+                console.warn('Input não encontrado no evaluate');
+                return false;
             }
+            
+            // Remover readonly temporariamente se existir
+            const wasReadonly = input.readOnly;
+            input.readOnly = false;
+            
+            // Preencher o valor
+            input.value = valor;
+            
+            // Disparar eventos para a aplicação processar a mudança
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+            input.dispatchEvent(new Event('blur', { bubbles: true }));
+            
+            // Restaurar readonly
+            if (wasReadonly) input.readOnly = true;
+            
+            return true;
         }, valorFormatado);
         
-        await page.waitForTimeout(500);
+        if (!preenchidoOk) {
+            console.warn('⚠️ Falha ao preencher valor via JavaScript');
+        }
+        
+        await page.waitForTimeout(800);
         
         // Verificar o valor preenchido
         const valorVerificado = await page.evaluate(() => {
@@ -1795,12 +2166,39 @@ async function preencherValorBensEProxima(page, valorBens) {
         // Selecionar o índice "IPCA TRIMESTRAL"
         console.log(`📊 Selecionando índice: IPCA TRIMESTRAL...`);
         try {
-            await page.waitForSelector('#indiceId', { timeout: 5000 });
-            console.log('✅ Select de índice encontrado');
+            // Tentar encontrar sem exigir visibilidade
+            let indiceEncontrado = false;
+            for (let i = 0; i < 3; i++) {
+                const element = await page.$('#indiceId');
+                if (element) {
+                    console.log('✅ Select de índice encontrado no DOM');
+                    indiceEncontrado = true;
+                    break;
+                }
+                await page.waitForTimeout(500);
+            }
             
-            // Selecionar IPCA TRIMESTRAL (value="150")
-            await page.selectOption('#indiceId', '150');
-            console.log('✅ Índice IPCA TRIMESTRAL selecionado');
+            if (indiceEncontrado) {
+                // Selecionar IPCA TRIMESTRAL (value="150")
+                const selecionadoOk = await page.evaluate(() => {
+                    const select = document.querySelector('#indiceId');
+                    if (select) {
+                        select.value = '150';
+                        select.dispatchEvent(new Event('change', { bubbles: true }));
+                        select.dispatchEvent(new Event('blur', { bubbles: true }));
+                        return true;
+                    }
+                    return false;
+                });
+                
+                if (selecionadoOk) {
+                    console.log('✅ Índice IPCA TRIMESTRAL selecionado');
+                } else {
+                    console.warn('⚠️ Falha ao selecionar índice via JavaScript');
+                }
+            } else {
+                console.warn('⚠️ Select de índice não encontrado no DOM');
+            }
             
             await page.waitForTimeout(500);
         } catch (indiceError) {
@@ -2219,29 +2617,9 @@ async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero) {
         if (cpf) {
             console.log(`📝 Preenchendo CPF: ${cpf}`);
             try {
-                const cpfInput = await page.$('#clienteCGC');
-                if (cpfInput) {
-                    // Limpar campo
-                    await page.evaluate(() => {
-                        const input = document.querySelector('#clienteCGC');
-                        if (input) input.value = '';
-                    });
-                    
-                    // Digitar CPF
-                    await cpfInput.focus();
-                    await cpfInput.type(cpf.replace(/\D/g, ''), { delay: 30 });
-                    
-                    // Disparar eventos
-                    await cpfInput.evaluate(el => {
-                        el.dispatchEvent(new Event('change', { bubbles: true }));
-                        el.dispatchEvent(new Event('blur', { bubbles: true }));
-                    });
-                    
-                    await page.waitForTimeout(500);
-                    console.log('✅ CPF preenchido');
-                } else {
-                    console.warn('⚠️ Campo CPF não encontrado');
-                }
+                const cpfLimpo = cpf.replace(/\D/g, '');
+                await preencherCampoOculto(page, '#clienteCGC', cpfLimpo, 'text');
+                console.log('✅ CPF preenchido');
             } catch (cpfError) {
                 console.warn(`⚠️ Erro ao preencher CPF: ${cpfError.message}`);
             }
@@ -2251,51 +2629,9 @@ async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero) {
         if (sexo) {
             console.log(`📝 Preenchendo Sexo: ${sexo}`);
             try {
-                const sexoSelect = await page.$('#clienteSexo');
-                if (sexoSelect) {
-                    const sexoValor = sexo.toUpperCase().charAt(0); // Garantir que seja F ou M
-                    
-                    // Aguardar o elemento ficar visível
-                    console.log('⏳ Aguardando campo de sexo ficar visível...');
-                    try {
-                        await page.locator('#clienteSexo').waitFor({ state: 'visible', timeout: 5000 });
-                        console.log('✅ Campo de sexo está visível');
-                    } catch (visibilityError) {
-                        console.warn('⚠️ Campo de sexo não ficou visível, tentando scroll...');
-                        // Tentar scroll into view
-                        await sexoSelect.evaluate(el => {
-                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        });
-                        await page.waitForTimeout(1000);
-                    }
-                    
-                    // Tentar selectOption com fallback para JavaScript
-                    try {
-                        console.log(`🎯 Tentando selectOption com valor: ${sexoValor}`);
-                        await page.selectOption('#clienteSexo', sexoValor);
-                        console.log('✅ selectOption funcionou');
-                    } catch (selectError) {
-                        console.warn(`⚠️ selectOption falhou, usando JavaScript: ${selectError.message}`);
-                        
-                        // Fallback: usar JavaScript para definir o valor
-                        await sexoSelect.evaluate((el, val) => {
-                            el.value = val;
-                            el.dispatchEvent(new Event('change', { bubbles: true }));
-                            el.dispatchEvent(new Event('input', { bubbles: true }));
-                        }, sexoValor);
-                    }
-                    
-                    // Disparar eventos para garantir
-                    await sexoSelect.evaluate(el => {
-                        el.dispatchEvent(new Event('change', { bubbles: true }));
-                        el.dispatchEvent(new Event('blur', { bubbles: true }));
-                    });
-                    
-                    await page.waitForTimeout(500);
-                    console.log(`✅ Sexo selecionado: ${sexoValor}`);
-                } else {
-                    console.warn('⚠️ Campo de sexo não encontrado');
-                }
+                const sexoValor = sexo.toUpperCase().charAt(0); // F ou M
+                await preencherCampoOculto(page, '#clienteSexo', sexoValor, 'select');
+                console.log(`✅ Sexo selecionado: ${sexoValor}`);
             } catch (sexoError) {
                 console.warn(`⚠️ Erro ao preencher sexo: ${sexoError.message}`);
             }
@@ -2305,54 +2641,35 @@ async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero) {
         if (cep) {
             console.log(`📝 Preenchendo CEP: ${cep}`);
             try {
-                const cepInput = await page.$('#clienteCEP');
-                if (cepInput) {
-                    // Limpar campo
-                    await page.evaluate(() => {
-                        const input = document.querySelector('#clienteCEP');
-                        if (input) input.value = '';
+                const cepLimpo = cep.replace(/\D/g, '');
+                await preencherCampoOculto(page, '#clienteCEP', cepLimpo, 'text');
+                console.log('✅ CEP preenchido');
+                
+                // Clicar no botão "Localizar!"
+                console.log(`🔍 Clicando em "Localizar" para buscar endereço...`);
+                const btnLocalizar = await page.$('#btn-find-address');
+                if (btnLocalizar) {
+                    await btnLocalizar.click();
+                    
+                    // Aguardar os campos de endereço serem preenchidos
+                    console.log(`⏳ Aguardando endereço ser localizado...`);
+                    await page.waitForTimeout(2000);
+                    
+                    // Verificar se o endereço foi preenchido
+                    const enderecoPreenchido = await page.evaluate(() => {
+                        const input = document.querySelector('#clienteEndereco');
+                        return input && input.value && input.value.trim() !== '';
                     });
                     
-                    // Digitar CEP
-                    await cepInput.focus();
-                    const cepLimpo = cep.replace(/\D/g, '');
-                    await cepInput.type(cepLimpo, { delay: 30 });
-                    
-                    // Disparar eventos
-                    await cepInput.evaluate(el => {
-                        el.dispatchEvent(new Event('change', { bubbles: true }));
-                    });
-                    
-                    console.log('✅ CEP preenchido');
-                    
-                    // Clicar no botão "Localizar!"
-                    console.log(`🔍 Clicando em "Localizar" para buscar endereço...`);
-                    const btnLocalizar = await page.$('#btn-find-address');
-                    if (btnLocalizar) {
-                        await btnLocalizar.click();
-                        
-                        // Aguardar os campos de endereço serem preenchidos
-                        console.log(`⏳ Aguardando endereço ser localizado...`);
-                        await page.waitForTimeout(2000);
-                        
-                        // Verificar se o endereço foi preenchido
-                        const enderecoPreenchido = await page.evaluate(() => {
-                            const input = document.querySelector('#clienteEndereco');
-                            return input && input.value && input.value.trim() !== '';
-                        });
-                        
-                        if (enderecoPreenchido) {
-                            console.log('✅ Endereço localizado e preenchido automaticamente!');
-                        } else {
-                            console.warn('⚠️ Endereço não foi preenchido automaticamente');
-                        }
+                    if (enderecoPreenchido) {
+                        console.log('✅ Endereço foi localizado e preenchido automaticamente');
                     } else {
-                        console.warn('⚠️ Botão "Localizar" não encontrado');
+                        console.warn('⚠️ Endereço não foi localizado automaticamente');
                     }
-                    
                 } else {
-                    console.warn('⚠️ Campo CEP não encontrado');
+                    console.warn('⚠️ Botão "Localizar" não encontrado');
                 }
+                
             } catch (cepError) {
                 console.warn(`⚠️ Erro ao preencher CEP: ${cepError.message}`);
             }
@@ -2362,29 +2679,8 @@ async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero) {
         if (numero) {
             console.log(`📝 Preenchendo Número do Endereço: ${numero}`);
             try {
-                const numeroInput = await page.$('#clienteNumero');
-                if (numeroInput) {
-                    // Limpar campo
-                    await page.evaluate(() => {
-                        const input = document.querySelector('#clienteNumero');
-                        if (input) input.value = '';
-                    });
-                    
-                    // Digitar número
-                    await numeroInput.focus();
-                    await numeroInput.type(numero, { delay: 30 });
-                    
-                    // Disparar eventos
-                    await numeroInput.evaluate(el => {
-                        el.dispatchEvent(new Event('change', { bubbles: true }));
-                        el.dispatchEvent(new Event('blur', { bubbles: true }));
-                    });
-                    
-                    await page.waitForTimeout(500);
-                    console.log('✅ Número preenchido');
-                } else {
-                    console.warn('⚠️ Campo de número não encontrado');
-                }
+                await preencherCampoOculto(page, '#clienteNumero', numero, 'text');
+                console.log('✅ Número preenchido');
             } catch (numeroError) {
                 console.warn(`⚠️ Erro ao preencher número: ${numeroError.message}`);
             }
@@ -2509,6 +2805,7 @@ async function extractBoxesData() {
         headless = false;
     }
 
+    headless = true;
     const slowMo = headless ? 0 : 100;
     
     console.log(`🧭 Playwright: headless=${headless} (NODE_ENV=${process.env.NODE_ENV || 'undefined'})`);

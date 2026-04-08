@@ -135,7 +135,7 @@ router.post('/gerar-proposta', async (req, res) => {
     console.error('✨ [ROUTES-2] SALVANDO DADOS NO JOBTRACKER');
     console.error('✨ [ROUTES-2] Job ID: ' + jobId);
     console.error('✨ [ROUTES-2] InputData:');
-    console.error(JSON.stringify(inputData, null, 2));
+    //console.error(JSON.stringify(inputData, null, 2));
     console.error('█'.repeat(100) + '\n');
     
     await jobTracker.updateJob(jobId, { data: inputData });
