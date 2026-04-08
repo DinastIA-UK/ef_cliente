@@ -195,6 +195,139 @@ async function keepAlive(page) {
 }
 
 /**
+ * Verificador universal de modais antes de qualquer ação
+ * Detecta e fecha automaticamente modais abertos
+ * @param {Object} page - Página do Playwright
+ * @returns {boolean} True se havia modal aberto
+ */
+async function verificarEFecharModaisAbertos(page) {
+    try {
+        // Seletores de modais que podem aparecer na página
+        const seletoresModais = [
+            '.modal.show',           // Bootstrap modals
+            '.bootbox-body',         // Bootbox
+            '[role="dialog"]:visible', // ARIA dialogs
+            '.popup-overlay:visible',
+            '.modal-backdrop.show',
+            'div[class*="modal"][style*="display: block"]'
+        ];
+        
+        let modalEncontrado = false;
+        
+        for (const seletor of seletoresModais) {
+            try {
+                const modal = await page.$(seletor);
+                if (modal) {
+                    const visible = await modal.isVisible().catch(() => false);
+                    
+                    if (visible) {
+                        console.log(`⚠️ Modal detectado: ${seletor}`);
+                        modalEncontrado = true;
+                        
+                        // Tentar fechar com botões comuns
+                        const botoes = [
+                            'button[aria-label="Close"]',
+                            'button.close',
+                            'button.btn-close',
+                            'button[data-bb-handler="success"]', // Bootbox "Não"
+                            'button[data-bb-handler="cancel"]',
+                            '[data-dismiss="modal"]'
+                        ];
+                        
+                        for (const botao of botoes) {
+                            const btn = await page.$(botao);
+                            if (btn) {
+                                const btnVisible = await btn.isVisible().catch(() => false);
+                                if (btnVisible) {
+                                    console.log(`✅ Fechando modal com: ${botao}`);
+                                    await btn.click();
+                                    await page.waitForTimeout(800);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                // Continuar com próximo seletor
+            }
+        }
+        
+        return modalEncontrado;
+    } catch (error) {
+        console.warn(`⚠️ Erro ao verificar modais: ${error.message}`);
+        return false;
+    }
+}
+
+/**
+ * WRAPPER: Executa ação com verificação de modal automática
+ * Evita quebras no fluxo causadas por modais inesperados
+ * @param {Object} page - Página do Playwright
+ * @param {Function} acao - Função assíncrona a executar
+ * @param {number} tentativas - Número de tentativas (default: 3)
+ * @returns {any} Resultado da ação executada
+ */
+async function comVerificacaoDeModal(page, acao, tentativas = 3) {
+    for (let i = 0; i < tentativas; i++) {
+        try {
+            // SEMPRE verificar modal antes de qualquer ação
+            const tinhaModal = await verificarEFecharModaisAbertos(page);
+            
+            if (tinhaModal) {
+                console.log(`🔄 Modal encontrado, tentativa ${i + 1}/${tentativas}`);
+                await page.waitForTimeout(1000);
+                continue; // Tenta novamente
+            }
+            
+            // Executar a ação
+            return await acao();
+            
+        } catch (error) {
+            if (i === tentativas - 1) throw error;
+            console.warn(`⚠️ Erro na tentativa ${i + 1}, verificando novamente...`);
+            await verificarEFecharModaisAbertos(page);
+            await page.waitForTimeout(1500);
+        }
+    }
+}
+
+/**
+ * Helper: Clicar com verificação de modal
+ * @param {Object} page - Página do Playwright
+ * @param {string} seletor - Seletor do elemento
+ */
+async function clicarComSeguranca(page, seletor) {
+    return comVerificacaoDeModal(page, async () => {
+        await page.click(seletor);
+    });
+}
+
+/**
+ * Helper: Preencher campo com verificação de modal
+ * @param {Object} page - Página do Playwright
+ * @param {string} seletor - Seletor do elemento
+ * @param {string} texto - Texto a preencher
+ */
+async function fillComSeguranca(page, seletor, texto) {
+    return comVerificacaoDeModal(page, async () => {
+        await page.fill(seletor, texto);
+    });
+}
+
+/**
+ * Helper: Selecionar opção com verificação de modal
+ * @param {Object} page - Página do Playwright
+ * @param {string} seletor - Seletor do element
+ * @param {string} valor - Valor a selecionar
+ */
+async function selectComSeguranca(page, seletor, valor) {
+    return comVerificacaoDeModal(page, async () => {
+        await page.selectOption(seletor, valor);
+    });
+}
+
+/**
  * Clicar no botão "Criar um Novo Cliente"
  * @param {Object} page - Página do Playwright
  */
@@ -206,8 +339,8 @@ async function clicarCriarNovoCliente(page) {
         await page.waitForSelector('#btn-add-client', { timeout: 10000 });
         console.log('✅ Botão "Criar um Novo Cliente" encontrado');
         
-        // Clicar no botão
-        await page.click('#btn-add-client');
+        // Clicar no botão com verificação de modal
+        await clicarComSeguranca(page, '#btn-add-client');
         console.log('✅ Clicado em "Criar um Novo Cliente"');
         
         // Aguardar o formulário aparecer
@@ -232,16 +365,16 @@ async function preencherDadosCliente(page, clienteNome, clienteTelCel) {
     try {
         console.log(`\n📝 Preenchendo dados do cliente...`);
         
-        // Preencher nome
+        // Preencher nome com verificação de modal
         console.log(`⏳ Preenchendo Nome: ${clienteNome}`);
         await page.waitForSelector('#clienteNome', { timeout: 10000 });
-        await page.fill('#clienteNome', clienteNome);
+        await fillComSeguranca(page, '#clienteNome', clienteNome);
         console.log('✅ Nome preenchido');
         
-        // Preencher celular
+        // Preencher celular com verificação de modal
         console.log(`⏳ Preenchendo Celular: ${clienteTelCel}`);
         await page.waitForSelector('#searchTelCel', { timeout: 10000 });
-        await page.fill('#searchTelCel', clienteTelCel);
+        await fillComSeguranca(page, '#searchTelCel', clienteTelCel);
         console.log('✅ Celular preenchido');
         
         await page.waitForTimeout(1000);
@@ -335,8 +468,8 @@ async function selecionarMotivoLocacao(page, motivoLocacaoId) {
         await page.waitForSelector('#motivoLocacaoId', { timeout: 10000 });
         console.log('✅ Select de motivo de locação encontrado');
         
-        // Selecionar a opção
-        await page.selectOption('#motivoLocacaoId', motivoLocacaoId);
+        // Selecionar a opção com verificação de modal
+        await selectComSeguranca(page, '#motivoLocacaoId', motivoLocacaoId);
         console.log(`✅ Motivo de locação selecionado`);
         
         await page.waitForTimeout(500);
@@ -361,8 +494,8 @@ async function selecionarVendedor(page, vendedorId) {
         await page.waitForSelector('#vendedorId', { timeout: 10000 });
         console.log('✅ Select de vendedor encontrado');
         
-        // Selecionar a opção
-        await page.selectOption('#vendedorId', vendedorId);
+        // Selecionar a opção com verificação de modal
+        await selectComSeguranca(page, '#vendedorId', vendedorId);
         console.log(`✅ Vendedor selecionado`);
         
         await page.waitForTimeout(500);
@@ -380,6 +513,13 @@ async function selecionarVendedor(page, vendedorId) {
 async function clicarProximo(page) {
     try {
         console.log('\n⏳ Procurando botão "Próximo"...');
+        
+        // Verificar e fechar modais antes de clicar
+        const tinhaModal = await verificarEFecharModaisAbertos(page);
+        if (tinhaModal) {
+            console.log('🔄 Modal foi fechado, aguardando...');
+            await page.waitForTimeout(1000);
+        }
         
         // Tentar encontrar o botão de próximo
         const botaoProximo = await page.$('a[href="#next"]');
@@ -402,7 +542,7 @@ async function clicarProximo(page) {
                 try {
                     await page.waitForSelector(seletor, { timeout: 2000 });
                     console.log(`✅ Encontrado com seletor: ${seletor}`);
-                    await page.click(seletor);
+                    await clicarComSeguranca(page, seletor);
                     console.log('✅ Botão "Próximo" clicado com sucesso!');
                     encontrou = true;
                     break;
@@ -417,7 +557,7 @@ async function clicarProximo(page) {
             }
         } else {
             console.log('✅ Botão encontrado, clicando...');
-            await page.click('a[href="#next"]');
+            await clicarComSeguranca(page, 'a[href="#next"]');
             console.log('✅ Botão "Próximo" clicado com sucesso!');
         }
         
@@ -1197,6 +1337,13 @@ async function clicarSalvar(page) {
     try {
         console.log('\n💾 Procurando botão "Salvar"...');
         
+        // Verificar e fechar modais antes de clicar
+        const tinhaModal = await verificarEFecharModaisAbertos(page);
+        if (tinhaModal) {
+            console.log('🔄 Modal foi fechado, aguardando...');
+            await page.waitForTimeout(1000);
+        }
+        
         // Fazer scroll para o elemento antes de clicar
         console.log('📍 Scrollando para o elemento "Salvar"...');
         await page.evaluate(() => {
@@ -1213,7 +1360,7 @@ async function clicarSalvar(page) {
         if (botaoSalvar) {
             console.log('✅ Botão "Salvar" encontrado');
             try {
-                await botaoSalvar.click({ timeout: 5000 });
+                await clicarComSeguranca(page, 'a[href="#finish"]');
             } catch (firstClickError) {
                 // Se falhar, tentar com JavaScript direto
                 console.warn('⚠️ Click falhou, tentando com JavaScript...');
@@ -1236,7 +1383,7 @@ async function clicarSalvar(page) {
                 try {
                     await page.waitForSelector(seletor, { timeout: 2000 });
                     console.log(`✅ Encontrado com seletor: ${seletor}`);
-                    await page.click(seletor);
+                    await clicarComSeguranca(page, seletor);
                     console.log('✅ Botão "Salvar" clicado com sucesso!');
                     encontrou = true;
                     break;
