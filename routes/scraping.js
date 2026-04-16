@@ -21,7 +21,7 @@ router.post('/gerar-proposta', async (req, res) => {
     console.error(JSON.stringify(req.body, null, 2));
     console.error('\n' + separator + '\n');
 
-    const { callbackUrl, unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes } = req.body;
+    const { callbackUrl, unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes, data_nascimento, email } = req.body;
 
     console.error('\n📍 VARIÁVEIS EXTRAÍDAS:');
     console.error(`   - callbackUrl: ${callbackUrl}`);
@@ -128,7 +128,9 @@ router.post('/gerar-proposta', async (req, res) => {
       propostaPrevisaoEntrada,
       motivoLocacaoId,
       vendedorId,
-      boxes
+      boxes,
+      data_nascimento,
+      email
     };
     
     console.error('\n' + '█'.repeat(100));
@@ -171,6 +173,12 @@ router.post('/gerar-proposta', async (req, res) => {
     if (vendedorId) {
       await jobTracker.addLog(jobId, `Vendedor ID: ${vendedorId}`);
     }
+    if (data_nascimento) {
+      await jobTracker.addLog(jobId, `data_nascimento: ${data_nascimento}`);
+    }
+    if (email) {
+      await jobTracker.addLog(jobId, `email: ${email}`);
+    }
 
     // Responder imediatamente com 200 OK
     res.status(200).json({
@@ -182,6 +190,8 @@ router.post('/gerar-proposta', async (req, res) => {
       clienteNome: clienteNome || null,
       clienteTelCel: clienteTelCel || null,
       cpf: cpf || null,
+      data_nascimento: data_nascimento || null,
+      email: email || null,
       sexo: sexo || null,
       cep: cep || null,
       numero_endereco: numero_endereco || null,
@@ -216,7 +226,7 @@ router.post('/gerar-proposta', async (req, res) => {
           const { getBoxesStats } = require('../supabase-client');
 
           const startTime = Date.now();
-          await main({ unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes });
+          await main({ unidade, clienteNome, clienteTelCel, cpf, sexo, cep, numero_endereco, pagamento, valorBens, propostaPrevisaoEntrada, motivoLocacaoId, vendedorId, boxes, data_nascimento, email });
           const endTime = Date.now();
           const processingTime = Math.round((endTime - startTime) / 1000);
 

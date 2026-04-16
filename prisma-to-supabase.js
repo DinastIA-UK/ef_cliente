@@ -685,6 +685,51 @@ async function preencherPrevisaoEntrada(page, previsaoEntrada) {
 }
 
 /**
+ * Preencher previsão de entrada da proposta via datepicker
+ * @param {Object} page - Página do Playwright
+ * @param {string} DataNascimento - Data da previsão de entrada (formato: YYYY-MM-DD ou DD/MM/YYYY)
+ */
+async function preencherDataNascimento(page, data_nascimento) {
+    try {
+        console.log(`\n📅 Preenchendo Previsão de Entrada...`);
+        console.log(`⏳ Data fornecida: ${data_nascimento}`);
+        
+        // Converter para formato YYYY-MM-DD para usar com input type="date"
+        let dataFormatada = data_nascimento;
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(data_nascimento)) {
+            // Converte DD/MM/YYYY para YYYY-MM-DD
+            const [dia, mes, ano] = data_nascimento.split('/');
+            dataFormatada = `${dia}-${mes}-${ano}`;
+        }
+        console.log(`📅 Data formatada (YYYY-MM-DD): ${dataFormatada}`);
+        
+        // Aguardar o campo aparecer
+        await page.waitForSelector('#clienteNascimento', { timeout: 10000 });
+        console.log('✅ Campo de data nascimento encontrado');
+        
+        // Tentar preencher via JavaScript (contornando o readonly)
+        await page.evaluate((args) => {
+            const input = document.querySelector(args.selector);
+            if (input) {
+                // Definir o valor
+                input.value = args.data;
+                // Disparar eventos de mudança
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+                input.dispatchEvent(new Event('blur', { bubbles: true }));
+            }
+        }, { selector: '#clienteNascimento', data: dataFormatada });
+        
+        console.log('✅ data nascimento preenchida');
+        await page.waitForTimeout(1000);
+        
+    } catch (error) {
+        console.error(`❌ Erro ao preencher data nacimento:`, error.message);
+        throw error;
+    }
+}
+
+/**
  * Selecionar motivo de locação
  * @param {Object} page - Página do Playwright
  * @param {string} motivoLocacaoId - ID do motivo de locação
@@ -843,7 +888,7 @@ async function adicionarItemsBoxes(page, boxes, dadosCliente = {}) {
             return;
         }
         
-        const { cpf, sexo, cep, numero_endereco, pagamento, valorBens } = dadosCliente;
+        const { cpf, sexo, cep, numero_endereco, pagamento, valorBens, data_nascimento, email } = dadosCliente;
         
         console.log(`\n📦 Iniciando adição de ${boxes.length} items...`);
         console.log(`   📊 Parâmetros recebidos em adicionarItemsBoxes:`);
@@ -1304,12 +1349,14 @@ async function adicionarItemsBoxes(page, boxes, dadosCliente = {}) {
         console.log(`1️⃣5️⃣ Preenchendo dados do cliente no contrato...`);
         console.log(`   📋 Dados recebidos:`);
         console.log(`      • CPF: ${cpf ? `"${cpf}"` : 'NÃO FORNECIDO'}`);
+        console.log(`      • EMAIL: ${email ? `"${email}"` : 'NÃO FORNECIDO'}`);
+        console.log(`      • NASCIMENTO: ${data_nascimento ? `"${data_nascimento}"` : 'NÃO FORNECIDO'}`);
         console.log(`      • Sexo: ${sexo ? `"${sexo}"` : 'NÃO FORNECIDO'}`);
         console.log(`      • CEP: ${cep ? `"${cep}"` : 'NÃO FORNECIDO'}`);
         console.log(`      • Número: ${numero_endereco ? `"${numero_endereco}"` : 'NÃO FORNECIDO'}`);
         try {
             if (cpf || sexo || cep || numero_endereco) {
-                await preencherDadosClienteContrato(page, cpf, sexo, cep, numero_endereco);
+                await preencherDadosClienteContrato(page, cpf, sexo, cep, numero_endereco, data_nascimento, email);
                 console.log(`✅ Dados do cliente preenchidos!\n`);
             } else {
                 console.warn(`⚠️ Nenhum dado do cliente fornecido...`);
@@ -2604,7 +2651,7 @@ async function selecionarPlanoEProxima(page, planoId = '3') {
  * @param {string} cep - CEP do cliente
  * @param {string} numero - Número do endereço
  */
-async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero) {
+async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero, data_nascimento, email) {
     try {
         console.log('\n👤 Preenchendo dados do cliente no contrato...');
         
@@ -2622,6 +2669,29 @@ async function preencherDadosClienteContrato(page, cpf, sexo, cep, numero) {
                 console.log('✅ CPF preenchido');
             } catch (cpfError) {
                 console.warn(`⚠️ Erro ao preencher CPF: ${cpfError.message}`);
+            }
+        }
+
+        // Preencher email
+        if (email) {
+            console.log(`📝 Preenchendo EMAIL: ${email}`);
+            try {
+                await preencherCampoOculto(page, '#clienteEmail', email, 'text');
+                console.log('✅ EMAIL preenchido');
+            } catch (emailError) {
+                console.warn(`⚠️ Erro ao preencher EMAIL: ${emailError.message}`);
+            }
+        }
+
+        // Preencher data nascimento
+        if (data_nascimento) {
+            console.log(`📝 Preenchendo DATA NASCIMENTO: ${data_nascimento}`);
+            try {
+                await preencherDataNascimento(page, data_nascimento);
+                //await preencherCampoOculto(page, '#clienteNascimento', data_nascimento, 'text');
+                console.log('✅ DATA NASCIMENTO preenchido');
+            } catch (nascimentoError) {
+                console.warn(`⚠️ Erro ao preencher DATA NASCIMENTO: ${nascimentoError.message}`);
             }
         }
         
@@ -2886,7 +2956,9 @@ async function main(options = {}) {
             propostaPrevisaoEntrada, 
             motivoLocacaoId, 
             vendedorId, 
-            boxes 
+            boxes,
+            data_nascimento,
+            email 
         } = options;
         
         if (unidade) {
@@ -3069,8 +3141,10 @@ async function main(options = {}) {
             console.log(`      • numero_endereco: ${numero_endereco ? `"${numero_endereco}"` : 'undefined'}`);
             console.log(`      • pagamento: ${pagamento ? `"${pagamento}"` : 'undefined'}`);
             console.log(`      • valorBens: ${valorBens ? `"${valorBens}"` : 'undefined'}`);
+            console.log(`      • data_nascimento: ${data_nascimento ? `"${data_nascimento}"` : 'undefined'}`);
+            console.log(`      • email: ${email ? `"${email}"` : 'undefined'}`);
             try {
-                const boxesResult = await adicionarItemsBoxes(result.page, boxes, { cpf, sexo, cep, numero_endereco, pagamento, valorBens });
+                const boxesResult = await adicionarItemsBoxes(result.page, boxes, { cpf, sexo, cep, numero_endereco, pagamento, valorBens, data_nascimento, email });
                 if (boxesResult && boxesResult.urlFinal) {
                     contratoUrl = boxesResult.urlFinal;
                 }

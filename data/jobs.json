@@ -1435,5 +1435,921 @@
         }
       ]
     }
+  },
+  {
+    "jobId": "43ee8330-3586-4fbe-98aa-7613e880af35",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "running",
+    "createdAt": "2026-04-14T19:56:08.707Z",
+    "updatedAt": "2026-04-14T19:56:08.887Z",
+    "progress": "Execução direta iniciada...",
+    "logs": [
+      {
+        "timestamp": "2026-04-14T19:56:08.715Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.722Z",
+        "level": "info",
+        "message": "Cliente: TUANY RODRIGUES RAIMUNDO"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.728Z",
+        "level": "info",
+        "message": "Celular: 32998828983"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.733Z",
+        "level": "info",
+        "message": "CPF: 10327845635"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.739Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.744Z",
+        "level": "info",
+        "message": "CEP: 36046090"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.750Z",
+        "level": "info",
+        "message": "Número Endereço: 1255"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.755Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.761Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.767Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-15"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.772Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.778Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-14T19:56:08.887Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      }
+    ],
+    "result": null,
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "TUANY RODRIGUES RAIMUNDO",
+      "clienteTelCel": "32998828983",
+      "cpf": "10327845635",
+      "sexo": "F",
+      "cep": "36046090",
+      "numero_endereco": "1255",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-15",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Box 0,8m²",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "d1080780-5c03-4a68-b577-e5410d367d2b",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-04-14T19:57:13.821Z",
+    "updatedAt": "2026-04-14T19:58:02.094Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-04-14T19:57:13.829Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.835Z",
+        "level": "info",
+        "message": "Cliente: TUANY RODRIGUES RAIMUNDO"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.841Z",
+        "level": "info",
+        "message": "Celular: 32998828983"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.846Z",
+        "level": "info",
+        "message": "CPF: 10327845635"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.851Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.857Z",
+        "level": "info",
+        "message": "CEP: 36046090"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.861Z",
+        "level": "info",
+        "message": "Número Endereço: 1255"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.867Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.873Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.877Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-15"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.883Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.888Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-14T19:57:13.997Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:02.094Z",
+        "level": "info",
+        "message": "Scraping concluído em 46 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 248,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 46,
+      "logs": [],
+      "extractedAt": "2026-04-14T19:58:02.092Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "TUANY RODRIGUES RAIMUNDO",
+      "clienteTelCel": "32998828983",
+      "cpf": "10327845635",
+      "sexo": "F",
+      "cep": "36046090",
+      "numero_endereco": "1255",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-15",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Box 0,8m²",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "3938906d-09e7-43c5-a50b-a46763fab670",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-04-14T19:58:20.174Z",
+    "updatedAt": "2026-04-14T20:00:14.798Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-04-14T19:58:20.183Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.189Z",
+        "level": "info",
+        "message": "Cliente: TUANY RODRIGUES RAIMUNDO"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.194Z",
+        "level": "info",
+        "message": "Celular: 32998828983"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.200Z",
+        "level": "info",
+        "message": "CPF: 10327845635"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.205Z",
+        "level": "info",
+        "message": "Sexo: F"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.211Z",
+        "level": "info",
+        "message": "CEP: 36046090"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.215Z",
+        "level": "info",
+        "message": "Número Endereço: 1255"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.220Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.226Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.231Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-15"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.236Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.242Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-14T19:58:20.350Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-14T20:00:14.798Z",
+        "level": "info",
+        "message": "Scraping concluído em 114 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 248,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 114,
+      "logs": [],
+      "extractedAt": "2026-04-14T20:00:14.797Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "TUANY RODRIGUES RAIMUNDO",
+      "clienteTelCel": "32998828983",
+      "cpf": "10327845635",
+      "sexo": "F",
+      "cep": "36046090",
+      "numero_endereco": "1255",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-15",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Locker",
+          "tipo": "MENSAL"
+        }
+      ]
+    }
+  },
+  {
+    "jobId": "f20e45d3-05ed-414b-9b69-c55f0bb9e479",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-04-16T03:09:40.047Z",
+    "updatedAt": "2026-04-16T03:11:33.746Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-04-16T03:09:40.056Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.062Z",
+        "level": "info",
+        "message": "Cliente: Pedro Teste EMAIL"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.068Z",
+        "level": "info",
+        "message": "Celular: 84999999999"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.073Z",
+        "level": "info",
+        "message": "CPF: 78593186017"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.079Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.084Z",
+        "level": "info",
+        "message": "CEP: 36033340"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.091Z",
+        "level": "info",
+        "message": "Número Endereço: 220"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.097Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.103Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.109Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.115Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.121Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.127Z",
+        "level": "info",
+        "message": "data_nascimento: 1992-12-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.132Z",
+        "level": "info",
+        "message": "email: eduardamariadcs@gmail.com"
+      },
+      {
+        "timestamp": "2026-04-16T03:09:40.248Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-16T03:11:33.746Z",
+        "level": "info",
+        "message": "Scraping concluído em 108 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 1000,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 108,
+      "logs": [],
+      "extractedAt": "2026-04-16T03:11:33.744Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "Pedro Teste EMAIL",
+      "clienteTelCel": "84999999999",
+      "cpf": "78593186017",
+      "sexo": "M",
+      "cep": "36033340",
+      "numero_endereco": "220",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-19",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Locker",
+          "tipo": "MENSAL"
+        }
+      ],
+      "data_nascimento": "1992-12-19",
+      "email": "eduardamariadcs@gmail.com"
+    }
+  },
+  {
+    "jobId": "8bb0d13a-2ba8-45d4-9775-8a56a6e9d24a",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-04-16T03:30:43.317Z",
+    "updatedAt": "2026-04-16T03:32:13.383Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-04-16T03:30:43.326Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.332Z",
+        "level": "info",
+        "message": "Cliente: Pedro Teste EMAIL"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.338Z",
+        "level": "info",
+        "message": "Celular: 84999999999"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.344Z",
+        "level": "info",
+        "message": "CPF: 78593186017"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.349Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.354Z",
+        "level": "info",
+        "message": "CEP: 36033340"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.359Z",
+        "level": "info",
+        "message": "Número Endereço: 220"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.364Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.369Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.374Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.379Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.384Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.389Z",
+        "level": "info",
+        "message": "data_nascimento: 1992-12-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.394Z",
+        "level": "info",
+        "message": "email: eduardamariadcs@gmail.com"
+      },
+      {
+        "timestamp": "2026-04-16T03:30:43.503Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-16T03:32:13.383Z",
+        "level": "info",
+        "message": "Scraping concluído em 89 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 1000,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 89,
+      "logs": [],
+      "extractedAt": "2026-04-16T03:32:13.382Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "Pedro Teste EMAIL",
+      "clienteTelCel": "84999999999",
+      "cpf": "78593186017",
+      "sexo": "M",
+      "cep": "36033340",
+      "numero_endereco": "220",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-19",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Locker",
+          "tipo": "MENSAL"
+        }
+      ],
+      "data_nascimento": "1992-12-19",
+      "email": "eduardamariadcs@gmail.com"
+    }
+  },
+  {
+    "jobId": "c755d0bf-cb01-4f90-bb4d-df179767b7ab",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-04-16T03:40:26.027Z",
+    "updatedAt": "2026-04-16T03:41:01.752Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-04-16T03:40:26.037Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.042Z",
+        "level": "info",
+        "message": "Cliente: Pedro Teste EMAIL"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.047Z",
+        "level": "info",
+        "message": "Celular: 84999999999"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.053Z",
+        "level": "info",
+        "message": "CPF: 78593186017"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.058Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.063Z",
+        "level": "info",
+        "message": "CEP: 36033340"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.068Z",
+        "level": "info",
+        "message": "Número Endereço: 220"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.074Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.079Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.084Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.089Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.094Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.099Z",
+        "level": "info",
+        "message": "data_nascimento: 1992-12-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.105Z",
+        "level": "info",
+        "message": "email: eduardamariadcs@gmail.com"
+      },
+      {
+        "timestamp": "2026-04-16T03:40:26.214Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-16T03:41:01.752Z",
+        "level": "error",
+        "message": "Erro: data_nascimento is not defined"
+      }
+    ],
+    "result": null,
+    "error": "data_nascimento is not defined",
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "Pedro Teste EMAIL",
+      "clienteTelCel": "84999999999",
+      "cpf": "78593186017",
+      "sexo": "M",
+      "cep": "36033340",
+      "numero_endereco": "220",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-19",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Locker",
+          "tipo": "MENSAL"
+        }
+      ],
+      "data_nascimento": "1992-12-19",
+      "email": "eduardamariadcs@gmail.com"
+    }
+  },
+  {
+    "jobId": "2ec141a7-acb7-40a5-80bc-4f2f0e43f602",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "failed",
+    "createdAt": "2026-04-16T03:44:22.462Z",
+    "updatedAt": "2026-04-16T03:44:59.063Z",
+    "progress": "Erro durante execução",
+    "logs": [
+      {
+        "timestamp": "2026-04-16T03:44:22.474Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.479Z",
+        "level": "info",
+        "message": "Cliente: Pedro Teste EMAIL"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.485Z",
+        "level": "info",
+        "message": "Celular: 84999999999"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.490Z",
+        "level": "info",
+        "message": "CPF: 78593186017"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.496Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.501Z",
+        "level": "info",
+        "message": "CEP: 36033340"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.506Z",
+        "level": "info",
+        "message": "Número Endereço: 220"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.512Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.517Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.523Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.528Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.533Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.538Z",
+        "level": "info",
+        "message": "data_nascimento: 1992-12-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.543Z",
+        "level": "info",
+        "message": "email: eduardamariadcs@gmail.com"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:22.655Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-16T03:44:59.063Z",
+        "level": "error",
+        "message": "Erro: data_nascimento is not defined"
+      }
+    ],
+    "result": null,
+    "error": "data_nascimento is not defined",
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "Pedro Teste EMAIL",
+      "clienteTelCel": "84999999999",
+      "cpf": "78593186017",
+      "sexo": "M",
+      "cep": "36033340",
+      "numero_endereco": "220",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-19",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Locker",
+          "tipo": "MENSAL"
+        }
+      ],
+      "data_nascimento": "1992-12-19",
+      "email": "eduardamariadcs@gmail.com"
+    }
+  },
+  {
+    "jobId": "e21474b9-507d-45d2-93e6-ab6d15232c75",
+    "callbackUrl": "https://espacofacil-prisma-contrato-propos.3z2up3.easypanel.host/api/prisma/callback",
+    "status": "completed",
+    "createdAt": "2026-04-16T03:50:49.722Z",
+    "updatedAt": "2026-04-16T03:52:14.809Z",
+    "progress": "Scraping concluído com sucesso",
+    "logs": [
+      {
+        "timestamp": "2026-04-16T03:50:49.731Z",
+        "level": "info",
+        "message": "Unidade selecionada: ESPAÇO FÁCIL - LONDRINA"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.738Z",
+        "level": "info",
+        "message": "Cliente: Pedro Teste EMAIL"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.743Z",
+        "level": "info",
+        "message": "Celular: 84999999999"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.748Z",
+        "level": "info",
+        "message": "CPF: 78593186017"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.754Z",
+        "level": "info",
+        "message": "Sexo: M"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.760Z",
+        "level": "info",
+        "message": "CEP: 36033340"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.766Z",
+        "level": "info",
+        "message": "Número Endereço: 220"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.771Z",
+        "level": "info",
+        "message": "Forma de Pagamento: PIX"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.777Z",
+        "level": "info",
+        "message": "Valor dos Bens: 5000.00"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.783Z",
+        "level": "info",
+        "message": "Previsão de Entrada: 2026-04-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.788Z",
+        "level": "info",
+        "message": "Motivo Locação ID: 1"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.793Z",
+        "level": "info",
+        "message": "Vendedor ID: 2314"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.799Z",
+        "level": "info",
+        "message": "data_nascimento: 1992-12-19"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.804Z",
+        "level": "info",
+        "message": "email: eduardamariadcs@gmail.com"
+      },
+      {
+        "timestamp": "2026-04-16T03:50:49.912Z",
+        "level": "info",
+        "message": "Executando sem worker (dev)"
+      },
+      {
+        "timestamp": "2026-04-16T03:52:14.809Z",
+        "level": "info",
+        "message": "Scraping concluído em 84 segundos (execução direta)"
+      }
+    ],
+    "result": {
+      "summary": "Scraping concluído com sucesso (execução direta)",
+      "totalBoxes": 1000,
+      "unitsProcessed": 0,
+      "successfulUnits": 0,
+      "failedUnits": [],
+      "processingTime": 84,
+      "logs": [],
+      "extractedAt": "2026-04-16T03:52:14.807Z"
+    },
+    "error": null,
+    "data": {
+      "unidade": "ESPAÇO FÁCIL - LONDRINA",
+      "clienteNome": "Pedro Teste EMAIL",
+      "clienteTelCel": "84999999999",
+      "cpf": "78593186017",
+      "sexo": "M",
+      "cep": "36033340",
+      "numero_endereco": "220",
+      "pagamento": "PIX",
+      "valorBens": "5000.00",
+      "propostaPrevisaoEntrada": "2026-04-19",
+      "motivoLocacaoId": "1",
+      "vendedorId": "2314",
+      "boxes": [
+        {
+          "nome": "Locker",
+          "tipo": "MENSAL"
+        }
+      ],
+      "data_nascimento": "1992-12-19",
+      "email": "eduardamariadcs@gmail.com"
+    }
   }
 ]
